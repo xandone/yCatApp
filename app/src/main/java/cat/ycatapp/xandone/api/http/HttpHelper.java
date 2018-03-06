@@ -1,0 +1,17 @@
+package cat.ycatapp.xandone.api.http;
+
+
+import java.util.List;
+
+import cat.ycatapp.xandone.model.base.BaseResponse;
+import cat.ycatapp.xandone.model.bean.RegistBean;
+import io.reactivex.Flowable;
+
+/**
+ * author: xandone
+ * created on: 2018/3/6 8:53
+ */
+
+public interface HttpHelper {
+    Flowable<BaseResponse<List<RegistBean>>> regist(String type, String id, String page);
+}
