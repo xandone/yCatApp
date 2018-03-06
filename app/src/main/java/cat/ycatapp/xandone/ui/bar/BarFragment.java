@@ -17,6 +17,6 @@ public class BarFragment extends RxBaseFragment<MainPresenter>{
 
     @Override
     protected void initInject() {
-        getFragmentComponent().inject(this);
+//        getFragmentComponent().inject(this);
     }
 }

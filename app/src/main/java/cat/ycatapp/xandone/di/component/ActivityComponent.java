@@ -3,6 +3,7 @@ package cat.ycatapp.xandone.di.component;
 import cat.ycatapp.xandone.MainActivity;
 import cat.ycatapp.xandone.di.module.ActivityModule;
 import cat.ycatapp.xandone.di.scope.ActivityScope;
+import cat.ycatapp.xandone.ui.regist.RegistActivity;
 import dagger.Component;
 
 /**
@@ -14,4 +15,6 @@ import dagger.Component;
 @Component(dependencies = AppComponent.class, modules = ActivityModule.class)
 public interface ActivityComponent {
     void inject(MainActivity mainActivity);
+
+    void inject(RegistActivity registActivity);
 }

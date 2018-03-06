@@ -20,10 +20,10 @@ import dagger.Component;
 public interface FragmentComponent {
     Activity getActivity();
 
-    void inject(JokeFragment jokeFragment);
-
-    void inject(BarFragment jokeFragment);
-
-    void inject(InfoFragment jokeFragment);
+//    void inject(JokeFragment jokeFragment);
+//
+//    void inject(BarFragment jokeFragment);
+//
+//    void inject(InfoFragment jokeFragment);
 
 }

@@ -2,6 +2,7 @@ package cat.ycatapp.xandone.ui.info;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -15,7 +16,11 @@ import cat.ycatapp.xandone.ui.login.LoginActivity;
  * created on: 2018/3/6 13:35
  */
 
-public class InfoFragment extends RxBaseFragment<InfoPresenter> {
+public class InfoFragment extends RxBaseFragment {
+    @BindView(R.id.frag_info_login_ll)
+    LinearLayout frag_info_login_ll;
+    @BindView(R.id.frag_info_icon_ll)
+    LinearLayout frag_info_icon_ll;
 
     @Override
     public int setLayout() {
@@ -24,7 +29,7 @@ public class InfoFragment extends RxBaseFragment<InfoPresenter> {
 
     @Override
     protected void initInject() {
-        getFragmentComponent().inject(this);
+//        getFragmentComponent().inject(this);
     }
 
     @OnClick({R.id.frag_info_login})

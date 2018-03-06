@@ -4,29 +4,63 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/frag_info_title"
+    <LinearLayout
+        android:id="@+id/frag_info_login_ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="登录ycat，体验更多"
-        android:textColor="@color/black"
-        android:textSize="16sp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintRight_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/frag_info_login"
+        <TextView
+            android:id="@+id/frag_info_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="登录ycat，体验更多"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/frag_info_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/text_fram_shape"
+            android:text="注册/登录"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/frag_info_icon_ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/text_fram_shape"
-        android:text="注册/登录"
-        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintRight_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frag_info_title" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <cat.ycatapp.xandone.widget.UserCircleIcon
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/df_icon" />
+
+        <TextView
+            android:id="@+id/frag_info_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/text_fram_shape"
+            android:text="xandone"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp" />
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

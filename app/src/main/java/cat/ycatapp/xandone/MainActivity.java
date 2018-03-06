@@ -1,5 +1,6 @@
 package cat.ycatapp.xandone;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -28,6 +29,8 @@ public class MainActivity extends RxBaseActivity<MainPresenter> {
     private List<Fragment> fragList;
     private boolean isState = true;
 
+    private InfoFragment mInfoFragment;
+
     @Override
     public int setLayout() {
         return R.layout.activity_main;
@@ -43,7 +46,9 @@ public class MainActivity extends RxBaseActivity<MainPresenter> {
         super.initData();
 
         mFragIndex = 0;
-        fragList = new ArrayList<Fragment>(Arrays.asList(new JokeFragment(), new BarFragment(), new InfoFragment()));
+        mInfoFragment = new InfoFragment();
+
+        fragList = new ArrayList<Fragment>(Arrays.asList(new JokeFragment(), new BarFragment(), mInfoFragment));
         turnToFrag();
 
         main_foot_rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -79,6 +84,11 @@ public class MainActivity extends RxBaseActivity<MainPresenter> {
         }
         ft.commitAllowingStateLoss();
         mCurrentFrag = toFragment;
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
     }
 
     @Override

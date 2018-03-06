@@ -1,10 +1,11 @@
-package cat.ycatapp.xandone.ui.info;
+package cat.ycatapp.xandone.ui.regist;
+
+
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import cat.ycatapp.xandone.MainContact;
 import cat.ycatapp.xandone.api.CommonSubscriber;
 import cat.ycatapp.xandone.base.RxPresenter;
 import cat.ycatapp.xandone.model.DataManager;
@@ -20,11 +21,11 @@ import io.reactivex.schedulers.Schedulers;
  * created on: 2018/3/6 14:43
  */
 
-public class InfoPresenter extends RxPresenter<InfoContact.View> implements InfoContact.Presenter{
+public class RegistPresenter extends RxPresenter<RegistContact.View> implements RegistContact.Presenter {
     private DataManager mDataManager;
 
     @Inject
-    InfoPresenter(DataManager dataManager) {
+    RegistPresenter(DataManager dataManager) {
         this.mDataManager = dataManager;
     }
 
@@ -38,7 +39,10 @@ public class InfoPresenter extends RxPresenter<InfoContact.View> implements Info
                     @Override
                     public void onNext(BaseResponse<List<RegistBean>> registBeen) {
 
-                        LogUtils.d("借口：" + registBeen.getMsg());
+                        if (registBeen != null) {
+                            LogUtils.d("借口：" + registBeen.getMsg());
+                            view.showContent(registBeen);
+                        }
                     }
                 })
         );

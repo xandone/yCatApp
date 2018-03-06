@@ -2,9 +2,6 @@ package cat.ycatapp.xandone.base;
 
 import javax.inject.Inject;
 
-import cat.ycatapp.xandone.App;
-import cat.ycatapp.xandone.di.component.DaggerFragmentComponent;
-import cat.ycatapp.xandone.di.component.FragmentComponent;
 import cat.ycatapp.xandone.di.module.FragmentModule;
 
 /**
@@ -17,12 +14,12 @@ public abstract class RxBaseFragment<T extends RxPresenter> extends BaseFragment
     @Inject
     protected T mPresenter;
 
-    protected FragmentComponent getFragmentComponent() {
-        return DaggerFragmentComponent.builder()
-                .appComponent(App.getAppComponent())
-                .fragmentModule(getFragmentModule())
-                .build();
-    }
+//    protected FragmentComponent getFragmentComponent() {
+//        return DaggerFragmentComponent.builder()
+//                .appComponent(App.getAppComponent())
+//                .fragmentModule(getFragmentModule())
+//                .build();
+//    }
 
 
     protected FragmentModule getFragmentModule() {
