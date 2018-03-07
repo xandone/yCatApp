@@ -3,7 +3,6 @@ package cat.ycatapp.xandone.ui.info;
 import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,6 +38,15 @@ public class InfoFragment extends RxBaseFragment {
                 startActivity(new Intent(mActivity, LoginActivity.class));
                 break;
         }
+    }
+
+    /**
+     * 刷新个人信息
+     */
+    public void refreshData() {
+        frag_info_login_ll.setVisibility(View.GONE);
+        frag_info_icon_ll.setVisibility(View.VISIBLE);
+
     }
 
 }

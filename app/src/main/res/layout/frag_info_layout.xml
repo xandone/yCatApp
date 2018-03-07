@@ -47,8 +47,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <cat.ycatapp.xandone.widget.UserCircleIcon
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:layout_marginTop="20dp"
             android:src="@drawable/df_icon" />
 
@@ -56,8 +56,8 @@
             android:id="@+id/frag_info_nick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/text_fram_shape"
-            android:text="xandone"
+            android:layout_marginTop="6dp"
+            android:text="二虎"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp" />
 

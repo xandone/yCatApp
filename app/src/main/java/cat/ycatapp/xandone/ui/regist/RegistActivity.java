@@ -8,11 +8,14 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import cat.ycatapp.xandone.MainActivity;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseActivity;
+import cat.ycatapp.xandone.cache.UserInfoCache;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.RegistBean;
 import cat.ycatapp.xandone.uitils.ToastUtils;
@@ -60,7 +63,10 @@ public class RegistActivity extends RxBaseActivity<RegistPresenter> implements R
                 ToastUtils.showShort(baseResponse.getMsg());
             }
             if ("1".equals(baseResponse.getCode())) {
-                startActivity(new Intent(RegistActivity.this, MainActivity.class));
+                UserInfoCache.setLogin(true);
+                Intent intent = new Intent(RegistActivity.this, MainActivity.class);
+                intent.putExtra(MainActivity.X_USER_RELOAD, MainActivity.USER_REGIST);
+                startActivity(intent);
             }
         }
 

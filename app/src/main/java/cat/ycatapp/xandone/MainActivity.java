@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.RadioGroup;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,6 +31,10 @@ public class MainActivity extends RxBaseActivity<MainPresenter> {
     private boolean isState = true;
 
     private InfoFragment mInfoFragment;
+
+    public static final String X_USER_RELOAD = MainActivity.class.getName() + "_USER_RELOAD";
+    public static final int USER_LOGIN = 1;
+    public static final int USER_REGIST = 2;
 
     @Override
     public int setLayout() {
@@ -89,6 +94,22 @@ public class MainActivity extends RxBaseActivity<MainPresenter> {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        if (intent == null) {
+            return;
+        }
+        int action = intent.getIntExtra(X_USER_RELOAD, 0);
+        switch (action) {
+            case USER_LOGIN:
+                if (mInfoFragment != null) {
+                    mInfoFragment.refreshData();
+                }
+                break;
+            case USER_REGIST:
+                if (mInfoFragment != null) {
+                    mInfoFragment.refreshData();
+                }
+                break;
+        }
     }
 
     @Override
