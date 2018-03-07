@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import cat.ycatapp.xandone.model.base.BaseResponse;
+import cat.ycatapp.xandone.model.bean.LoginBean;
 import cat.ycatapp.xandone.model.bean.RegistBean;
 import io.reactivex.Flowable;
 import retrofit2.http.GET;
@@ -23,4 +24,10 @@ public interface Api {
             @Query("name") String name,
             @Query("password") String psw,
             @Query("nickname") String nick);
+
+
+    @GET("ycat/login")
+    Flowable<BaseResponse<List<LoginBean>>> login(
+            @Query("name") String name,
+            @Query("password") String psw);
 }

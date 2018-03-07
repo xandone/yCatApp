@@ -13,10 +13,6 @@ import cat.ycatapp.xandone.App;
 
 public class Constants {
 
-    //================= TYPE ====================
-
-    public static final int TYPE_ZHIHU = 101;
-
     //================= PATH ====================
 
     public static final String PATH_DATA = App.sContext.getCacheDir().getAbsolutePath() + File.separator + "data";
@@ -25,25 +21,13 @@ public class Constants {
 
     public static final String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "xandone" + File.separator + "ycat";
 
-//------------------------KEY------------------------------
+//------------------------SP_KEY------------------------------
 
-    public static final String BUGLY_ID = "";
+    public static final String USER_INFO_KEY = "Constants_USER_INFO_KEY";
 
+//------------------------SP_NAME------------------------------
 
-    //================= PREFERENCE ====================
+    public static final String USER_INFO_NAME = "Constants_USER_INFO_NAME";
 
-    public static final String SP_NIGHT_MODE = "night_mode";
-
-    public static final String SP_NO_IMAGE = "no_image";
-
-    public static final String SP_AUTO_CACHE = "auto_cache";
-
-    public static final String SP_CURRENT_ITEM = "current_item";
-
-    public static final String SP_LIKE_POINT = "like_point";
-
-    public static final String SP_VERSION_POINT = "version_point";
-
-    public static final String SP_MANAGER_POINT = "manager_point";
 
 }

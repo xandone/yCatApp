@@ -5,6 +5,7 @@ import java.util.Map;
 
 import cat.ycatapp.xandone.api.http.HttpHelper;
 import cat.ycatapp.xandone.model.base.BaseResponse;
+import cat.ycatapp.xandone.model.bean.LoginBean;
 import cat.ycatapp.xandone.model.bean.RegistBean;
 import io.reactivex.Flowable;
 
@@ -23,5 +24,10 @@ public class DataManager implements HttpHelper {
     @Override
     public Flowable<BaseResponse<List<RegistBean>>> regist(String name, String psw, String nick) {
         return mHttpHelper.regist(name, psw, nick);
+    }
+
+    @Override
+    public Flowable<BaseResponse<List<LoginBean>>> login(String name, String psw) {
+        return mHttpHelper.login(name,psw);
     }
 }

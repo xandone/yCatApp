@@ -4,11 +4,9 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import java.util.List;
 
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -19,6 +17,7 @@ import cat.ycatapp.xandone.cache.UserInfoCache;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.RegistBean;
 import cat.ycatapp.xandone.uitils.ToastUtils;
+import cat.ycatapp.xandone.uitils.XString;
 
 /**
  * author: xandone
@@ -48,10 +47,22 @@ public class RegistActivity extends RxBaseActivity<RegistPresenter> implements R
     public void click(View view) {
         switch (view.getId()) {
             case R.id.act_regist_btn:
-                String name = act_regist_et_email.getText().toString().trim();
+                String email = act_regist_et_email.getText().toString().trim();
                 String psw = act_regist_et_psw.getText().toString().trim();
                 String nick = act_regist_et_nick.getText().toString().trim();
-                mPresenter.regist(name, psw, nick);
+                if (XString.isEmpty(email) || !XString.isEmail(email)) {
+                    ToastUtils.showShort("请输入正确的邮箱");
+                    return;
+                }
+                if (XString.isEmpty(psw) || !XString.isPassword(psw)) {
+                    ToastUtils.showShort("请输入6-16位数字/英文密码");
+                    return;
+                }
+                if (XString.isEmpty(nick)) {
+                    ToastUtils.showShort("请输入昵称");
+                    return;
+                }
+                mPresenter.regist(email, psw, nick);
                 break;
         }
     }

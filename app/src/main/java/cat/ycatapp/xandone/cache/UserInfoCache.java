@@ -6,6 +6,7 @@ package cat.ycatapp.xandone.cache;
  */
 
 public class UserInfoCache {
+
     private static boolean mLogin;
 
     public static boolean isLogin() {

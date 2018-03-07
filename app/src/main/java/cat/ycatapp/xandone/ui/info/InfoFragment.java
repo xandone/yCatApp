@@ -1,6 +1,7 @@
 package cat.ycatapp.xandone.ui.info;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -8,7 +9,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseFragment;
+import cat.ycatapp.xandone.config.Constants;
 import cat.ycatapp.xandone.ui.login.LoginActivity;
+import cat.ycatapp.xandone.uitils.SPUtils;
 
 /**
  * author: xandone
@@ -46,7 +49,9 @@ public class InfoFragment extends RxBaseFragment {
     public void refreshData() {
         frag_info_login_ll.setVisibility(View.GONE);
         frag_info_icon_ll.setVisibility(View.VISIBLE);
-
+        SPUtils spUtils = SPUtils.getInstance(Constants.USER_INFO_NAME);
+        String info = spUtils.getString(Constants.USER_INFO_KEY);
+        Log.d("yandone", info);
     }
 
 }
