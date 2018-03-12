@@ -1,5 +1,6 @@
 package cat.ycatapp.xandone.ui.splash;
 
+
 import android.util.Log;
 
 import java.util.List;
@@ -8,9 +9,13 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 import cat.ycatapp.xandone.base.RxPresenter;
+import cat.ycatapp.xandone.cache.UserInfoCache;
+import cat.ycatapp.xandone.config.Constants;
 import cat.ycatapp.xandone.model.DataManager;
 import cat.ycatapp.xandone.model.base.BaseResponse;
-import cat.ycatapp.xandone.model.bean.SplashBean;
+import cat.ycatapp.xandone.model.bean.UserBean;
+import cat.ycatapp.xandone.uitils.GsonUtil;
+import cat.ycatapp.xandone.uitils.SPUtils;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -26,43 +31,58 @@ public class SplashPresenter extends RxPresenter<SplashContact.View> implements 
     private DataManager mDataManager;
 
     @Inject
-    public SplashPresenter(DataManager dataManager) {
+    SplashPresenter(DataManager dataManager) {
         this.mDataManager = dataManager;
     }
 
     @Override
-    public void getContent() {
-        Flowable<BaseResponse<List<SplashBean>>> result = mDataManager.splash();
+    public void getContent(final String email, final String psw) {
+        Flowable<BaseResponse<List<UserBean>>> result = mDataManager.login(email, psw);
 
         addSubscrible(result.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<BaseResponse<List<SplashBean>>>() {
-                    @Override
-                    public void accept(@NonNull BaseResponse<List<SplashBean>> listBaseResponse) throws Exception {
-                        view.showContent(listBaseResponse);
-                        Log.d("yandone","1");
-                        startAct();
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(@NonNull Throwable throwable) throws Exception {
-                        Log.d("yandone","2");
-                        startAct();
-                    }
-                })
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<BaseResponse<List<UserBean>>>() {
+                            @Override
+                            public void accept(@NonNull BaseResponse<List<UserBean>> baseResponse) throws Exception {
+
+                                if (baseResponse != null) {
+//                                     密码正确
+                                    if ("1".equals(baseResponse.getCode()) && baseResponse.getDataList() != null
+                                            && !baseResponse.getDataList().isEmpty()) {
+                                        UserBean result = baseResponse.getDataList().get(0);
+                                        result.setUserName(email);
+                                        result.setUserPsw(psw);
+                                        UserInfoCache.setUserBean(result);
+                                        UserInfoCache.setLogin(true);
+
+                                        String userResult = GsonUtil.objToJson(result);
+                                        SPUtils spUtils = SPUtils.getInstance(Constants.USER_INFO_NAME);
+                                        spUtils.put(Constants.USER_INFO_KEY, userResult);
+                                    }
+
+                                }
+                                view.showContent(baseResponse);
+                                startAct();
+                            }
+                        }, new Consumer<Throwable>() {
+                            @Override
+                            public void accept(@NonNull Throwable throwable) throws Exception {
+                                startAct();
+                            }
+                        })
         );
     }
 
-    private void startAct(){
+    void startAct() {
         addSubscrible(Flowable.timer(2000, TimeUnit.MILLISECONDS)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-           .subscribe(new Consumer<Long>() {
-               @Override
-               public void accept(@NonNull Long aLong) throws Exception {
-                   view.jumpAct();
-               }
-           })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(@NonNull Long aLong) throws Exception {
+                        view.jumpAct();
+                    }
+                })
         );
     }
 }

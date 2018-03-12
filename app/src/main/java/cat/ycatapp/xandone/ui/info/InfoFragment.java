@@ -1,6 +1,7 @@
 package cat.ycatapp.xandone.ui.info;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -9,9 +10,12 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseFragment;
+import cat.ycatapp.xandone.cache.UserInfoCache;
 import cat.ycatapp.xandone.config.Constants;
+import cat.ycatapp.xandone.model.bean.UserBean;
 import cat.ycatapp.xandone.ui.login.LoginActivity;
 import cat.ycatapp.xandone.ui.personal.PersonalActivity;
+import cat.ycatapp.xandone.uitils.GsonUtil;
 import cat.ycatapp.xandone.uitils.SPUtils;
 
 /**
@@ -31,11 +35,19 @@ public class InfoFragment extends RxBaseFragment {
     }
 
     @Override
+    public void initData() {
+        super.initData();
+        if (UserInfoCache.isLogin()) {
+            refreshData();
+        }
+    }
+
+    @Override
     protected void initInject() {
 //        getFragmentComponent().inject(this);
     }
 
-    @OnClick({R.id.frag_info_login,R.id.frag_info_icon_ll})
+    @OnClick({R.id.frag_info_login, R.id.frag_info_icon_ll})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.frag_info_login:
@@ -53,9 +65,6 @@ public class InfoFragment extends RxBaseFragment {
     public void refreshData() {
         frag_info_login_ll.setVisibility(View.GONE);
         frag_info_icon_ll.setVisibility(View.VISIBLE);
-        SPUtils spUtils = SPUtils.getInstance(Constants.USER_INFO_NAME);
-        String info = spUtils.getString(Constants.USER_INFO_KEY);
-        Log.d("yandone", info);
     }
 
 }

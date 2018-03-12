@@ -16,6 +16,8 @@ import cat.ycatapp.xandone.cache.UserInfoCache;
 import cat.ycatapp.xandone.config.Constants;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.LoginBean;
+import cat.ycatapp.xandone.model.bean.UserBean;
+import cat.ycatapp.xandone.model.bean.UserPsw;
 import cat.ycatapp.xandone.ui.regist.RegistActivity;
 import cat.ycatapp.xandone.uitils.GsonUtil;
 import cat.ycatapp.xandone.uitils.SPUtils;
@@ -66,21 +68,15 @@ public class LoginActivity extends RxBaseActivity<LoginPresenter> implements Log
     }
 
     @Override
-    public void showContent(BaseResponse<List<LoginBean>> baseResponse) {
-        if (baseResponse != null) {
-            if ("1".equals(baseResponse.getCode()) && baseResponse.getDataList() != null
-                    && !baseResponse.getDataList().isEmpty()) {
-                UserInfoCache.setLogin(true);
-                LoginBean loginBean = baseResponse.getDataList().get(0);
-                String info = GsonUtil.objToJson(loginBean);
-                SPUtils spUtils = SPUtils.getInstance(Constants.USER_INFO_NAME);
-                spUtils.put(Constants.USER_INFO_KEY, info);
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.putExtra(MainActivity.X_USER_RELOAD, MainActivity.USER_REGIST);
-                startActivity(intent);
-            } else if (!TextUtils.isEmpty(baseResponse.getMsg())) {
-                ToastUtils.showShort(baseResponse.getMsg());
-            }
+    public void showContent(BaseResponse<List<UserBean>> baseResponse) {
+        if (UserInfoCache.isLogin()) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.putExtra(MainActivity.X_USER_RELOAD, MainActivity.USER_REGIST);
+            startActivity(intent);
+        } else if (!TextUtils.isEmpty(baseResponse.getMsg())) {
+            ToastUtils.showShort(baseResponse.getMsg());
+        } else {
+            ToastUtils.showShort("服务器异常,请稍后再试");
         }
     }
 }

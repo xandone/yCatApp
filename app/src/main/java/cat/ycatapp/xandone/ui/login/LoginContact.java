@@ -5,9 +5,7 @@ import java.util.List;
 import cat.ycatapp.xandone.base.BasePresenter;
 import cat.ycatapp.xandone.base.BaseView;
 import cat.ycatapp.xandone.model.base.BaseResponse;
-import cat.ycatapp.xandone.model.bean.LoginBean;
-import cat.ycatapp.xandone.model.bean.RegistBean;
-import cat.ycatapp.xandone.ui.regist.RegistContact;
+import cat.ycatapp.xandone.model.bean.UserBean;
 
 /**
  * author: xandone
@@ -17,7 +15,7 @@ import cat.ycatapp.xandone.ui.regist.RegistContact;
 public class LoginContact {
 
     interface View extends BaseView {
-        void showContent(BaseResponse<List<LoginBean>> baseResponse);
+        void showContent(BaseResponse<List<UserBean>> baseResponse);
     }
 
     interface Presenter extends BasePresenter<LoginContact.View> {

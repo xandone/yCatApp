@@ -5,7 +5,7 @@ import java.util.List;
 import cat.ycatapp.xandone.base.BasePresenter;
 import cat.ycatapp.xandone.base.BaseView;
 import cat.ycatapp.xandone.model.base.BaseResponse;
-import cat.ycatapp.xandone.model.bean.SplashBean;
+import cat.ycatapp.xandone.model.bean.UserBean;
 
 /**
  * author: xandone
@@ -15,12 +15,12 @@ import cat.ycatapp.xandone.model.bean.SplashBean;
 public class SplashContact {
 
     interface  View extends BaseView{
-        void showContent(BaseResponse<List<SplashBean>> baseResponse);
+        void showContent(BaseResponse<List<UserBean>> baseResponse);
         void jumpAct();
     }
 
     interface Presenter extends BasePresenter<View> {
-        void getContent();
+        void getContent( String email,  String psw);
     }
 
 

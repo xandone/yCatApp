@@ -4,9 +4,8 @@ package cat.ycatapp.xandone.api.http;
 import java.util.List;
 
 import cat.ycatapp.xandone.model.base.BaseResponse;
-import cat.ycatapp.xandone.model.bean.LoginBean;
 import cat.ycatapp.xandone.model.bean.RegistBean;
-import cat.ycatapp.xandone.model.bean.SplashBean;
+import cat.ycatapp.xandone.model.bean.UserBean;
 import io.reactivex.Flowable;
 
 /**
@@ -16,6 +15,5 @@ import io.reactivex.Flowable;
 
 public interface HttpHelper {
     Flowable<BaseResponse<List<RegistBean>>> regist(String type, String id, String page);
-    Flowable<BaseResponse<List<LoginBean>>> login(String name, String psw);
-    Flowable<BaseResponse<List<SplashBean>>> splash();
+    Flowable<BaseResponse<List<UserBean>>> login(String name, String psw);
 }

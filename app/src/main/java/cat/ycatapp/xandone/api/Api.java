@@ -3,9 +3,8 @@ package cat.ycatapp.xandone.api;
 import java.util.List;
 
 import cat.ycatapp.xandone.model.base.BaseResponse;
-import cat.ycatapp.xandone.model.bean.LoginBean;
 import cat.ycatapp.xandone.model.bean.RegistBean;
-import cat.ycatapp.xandone.model.bean.SplashBean;
+import cat.ycatapp.xandone.model.bean.UserBean;
 import io.reactivex.Flowable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -25,11 +24,8 @@ public interface Api {
             @Query("nickname") String nick);
 
     @GET("ycat/login")
-    Flowable<BaseResponse<List<LoginBean>>> login(
+    Flowable<BaseResponse<List<UserBean>>> login(
             @Query("name") String name,
             @Query("password") String psw);
-
-    @GET("ycat/joke/test")
-    Flowable<BaseResponse<List<SplashBean>>> splash();
 
 }
