@@ -7,6 +7,7 @@ import cat.ycatapp.xandone.api.http.HttpHelper;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.LoginBean;
 import cat.ycatapp.xandone.model.bean.RegistBean;
+import cat.ycatapp.xandone.model.bean.SplashBean;
 import io.reactivex.Flowable;
 
 /**
@@ -30,4 +31,11 @@ public class DataManager implements HttpHelper {
     public Flowable<BaseResponse<List<LoginBean>>> login(String name, String psw) {
         return mHttpHelper.login(name,psw);
     }
+
+    @Override
+    public Flowable<BaseResponse<List<SplashBean>>> splash() {
+        return mHttpHelper.splash();
+    }
+
+
 }

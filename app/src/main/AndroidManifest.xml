@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.splash.SplashActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,6 +29,9 @@
 
         <activity android:name=".ui.login.LoginActivity" />
         <activity android:name=".ui.regist.RegistActivity" />
+        <activity android:name=".ui.personal.PersonalActivity" />
+        <activity android:name=".MainActivity"
+            android:launchMode="singleTask"/>
     </application>
 
 </manifest>

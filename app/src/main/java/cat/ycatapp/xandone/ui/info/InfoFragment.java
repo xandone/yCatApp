@@ -11,6 +11,7 @@ import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseFragment;
 import cat.ycatapp.xandone.config.Constants;
 import cat.ycatapp.xandone.ui.login.LoginActivity;
+import cat.ycatapp.xandone.ui.personal.PersonalActivity;
 import cat.ycatapp.xandone.uitils.SPUtils;
 
 /**
@@ -34,11 +35,14 @@ public class InfoFragment extends RxBaseFragment {
 //        getFragmentComponent().inject(this);
     }
 
-    @OnClick({R.id.frag_info_login})
+    @OnClick({R.id.frag_info_login,R.id.frag_info_icon_ll})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.frag_info_login:
                 startActivity(new Intent(mActivity, LoginActivity.class));
+                break;
+            case R.id.frag_info_icon_ll:
+                startActivity(new Intent(mActivity, PersonalActivity.class));
                 break;
         }
     }

@@ -23,6 +23,14 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
         unSubscrible();
     }
 
+    //移除并取消订阅
+    public void dispose(Disposable disposable) {
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.remove(disposable);
+        }
+    }
+
+    //取消所有的订阅
     public void unSubscrible() {
         if (mCompositeDisposable != null) {
             mCompositeDisposable.clear();
@@ -30,6 +38,7 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
     }
 
     public void addSubscrible(Disposable disposable) {
+        if (disposable == null) return;
         if (mCompositeDisposable == null) {
             mCompositeDisposable = new CompositeDisposable();
         }
