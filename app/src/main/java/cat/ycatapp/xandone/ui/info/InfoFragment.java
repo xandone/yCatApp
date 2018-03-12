@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -28,6 +29,8 @@ public class InfoFragment extends RxBaseFragment {
     LinearLayout frag_info_login_ll;
     @BindView(R.id.frag_info_icon_ll)
     LinearLayout frag_info_icon_ll;
+    @BindView(R.id.frag_info_nick)
+    TextView frag_info_nick;
 
     @Override
     public int setLayout() {
@@ -38,7 +41,7 @@ public class InfoFragment extends RxBaseFragment {
     public void initData() {
         super.initData();
         if (UserInfoCache.isLogin()) {
-            refreshData();
+            showUserInfo();
         }
     }
 
@@ -47,24 +50,37 @@ public class InfoFragment extends RxBaseFragment {
 //        getFragmentComponent().inject(this);
     }
 
-    @OnClick({R.id.frag_info_login, R.id.frag_info_icon_ll})
+    @OnClick({R.id.frag_info_login, R.id.frag_info_out})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.frag_info_login:
                 startActivity(new Intent(mActivity, LoginActivity.class));
                 break;
-            case R.id.frag_info_icon_ll:
-                startActivity(new Intent(mActivity, PersonalActivity.class));
+            case R.id.frag_info_out:
+                SPUtils.getInstance(Constants.USER_INFO_NAME).remove(Constants.USER_INFO_KEY);
+                UserInfoCache.setLogin(false);
+                UserInfoCache.setUserBean(null);
+                logout();
                 break;
         }
     }
 
     /**
-     * 刷新个人信息
+     * 显示个人信息
      */
-    public void refreshData() {
+    public void showUserInfo() {
         frag_info_login_ll.setVisibility(View.GONE);
         frag_info_icon_ll.setVisibility(View.VISIBLE);
+        frag_info_nick.setText(UserInfoCache.getUserBean().getNickName());
+    }
+
+    /**
+     * 清除用户信息
+     */
+    public void logout() {
+        frag_info_login_ll.setVisibility(View.VISIBLE);
+        frag_info_icon_ll.setVisibility(View.GONE);
+        frag_info_nick.setText("");
     }
 
 }

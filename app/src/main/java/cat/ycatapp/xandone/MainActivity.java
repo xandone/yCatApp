@@ -107,12 +107,12 @@ public class MainActivity extends RxBaseActivity<MainPresenter> {
         switch (action) {
             case USER_LOGIN:
                 if (mInfoFragment != null) {
-                    mInfoFragment.refreshData();
+                    mInfoFragment.showUserInfo();
                 }
                 break;
             case USER_REGIST:
                 if (mInfoFragment != null) {
-                    mInfoFragment.refreshData();
+                    mInfoFragment.showUserInfo();
                 }
                 break;
         }

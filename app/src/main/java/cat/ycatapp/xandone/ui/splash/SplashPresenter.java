@@ -1,7 +1,6 @@
 package cat.ycatapp.xandone.ui.splash;
 
 
-import android.util.Log;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
