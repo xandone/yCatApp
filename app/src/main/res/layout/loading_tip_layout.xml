@@ -37,6 +37,6 @@
         android:paddingRight="10dp"
         android:paddingTop="4dp"
         android:text="重新加载"
-        android:textColor="@color/text_normal"
+        android:textColor="@color/colorPrimary"
         android:textSize="14sp" />
 </LinearLayout>

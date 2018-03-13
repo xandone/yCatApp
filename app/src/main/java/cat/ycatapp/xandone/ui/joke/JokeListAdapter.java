@@ -1,5 +1,7 @@
 package cat.ycatapp.xandone.ui.joke;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +11,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cat.ycatapp.xandone.App;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.model.bean.JokeBean;
@@ -23,9 +27,12 @@ import cat.ycatapp.xandone.uitils.TimeUtil;
 
 public class JokeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<JokeBean.RowsBean> list;
+    private Context mContext;
+    public static final String JOKEBEAN_TAG = "JOKEBEAN_TAG";
 
-    public JokeListAdapter(List list) {
+    public JokeListAdapter(Context context, List list) {
         this.list = list;
+        this.mContext = context;
     }
 
     @Override
@@ -48,7 +55,7 @@ public class JokeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return list.size();
     }
 
-    public static class MyHolder extends RecyclerView.ViewHolder {
+    class MyHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_joke_user_ll)
         LinearLayout item_joke_user_ll;
         @BindView(R.id.item_joke_list_title)
@@ -65,6 +72,17 @@ public class JokeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public MyHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+
+        @OnClick(R.id.item_joke_list_root)
+        public void click(View view) {
+            switch (view.getId()) {
+                case R.id.item_joke_list_root:
+                    Intent intent = new Intent(mContext, JokeDetailsActivity.class);
+                    intent.putExtra(JOKEBEAN_TAG, list.get(getLayoutPosition()));
+                    mContext.startActivity(intent);
+                    break;
+            }
         }
 
         public void bindView(JokeBean.RowsBean jokeBean) {

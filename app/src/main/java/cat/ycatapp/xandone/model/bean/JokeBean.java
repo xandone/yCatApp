@@ -1,5 +1,6 @@
 package cat.ycatapp.xandone.model.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -33,7 +34,7 @@ public class JokeBean {
         this.rows = rows;
     }
 
-    public static class RowsBean {
+    public static class RowsBean implements Serializable {
         /**
          * joke_id : 1000
          * joke_user_id : 10000

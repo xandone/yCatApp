@@ -53,7 +53,7 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
         super.initData();
 
         jokes = new ArrayList<>();
-        jokeListAdapter = new JokeListAdapter(jokes);
+        jokeListAdapter = new JokeListAdapter(mActivity, jokes);
         frag_joke_list.setAdapter(jokeListAdapter);
         frag_joke_list.setLayoutManager(new LinearLayoutManager(App.sContext));
 
@@ -82,7 +82,7 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
                 mPage++;
-                mPresenter.getJokeList(mPage, mCount, JokeContact.MODE_ONE);
+                mPresenter.getJokeList(mPage, mCount, JokeContact.MODE_MORE);
             }
         });
 
@@ -96,11 +96,9 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
             return;
         }
         showMsg("加载完毕", LoadingLayout.finish);
-        if (jokes != null) {
-            jokes.clear();
-            jokes.addAll(jokeBean.getRows());
-            jokeListAdapter.notifyDataSetChanged();
-        }
+        jokes.clear();
+        jokes.addAll(jokeBean.getRows());
+        jokeListAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -109,10 +107,8 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
         if (jokeBean == null || jokeBean.getRows() == null || jokeBean.getRows().isEmpty()) {
             return;
         }
-        if (jokes != null) {
-            jokes.addAll(jokeBean.getRows());
-            jokeListAdapter.notifyDataSetChanged();
-        }
+        jokes.addAll(jokeBean.getRows());
+        jokeListAdapter.notifyDataSetChanged();
     }
 
     @Override

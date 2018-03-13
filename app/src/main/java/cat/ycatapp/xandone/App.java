@@ -11,6 +11,7 @@ import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.squareup.leakcanary.LeakCanary;
 
 import cat.ycatapp.xandone.di.component.AppComponent;
 import cat.ycatapp.xandone.di.component.DaggerAppComponent;
@@ -49,6 +50,14 @@ public class App extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         sContext = this;
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
+        // Normal app init code...
+
     }
 
     public static AppComponent getAppComponent() {
