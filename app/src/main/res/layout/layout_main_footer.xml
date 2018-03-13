@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_foot"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:orientation="vertical">
+    android:layout_height="60dp">
 
     <RadioGroup
         android:id="@+id/main_foot_rg"
@@ -34,4 +33,4 @@
     </RadioGroup>
 
 
-</RelativeLayout>
+</FrameLayout>

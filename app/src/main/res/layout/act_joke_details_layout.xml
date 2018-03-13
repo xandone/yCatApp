@@ -1,93 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.constraint.ConstraintLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/act_joke_details_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_card"
-            android:paddingBottom="16dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="16dp"
-            android:textColor="@color/text_black"
-            android:textSize="20sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            tools:text="吵架" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
-        <LinearLayout
-            android:id="@+id/act_joke_details_user_ll"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingBottom="16dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="16dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/act_joke_details_title">
+    </android.support.design.widget.AppBarLayout>
 
-            <cat.ycatapp.xandone.widget.UserCircleIcon
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/df_icon" />
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/act_joke_details_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_card"
+                android:paddingBottom="16dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="16dp"
+                android:textColor="@color/text_black"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:text="吵架" />
+
+            <LinearLayout
+                android:id="@+id/act_joke_details_user_ll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="16dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="16dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/act_joke_details_title">
+
+                <cat.ycatapp.xandone.widget.UserCircleIcon
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/df_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/text_normal"
+                    android:textSize="16sp"
+                    tools:text="二虎" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:background="@color/text_light"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/act_joke_details_user_ll" />
+
+            <TextView
+                android:id="@+id/act_joke_details_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:lineSpacingMultiplier="1.4"
+                android:padding="10dp"
                 android:textColor="@color/text_normal"
                 android:textSize="16sp"
-                tools:text="二虎" />
+                app:layout_constraintTop_toBottomOf="@+id/line"
+                tools:text="朋友和媳妇吵架了，想买条项链，给她个惊喜求她原谅，但是他又不知道媳妇带多大的，于是就半夜起来用绳子量一下，没想到她醒了……" />
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/act_joke_details_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                android:textColor="@color/text_light"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/act_joke_details_content"
+                tools:text="2018-2-18" />
 
-        <View
-            android:id="@+id/line"
-            android:layout_width="0dp"
-            android:layout_height="0.5dp"
-            android:background="@color/text_light"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/act_joke_details_user_ll" />
+        </android.support.constraint.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/act_joke_details_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:lineSpacingMultiplier="1.4"
-            android:padding="10dp"
-            android:textColor="@color/text_normal"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@+id/line"
-            tools:text="朋友和媳妇吵架了，想买条项链，给她个惊喜求她原谅，但是他又不知道媳妇带多大的，于是就半夜起来用绳子量一下，没想到她醒了……" />
+    </android.support.v4.widget.NestedScrollView>
 
-        <TextView
-            android:id="@+id/act_joke_details_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/white"
-            android:textColor="@color/text_light"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/act_joke_details_content"
-            tools:text="2018-2-18" />
-
-    </android.support.constraint.ConstraintLayout>
-
-</ScrollView>
+</android.support.design.widget.CoordinatorLayout>
