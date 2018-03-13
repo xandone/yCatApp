@@ -12,7 +12,7 @@ import cat.ycatapp.xandone.model.bean.RegistBean;
  * created on: 2018/3/6 14:47
  */
 
-public class RegistContact {
+public interface RegistContact {
 
     interface View extends BaseView {
         void showContent(BaseResponse<List<RegistBean>> baseResponse);

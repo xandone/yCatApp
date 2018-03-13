@@ -73,7 +73,7 @@ public abstract class BaseFragment extends Fragment implements BaseView{
     protected abstract void lazyLoadData();
 
     @Override
-    public void showMsg(String msg) {
+    public void showMsg(String msg,int loadStatus) {
 
     }
 

@@ -12,7 +12,7 @@ import cat.ycatapp.xandone.model.bean.UserBean;
  * created on: 2018/3/7 14:08
  */
 
-public class LoginContact {
+public interface LoginContact {
 
     interface View extends BaseView {
         void showContent(BaseResponse<List<UserBean>> baseResponse);

@@ -60,8 +60,8 @@ public class HttpModule {
                             .removeHeader("Pragma")
                             .build();
                 } else {
-                    // 无网络时，设置超时为4周
-                    int maxStale = 60 * 60 * 24 * 28;
+                    // 无网络时，设置超时为2天
+                    int maxStale = 60 * 60 * 24 * 2;
                     response.newBuilder()
                             .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
                             .removeHeader("Pragma")
@@ -75,9 +75,9 @@ public class HttpModule {
         builder.addInterceptor(cacheInterceptor);
         builder.cache(cache);
         //设置超时
-        builder.connectTimeout(10, TimeUnit.SECONDS);
-        builder.readTimeout(20, TimeUnit.SECONDS);
-        builder.writeTimeout(20, TimeUnit.SECONDS);
+        builder.connectTimeout(5, TimeUnit.SECONDS);
+        builder.readTimeout(10, TimeUnit.SECONDS);
+        builder.writeTimeout(10, TimeUnit.SECONDS);
         //错误重连
         builder.retryOnConnectionFailure(true);
         return builder.build();

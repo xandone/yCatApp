@@ -12,7 +12,7 @@ import cat.ycatapp.xandone.model.bean.UserBean;
  * created on: 2018/3/12 9:16
  */
 
-public class SplashContact {
+public interface SplashContact {
 
     interface  View extends BaseView{
         void showContent(BaseResponse<List<UserBean>> baseResponse);

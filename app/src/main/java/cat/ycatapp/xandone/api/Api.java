@@ -3,6 +3,7 @@ package cat.ycatapp.xandone.api;
 import java.util.List;
 
 import cat.ycatapp.xandone.model.base.BaseResponse;
+import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.model.bean.RegistBean;
 import cat.ycatapp.xandone.model.bean.UserBean;
 import io.reactivex.Flowable;
@@ -27,5 +28,10 @@ public interface Api {
     Flowable<BaseResponse<List<UserBean>>> login(
             @Query("name") String name,
             @Query("password") String psw);
+
+    @GET("ycat/joke/list")
+    Flowable<JokeBean> getJokeList(
+            @Query("page") int page,
+            @Query("rows") int count);
 
 }

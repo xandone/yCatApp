@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/bg_card"
     android:padding="10dp">
 
     <LinearLayout
@@ -27,7 +28,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
-            android:text="二虎"
             android:textColor="@color/text_light"
             android:textSize="14sp"
             tools:text="二虎" />
@@ -39,7 +39,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        android:text="二虎"
         android:textColor="@color/text_normal"
         android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -53,7 +52,6 @@
         android:layout_marginTop="2dp"
         android:ellipsize="end"
         android:maxLines="2"
-        android:text="笑话笑话内容笑话内笑话笑话内容笑话内容笑话内容笑话内容笑话内容笑话内容笑话内容笑话内容笑话内容笑话内容内容容笑话内容笑话内容笑话内容笑话内容笑话内容笑话内容笑话内容笑话内容内容"
         android:textColor="@color/text_light"
         android:textSize="14sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -65,7 +63,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="26赞"
         android:textColor="@color/hint_normal"
         android:textSize="14sp"
         app:layout_constraintLeft_toRightOf="parent"
@@ -73,12 +70,11 @@
         tools:text="26赞" />
 
     <TextView
-        android:layout_marginLeft="8dp"
         android:id="@+id/item_joke_list_comment_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="10dp"
-        android:text="17评论"
         android:textColor="@color/hint_normal"
         android:textSize="14sp"
         app:layout_constraintLeft_toRightOf="@+id/item_joke_list_like"
@@ -91,7 +87,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="2018-3-12"
         android:textColor="@color/hint_normal"
         android:textSize="14sp"
         app:layout_constraintRight_toRightOf="parent"

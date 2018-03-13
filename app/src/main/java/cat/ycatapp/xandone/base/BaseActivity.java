@@ -40,7 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     @Override
-    public void showMsg(String msg) {
+    public void showMsg(String msg,int loadStatus) {
 
     }
     @Override

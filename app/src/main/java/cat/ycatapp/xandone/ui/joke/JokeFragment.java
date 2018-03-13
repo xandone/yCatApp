@@ -13,25 +13,30 @@ import java.util.List;
 
 import butterknife.BindView;
 import cat.ycatapp.xandone.App;
-import cat.ycatapp.xandone.MainPresenter;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseFragment;
 import cat.ycatapp.xandone.model.bean.JokeBean;
+import cat.ycatapp.xandone.widget.LoadingLayout;
 
 /**
  * author: xandone
  * created on: 2018/3/6 13:34
  */
 
-public class JokeFragment extends RxBaseFragment<MainPresenter> {
+public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeContact.View {
     @BindView(R.id.frag_joke_list)
     RecyclerView frag_joke_list;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
+    @BindView(R.id.loadingLayout)
+    LoadingLayout loadingLayout;
 
     private JokeListAdapter jokeListAdapter;
-    private List<JokeBean> jokes;
+    private List<JokeBean.RowsBean> jokes;
     private int mPage = 1;
+    private int mCount = 10;
+
+    private LoadingLayout.OnReloadListener onReloadListener;
 
     @Override
     public int setLayout() {
@@ -40,7 +45,7 @@ public class JokeFragment extends RxBaseFragment<MainPresenter> {
 
     @Override
     protected void initInject() {
-//        getFragmentComponent().inject(this);
+        getFragmentComponent().inject(this);
     }
 
     @Override
@@ -48,28 +53,71 @@ public class JokeFragment extends RxBaseFragment<MainPresenter> {
         super.initData();
 
         jokes = new ArrayList<>();
-        jokes.add(new JokeBean());
-        jokes.add(new JokeBean());
-        jokes.add(new JokeBean());
-        jokes.add(new JokeBean());
-        jokes.add(new JokeBean());
-        jokes.add(new JokeBean());
         jokeListAdapter = new JokeListAdapter(jokes);
         frag_joke_list.setAdapter(jokeListAdapter);
         frag_joke_list.setLayoutManager(new LinearLayoutManager(App.sContext));
 
+        mPresenter.getJokeList(mPage, mCount, JokeContact.MODE_ONE);
+        loadingLayout.setLoadingTips(LoadingLayout.loading);
+
+        onReloadListener = new LoadingLayout.OnReloadListener() {
+            @Override
+            public void reLoad() {
+                mPage = 1;
+                mPresenter.getJokeList(mPage, mCount, JokeContact.MODE_ONE);
+                loadingLayout.setLoadingTips(LoadingLayout.loading);
+            }
+        };
+        loadingLayout.setOnReloadListener(onReloadListener);
+
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-
+                mPage = 1;
+                mPresenter.getJokeList(mPage, mCount, JokeContact.MODE_ONE);
             }
         });
 
         mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-
+                mPage++;
+                mPresenter.getJokeList(mPage, mCount, JokeContact.MODE_ONE);
             }
         });
+
+    }
+
+    @Override
+    public void showContent(JokeBean jokeBean) {
+        mRefreshLayout.finishRefresh();
+        if (jokeBean == null || jokeBean.getRows() == null || jokeBean.getRows().isEmpty()) {
+            showMsg("无数据", LoadingLayout.empty);
+            return;
+        }
+        showMsg("加载完毕", LoadingLayout.finish);
+        if (jokes != null) {
+            jokes.clear();
+            jokes.addAll(jokeBean.getRows());
+            jokeListAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void showContentMore(JokeBean jokeBean) {
+        mRefreshLayout.finishLoadmore();
+        if (jokeBean == null || jokeBean.getRows() == null || jokeBean.getRows().isEmpty()) {
+            return;
+        }
+        if (jokes != null) {
+            jokes.addAll(jokeBean.getRows());
+            jokeListAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void showMsg(String msg, int loadStatus) {
+        mRefreshLayout.finishRefresh();
+        loadingLayout.setLoadingTips(loadStatus);
     }
 }

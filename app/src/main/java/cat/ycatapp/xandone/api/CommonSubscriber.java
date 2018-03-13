@@ -1,11 +1,13 @@
 package cat.ycatapp.xandone.api;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 
 import cat.ycatapp.xandone.base.BaseView;
 import cat.ycatapp.xandone.exception.ApiException;
 import cat.ycatapp.xandone.uitils.LogUtils;
+import cat.ycatapp.xandone.widget.LoadingLayout;
 import io.reactivex.subscribers.ResourceSubscriber;
 import retrofit2.HttpException;
 
@@ -49,14 +51,15 @@ public class CommonSubscriber<T> extends ResourceSubscriber<T> {
         if (mView == null) {
             return;
         }
+
         if (!TextUtils.isEmpty(mErrorMsg)) {
-            mView.showMsg(mErrorMsg);
+            mView.showMsg(mErrorMsg, LoadingLayout.serverError);
         } else if (t instanceof ApiException) {
-            mView.showMsg(t.toString());
+            mView.showMsg(t.toString(), LoadingLayout.serverError);
         } else if (t instanceof HttpException) {
-            mView.showMsg("数据加载失败");
+            mView.showMsg("数据加载失败", LoadingLayout.netError);
         } else {
-            mView.showMsg("未知错误");
+            mView.showMsg("未知错误", LoadingLayout.serverError);
             LogUtils.d(t.toString());
         }
         if (isShowErrorState) {

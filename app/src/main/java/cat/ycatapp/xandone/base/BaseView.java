@@ -6,7 +6,7 @@ package cat.ycatapp.xandone.base;
  */
 
 public interface BaseView {
-    void showMsg(String msg);
+    void showMsg(String msg,int loadStatus);
 
     void stateError();
 

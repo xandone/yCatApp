@@ -37,7 +37,6 @@ public class MainPresenter extends RxPresenter<MainContact.View> implements Main
                     @Override
                     public void onNext(BaseResponse<List<RegistBean>> registBeen) {
 
-                        LogUtils.d("借口：" + registBeen.getMsg());
                     }
                 })
         );

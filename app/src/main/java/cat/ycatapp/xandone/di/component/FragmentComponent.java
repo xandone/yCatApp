@@ -20,7 +20,7 @@ import dagger.Component;
 public interface FragmentComponent {
     Activity getActivity();
 
-//    void inject(JokeFragment jokeFragment);
+    void inject(JokeFragment jokeFragment);
 //
 //    void inject(BarFragment jokeFragment);
 //
