@@ -22,7 +22,7 @@ import cat.ycatapp.xandone.ui.info.InfoFragment;
 import cat.ycatapp.xandone.ui.joke.JokeFragment;
 import cat.ycatapp.xandone.uitils.ToastUtils;
 
-public class MainActivity extends RxBaseActivity<MainPresenter> {
+public class MainActivity extends RxBaseActivity {
     @BindView(R.id.main_foot_rg)
     RadioGroup main_foot_rg;
 
@@ -46,7 +46,6 @@ public class MainActivity extends RxBaseActivity<MainPresenter> {
 
     @Override
     public void initInject() {
-        getActivityComponent().inject(this);
     }
 
     @Override
