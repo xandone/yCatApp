@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">yCatApp</string>
-
-
     <string name="x_et_user_psw">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789</string>
+
+    <string name="x_joke_title">笑话</string>
+    <string name="x_login_title">登录</string>
+    <string name="x_regist_title">注册</string>
+    <string name="x_details_title">详情</string>
+    <string name="x_personal_title">个人信息</string>
 </resources>

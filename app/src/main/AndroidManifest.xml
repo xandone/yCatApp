@@ -30,15 +30,18 @@
 
         <activity
             android:name=".ui.login.LoginActivity"
+            android:label="@string/x_login_title"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.regist.RegistActivity"
+            android:label="@string/x_regist_title"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.personal.PersonalActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.joke.JokeDetailsActivity"
+            android:label="@string/x_details_title"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".MainActivity"

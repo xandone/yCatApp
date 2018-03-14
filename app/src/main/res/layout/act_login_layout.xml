@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include layout="@layout/toolbar_layout" />
+
     <TextView
         android:id="@+id/act_login_title"
         android:layout_width="wrap_content"
@@ -14,7 +16,7 @@
         android:textSize="30sp"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/appBar" />
 
     <EditText
         android:id="@+id/act_login_et_email"
@@ -38,7 +40,7 @@
         android:textSize="16sp"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/act_login_et_email" />
+        app:layout_constraintTop_toBottomOf="@id/act_login_et_email" />
 
     <TextView
         android:id="@+id/act_login_btn"
@@ -54,7 +56,7 @@
         android:textSize="16sp"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/act_login_et_psw" />
+        app:layout_constraintTop_toBottomOf="@id/act_login_et_psw" />
 
     <TextView
         android:id="@+id/act_login_regist"

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,9 @@ import butterknife.ButterKnife;
  * created on: 2018/3/5 15:30
  */
 
-public abstract class BaseFragment extends Fragment implements BaseView{
+public abstract class BaseFragment extends Fragment implements BaseView {
 
-    protected Activity mActivity;
+    protected BaseActivity mActivity;
 
     //Fragment的View加载完毕的标记
     protected boolean isViewCreated;
@@ -28,9 +29,10 @@ public abstract class BaseFragment extends Fragment implements BaseView{
 
     @Override
     public void onAttach(Context context) {
-        this.mActivity = (Activity) context;
+        this.mActivity = (BaseActivity) context;
         super.onAttach(context);
     }
+
     public abstract int setLayout();
 
     @Nullable
@@ -73,7 +75,7 @@ public abstract class BaseFragment extends Fragment implements BaseView{
     protected abstract void lazyLoadData();
 
     @Override
-    public void showMsg(String msg,int loadStatus) {
+    public void showMsg(String msg, int loadStatus) {
 
     }
 
@@ -95,5 +97,13 @@ public abstract class BaseFragment extends Fragment implements BaseView{
     @Override
     public void stateMain() {
 
+    }
+
+    public void setToolBar(Toolbar toolbar,String title) {
+        toolbar.setTitle(title);
+        mActivity.setSupportActionBar(toolbar);
+        mActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mActivity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationIcon(null);
     }
 }

@@ -2,6 +2,7 @@ package cat.ycatapp.xandone.ui.info;
 
 import android.content.Intent;
 import android.os.Handler;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -31,6 +32,8 @@ public class InfoFragment extends RxBaseFragment {
     LinearLayout frag_info_icon_ll;
     @BindView(R.id.frag_info_nick)
     TextView frag_info_nick;
+    @BindView(R.id.toolBar)
+    Toolbar toolBar;
 
     @Override
     public int setLayout() {
@@ -40,6 +43,7 @@ public class InfoFragment extends RxBaseFragment {
     @Override
     public void initData() {
         super.initData();
+        setToolBar(toolBar, getString(R.string.x_personal_title));
         if (UserInfoCache.isLogin()) {
             showUserInfo();
         }

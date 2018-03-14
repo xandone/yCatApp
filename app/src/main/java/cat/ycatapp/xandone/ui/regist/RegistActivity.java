@@ -1,6 +1,7 @@
 package cat.ycatapp.xandone.ui.regist;
 
 import android.content.Intent;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -31,6 +32,8 @@ public class RegistActivity extends RxBaseActivity<RegistPresenter> implements R
     EditText act_regist_et_psw;
     @BindView(R.id.act_regist_et_nick)
     EditText act_regist_et_nick;
+    @BindView(R.id.toolBar)
+    Toolbar toolBar;
 
     @Override
     public void initInject() {
@@ -42,6 +45,11 @@ public class RegistActivity extends RxBaseActivity<RegistPresenter> implements R
         return R.layout.act_regist_layout;
     }
 
+    @Override
+    public void initData() {
+        super.initData();
+        setToolBar(toolBar, getTitle().toString());
+    }
 
     @OnClick({R.id.act_regist_btn})
     public void click(View view) {

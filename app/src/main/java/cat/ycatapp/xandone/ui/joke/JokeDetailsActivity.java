@@ -1,5 +1,6 @@
 package cat.ycatapp.xandone.ui.joke;
 
+import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -20,6 +21,8 @@ public class JokeDetailsActivity extends BaseActivity {
     TextView act_joke_details_content;
     @BindView(R.id.act_joke_details_date)
     TextView act_joke_details_date;
+    @BindView(R.id.toolBar)
+    Toolbar toolBar;
 
     private JokeBean.RowsBean jokeBean;
 
@@ -28,8 +31,10 @@ public class JokeDetailsActivity extends BaseActivity {
         return R.layout.act_joke_details_layout;
     }
 
+
     @Override
     public void initData() {
+        setToolBar(toolBar, getTitle().toString());
         jokeBean = (JokeBean.RowsBean) getIntent().getSerializableExtra(JokeListAdapter.JOKEBEAN_TAG);
         if (jokeBean == null) {
             return;

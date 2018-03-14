@@ -2,6 +2,7 @@ package cat.ycatapp.xandone.ui.joke;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -30,6 +31,8 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.loadingLayout)
     LoadingLayout loadingLayout;
+    @BindView(R.id.toolBar)
+    Toolbar toolBar;
 
     private JokeListAdapter jokeListAdapter;
     private List<JokeBean.RowsBean> jokes;
@@ -51,6 +54,8 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
     @Override
     public void initData() {
         super.initData();
+
+        setToolBar(toolBar, getString(R.string.x_joke_title));
 
         jokes = new ArrayList<>();
         jokeListAdapter = new JokeListAdapter(mActivity, jokes);
