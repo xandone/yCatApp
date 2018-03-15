@@ -19,6 +19,7 @@ import butterknife.OnClick;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.BaseActivity;
 import cat.ycatapp.xandone.base.RxBaseActivity;
+import cat.ycatapp.xandone.cache.UserInfoCache;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.uitils.TimeUtil;
@@ -107,7 +108,11 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
                 bottomAnim(isShowBottom);
                 break;
             case R.id.act_joke_details_like:
-                mPresenter.thumbsJoke(jokeBean.getJoke_id(), jokeBean.getJoke_user_id());
+                if (!UserInfoCache.isLogin()) {
+                    ToastUtils.showShort("你还未登录");
+                    break;
+                }
+                mPresenter.thumbsJoke(jokeBean.getJoke_id(), UserInfoCache.getUserBean().getUserId());
                 break;
         }
     }
