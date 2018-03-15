@@ -15,16 +15,19 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+            app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:titleTextColor="@color/white" />
 
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/act_joke_details_scroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/act_joke_details_root"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -58,11 +61,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/act_joke_details_title">
 
                 <cat.ycatapp.xandone.widget.UserCircleIcon
+                    android:id="@+id/act_joke_details_user_icon"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/df_icon" />
 
                 <TextView
+                    android:id="@+id/act_joke_details_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -96,7 +101,7 @@
                 android:id="@+id/act_joke_details_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="60dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/white"
@@ -111,4 +116,59 @@
 
     </android.support.v4.widget.NestedScrollView>
 
+    <RelativeLayout
+        android:id="@+id/act_joke_details_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        app:layout_anchor="@+id/act_joke_details_scroll"
+        app:layout_anchorGravity="bottom">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divide_line"
+            android:background="@color/layout_bg_color" />
+
+        <TextView
+            android:id="@+id/act_joke_details_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:drawableTop="@drawable/zan"
+            android:gravity="center_horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:textColor="@color/text_normal"
+            android:textSize="16sp"
+            tools:text="11" />
+
+        <TextView
+            android:id="@+id/act_joke_details_comment_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/act_joke_details_like"
+            android:drawableTop="@drawable/comment_icon"
+            android:gravity="center_horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:textColor="@color/text_normal"
+            android:textSize="16sp"
+            tools:text="11" />
+
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/conlect" />
+
+
+    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
