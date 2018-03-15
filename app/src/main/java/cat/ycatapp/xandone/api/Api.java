@@ -16,7 +16,7 @@ import retrofit2.http.Query;
  */
 
 public interface Api {
-//    String HOST = "http://192.168.3.102:8080/";
+    //    String HOST = "http://192.168.3.102:8080/";
     String HOST = "http://192.168.137.1:8080/";
 
     @GET("ycat/regist")
@@ -34,5 +34,15 @@ public interface Api {
     Flowable<JokeBean> getJokeList(
             @Query("page") int page,
             @Query("rows") int count);
+
+    @GET("ycat/joke/thumbs/self")
+    Flowable<BaseResponse> getThumbsJoke(
+            @Query("jokeId") String jokeId,
+            @Query("jokeUserId") String jokeUserId);
+
+    @GET("ycat/joke/thumbs")
+    Flowable<BaseResponse> thumbsJoke(
+            @Query("jokeId") String jokeId,
+            @Query("jokeUserId") String jokeUserId);
 
 }

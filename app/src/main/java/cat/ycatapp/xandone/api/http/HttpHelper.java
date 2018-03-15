@@ -18,4 +18,6 @@ public interface HttpHelper {
     Flowable<BaseResponse<List<RegistBean>>> regist(String type, String id, String page);
     Flowable<BaseResponse<List<UserBean>>> login(String name, String psw);
     Flowable<JokeBean> getJokeList(int page, int count);
+    Flowable<BaseResponse> getThumbsJoke(String jokeId, String jokeUserId);
+    Flowable<BaseResponse> thumbsJoke(String jokeId, String jokeUserId);
 }

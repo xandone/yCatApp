@@ -29,12 +29,22 @@ public class DataManager implements HttpHelper {
 
     @Override
     public Flowable<BaseResponse<List<UserBean>>> login(String name, String psw) {
-        return mHttpHelper.login(name,psw);
+        return mHttpHelper.login(name, psw);
     }
 
     @Override
     public Flowable<JokeBean> getJokeList(int page, int count) {
-        return mHttpHelper.getJokeList(page,count);
+        return mHttpHelper.getJokeList(page, count);
+    }
+
+    @Override
+    public Flowable<BaseResponse> getThumbsJoke(String jokeId, String jokeUserId) {
+        return mHttpHelper.getThumbsJoke(jokeId, jokeUserId);
+    }
+
+    @Override
+    public Flowable<BaseResponse> thumbsJoke(String jokeId, String jokeUserId) {
+        return mHttpHelper.thumbsJoke(jokeId, jokeUserId);
     }
 
 }

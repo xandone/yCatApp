@@ -41,4 +41,14 @@ public class RetrofitHelper implements HttpHelper {
         return mApi.getJokeList(page, count);
     }
 
+    @Override
+    public Flowable<BaseResponse> getThumbsJoke(String jokeId, String jokeUserId) {
+        return mApi.getThumbsJoke(jokeId, jokeUserId);
+    }
+
+    @Override
+    public Flowable<BaseResponse> thumbsJoke(String jokeId, String jokeUserId) {
+        return mApi.thumbsJoke(jokeId, jokeUserId);
+    }
+
 }

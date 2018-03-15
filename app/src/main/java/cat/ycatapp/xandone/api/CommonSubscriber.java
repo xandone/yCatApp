@@ -51,7 +51,6 @@ public class CommonSubscriber<T> extends ResourceSubscriber<T> {
         if (mView == null) {
             return;
         }
-
         if (!TextUtils.isEmpty(mErrorMsg)) {
             mView.showMsg(mErrorMsg, LoadingLayout.serverError);
         } else if (t instanceof ApiException) {
