@@ -2,6 +2,7 @@ package cat.ycatapp.xandone.ui.joke;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.Toolbar;
@@ -100,7 +101,7 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
 
     }
 
-    @OnClick({R.id.act_joke_details_root, R.id.act_joke_details_like})
+    @OnClick({R.id.act_joke_details_root, R.id.act_joke_details_like, R.id.act_joke_details_comment_count})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.act_joke_details_root:
@@ -113,6 +114,11 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
                     break;
                 }
                 mPresenter.thumbsJoke(jokeBean.getJoke_id(), UserInfoCache.getUserBean().getUserId());
+                break;
+            case R.id.act_joke_details_comment_count:
+                Intent intent = new Intent(this, JokeCommentActivity.class);
+                intent.putExtra(JokeListAdapter.JOKEBEAN_TAG, jokeBean);
+                startActivity(intent);
                 break;
         }
     }

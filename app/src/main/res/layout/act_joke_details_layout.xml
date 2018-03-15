@@ -150,7 +150,7 @@
             android:id="@+id/act_joke_details_comment_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/act_joke_details_like"
+            android:layout_toRightOf="@+id/act_joke_details_like"
             android:drawableTop="@drawable/comment_icon"
             android:gravity="center_horizontal"
             android:paddingBottom="10dp"
