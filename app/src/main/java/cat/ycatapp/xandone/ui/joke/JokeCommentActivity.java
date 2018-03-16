@@ -159,6 +159,9 @@ public class JokeCommentActivity extends RxBaseActivity<JokeCommentPresenter> im
         comments.add(commentBean);
         jokeCommentAdapter.notifyDataSetChanged();
         if ("1".equals(response.getCode())) {
+            if (loadingLayout.getVisibility() == View.VISIBLE) {
+                loadingLayout.setVisibility(View.GONE);
+            }
             ToastUtils.showShort("评论成功");
             act_joke_comment_et.setText("");
         } else {

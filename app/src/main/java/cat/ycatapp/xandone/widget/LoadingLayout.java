@@ -115,7 +115,8 @@ public class LoadingLayout extends LinearLayout {
                 bt_operate.setVisibility(VISIBLE);
                 tv_tips.setText("暂无数据");
                 if (nullPic <= 0) {
-                    img_tip_logo.setImageResource(R.drawable.icon_server_error);
+                    img_tip_logo.setImageResource(R.drawable.icon_net_nodata
+                    );
                 } else {
                     img_tip_logo.setImageResource(nullPic);
                 }
