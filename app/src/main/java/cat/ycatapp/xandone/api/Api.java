@@ -3,6 +3,7 @@ package cat.ycatapp.xandone.api;
 import java.util.List;
 
 import cat.ycatapp.xandone.model.base.BaseResponse;
+import cat.ycatapp.xandone.model.bean.CommentBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.model.bean.RegistBean;
 import cat.ycatapp.xandone.model.bean.UserBean;
@@ -16,8 +17,8 @@ import retrofit2.http.Query;
  */
 
 public interface Api {
-        String HOST = "http://192.168.3.102:8080/";
-//    String HOST = "http://192.168.137.1:8080/";
+//        String HOST = "http://192.168.3.102:8080/";
+    String HOST = "http://192.168.137.1:8080/";
 
     @GET("ycat/regist")
     Flowable<BaseResponse<List<RegistBean>>> regist(
@@ -44,5 +45,12 @@ public interface Api {
     Flowable<BaseResponse> thumbsJoke(
             @Query("jokeId") String jokeId,
             @Query("jokeUserId") String jokeUserId);
+
+    @GET("ycat/joke/comment/list")
+    Flowable<CommentBean> getJokeCommentList(
+            @Query("page") int page,
+            @Query("rows") int rows,
+            @Query("jokeId") String jokeId
+    );
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import cat.ycatapp.xandone.api.http.HttpHelper;
 import cat.ycatapp.xandone.model.base.BaseResponse;
+import cat.ycatapp.xandone.model.bean.CommentBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.model.bean.LoginBean;
 import cat.ycatapp.xandone.model.bean.RegistBean;
@@ -45,6 +46,11 @@ public class DataManager implements HttpHelper {
     @Override
     public Flowable<BaseResponse> thumbsJoke(String jokeId, String jokeUserId) {
         return mHttpHelper.thumbsJoke(jokeId, jokeUserId);
+    }
+
+    @Override
+    public Flowable<CommentBean> getJokeCommentList(int page, int rows, String jokeId) {
+        return mHttpHelper.getJokeCommentList(page, rows, jokeId);
     }
 
 }

@@ -4,6 +4,7 @@ package cat.ycatapp.xandone.api.http;
 import java.util.List;
 
 import cat.ycatapp.xandone.model.base.BaseResponse;
+import cat.ycatapp.xandone.model.bean.CommentBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.model.bean.RegistBean;
 import cat.ycatapp.xandone.model.bean.UserBean;
@@ -20,4 +21,5 @@ public interface HttpHelper {
     Flowable<JokeBean> getJokeList(int page, int count);
     Flowable<BaseResponse> getThumbsJoke(String jokeId, String jokeUserId);
     Flowable<BaseResponse> thumbsJoke(String jokeId, String jokeUserId);
+    Flowable<CommentBean> getJokeCommentList(int page, int rows,String jokeId);
 }

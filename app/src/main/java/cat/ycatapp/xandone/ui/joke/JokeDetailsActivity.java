@@ -89,7 +89,9 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
         drawable1.setBounds(0, 0, drawable1.getIntrinsicWidth(), drawable1.getMinimumHeight());
         drawable2.setBounds(0, 0, drawable1.getIntrinsicWidth(), drawable1.getMinimumHeight());
 
-        mPresenter.getThumbsJoke(jokeBean.getJoke_id(), jokeBean.getJoke_user_id());
+        if (UserInfoCache.isLogin()) {
+            mPresenter.getThumbsJoke(jokeBean.getJoke_id(), UserInfoCache.getUserBean().getUserId());
+        }
         XGlide.loadImage(requestManager, act_joke_details_user_icon, jokeBean.getJoke_user_icon(), R.drawable.df_icon);
 
         act_joke_details_user_name.setText(jokeBean.getJoke_user_nick());

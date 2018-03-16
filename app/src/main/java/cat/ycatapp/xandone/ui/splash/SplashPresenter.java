@@ -2,6 +2,8 @@ package cat.ycatapp.xandone.ui.splash;
 
 
 
+import android.util.Log;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -57,6 +59,8 @@ public class SplashPresenter extends RxPresenter<SplashContact.View> implements 
                                         String userResult = GsonUtil.objToJson(result);
                                         SPUtils spUtils = SPUtils.getInstance(Constants.USER_INFO_NAME);
                                         spUtils.put(Constants.USER_INFO_KEY, userResult);
+
+                                        Log.d("yandone", userResult);
                                     }
 
                                 }
