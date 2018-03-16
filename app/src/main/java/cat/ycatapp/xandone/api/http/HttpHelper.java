@@ -17,9 +17,16 @@ import io.reactivex.Flowable;
 
 public interface HttpHelper {
     Flowable<BaseResponse<List<RegistBean>>> regist(String type, String id, String page);
+
     Flowable<BaseResponse<List<UserBean>>> login(String name, String psw);
+
     Flowable<JokeBean> getJokeList(int page, int count);
+
     Flowable<BaseResponse> getThumbsJoke(String jokeId, String jokeUserId);
+
     Flowable<BaseResponse> thumbsJoke(String jokeId, String jokeUserId);
-    Flowable<CommentBean> getJokeCommentList(int page, int rows,String jokeId);
+
+    Flowable<CommentBean> getJokeCommentList(int page, int rows, String jokeId);
+
+    Flowable<BaseResponse<List<CommentBean.RowsBean>>> addComment(String jokeId, String userId, String details);
 }

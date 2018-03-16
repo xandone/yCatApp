@@ -1,11 +1,14 @@
 package cat.ycatapp.xandone.ui.joke;
 
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import cat.ycatapp.xandone.api.CommonSubscriber;
 import cat.ycatapp.xandone.base.RxPresenter;
 import cat.ycatapp.xandone.model.DataManager;
+import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.CommentBean;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -27,7 +30,7 @@ public class JokeCommentPresenter extends RxPresenter<JokeCommentContact.MyView>
 
     @Override
     public void getContentList(int page, int rows, String jokeId, final int mode) {
-        Flowable<CommentBean> result=dataManager.getJokeCommentList(page,rows,jokeId);
+        Flowable<CommentBean> result = dataManager.getJokeCommentList(page, rows, jokeId);
         addSubscrible(result.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new CommonSubscriber<CommentBean>(view) {
@@ -39,6 +42,21 @@ public class JokeCommentPresenter extends RxPresenter<JokeCommentContact.MyView>
                         } else if (mode == JokeCommentContact.MODE_MORE) {
                             view.showContentMore(commentBean);
                         }
+                    }
+                })
+        );
+    }
+
+    @Override
+    public void addComment(String jokeId, String userId, String details) {
+        final Flowable<BaseResponse<List<CommentBean.RowsBean>>> result = dataManager.addComment(jokeId, userId, details);
+        addSubscrible(result.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new CommonSubscriber<BaseResponse<List<CommentBean.RowsBean>>>(view) {
+                    @Override
+                    public void onNext(BaseResponse<List<CommentBean.RowsBean>> baseResponse) {
+                        super.onNext(baseResponse);
+                        view.showCommentResult(baseResponse);
                     }
                 })
         );

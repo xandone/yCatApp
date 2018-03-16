@@ -57,4 +57,9 @@ public class RetrofitHelper implements HttpHelper {
         return mApi.getJokeCommentList(page, rows, jokeId);
     }
 
+    @Override
+    public Flowable<BaseResponse<List<CommentBean.RowsBean>>> addComment(String jokeId, String userId, String details) {
+        return mApi.addComment(jokeId, userId, details);
+    }
+
 }

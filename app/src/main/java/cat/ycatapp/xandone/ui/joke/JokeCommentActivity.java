@@ -1,9 +1,13 @@
 package cat.ycatapp.xandone.ui.joke;
 
+import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -14,12 +18,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import cat.ycatapp.xandone.App;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseActivity;
+import cat.ycatapp.xandone.cache.UserInfoCache;
+import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.CommentBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.uitils.GsonUtil;
+import cat.ycatapp.xandone.uitils.ToastUtils;
+import cat.ycatapp.xandone.uitils.XString;
 import cat.ycatapp.xandone.widget.LoadingLayout;
 
 /**
@@ -36,6 +45,8 @@ public class JokeCommentActivity extends RxBaseActivity<JokeCommentPresenter> im
     LoadingLayout loadingLayout;
     @BindView(R.id.toolBar)
     Toolbar toolBar;
+    @BindView(R.id.act_joke_comment_et)
+    EditText act_joke_comment_et;
 
     private JokeCommentAdapter jokeCommentAdapter;
     private List<CommentBean.RowsBean> comments;
@@ -99,13 +110,20 @@ public class JokeCommentActivity extends RxBaseActivity<JokeCommentPresenter> im
             }
         });
 
+        act_joke_comment_et.post(new Runnable() {
+            @Override
+            public void run() {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(act_joke_comment_et, 0);
+            }
+        });
+
     }
 
     @Override
     public void showContent(CommentBean commentBean) {
         mRefreshLayout.finishRefresh();
 
-        Log.d("yandone", GsonUtil.objToJson(commentBean));
         if (commentBean == null || commentBean.getRows() == null || commentBean.getRows().isEmpty()) {
             showMsg("无数据", LoadingLayout.empty);
             return;
@@ -130,5 +148,41 @@ public class JokeCommentActivity extends RxBaseActivity<JokeCommentPresenter> im
     public void showMsg(String msg, int loadStatus) {
         mRefreshLayout.finishRefresh();
         loadingLayout.setLoadingTips(loadStatus);
+    }
+
+    @Override
+    public void showCommentResult(BaseResponse<List<CommentBean.RowsBean>> response) {
+        if (response == null || response.getDataList() == null || response.getDataList().isEmpty()) {
+            return;
+        }
+        CommentBean.RowsBean commentBean = response.getDataList().get(0);
+        comments.add(commentBean);
+        jokeCommentAdapter.notifyDataSetChanged();
+        if ("1".equals(response.getCode())) {
+            ToastUtils.showShort("评论成功");
+            act_joke_comment_et.setText("");
+        } else {
+            ToastUtils.showShort("评论失败");
+        }
+    }
+
+    @OnClick({R.id.act_joke_comment_commit})
+    public void click(View view) {
+        switch (view.getId()) {
+            case R.id.act_joke_comment_commit:
+                if (!UserInfoCache.isLogin()) {
+                    ToastUtils.showShort("你还未登录");
+                    break;
+                }
+                String jokeId = jokeBean.getJoke_id();
+                String userId = UserInfoCache.getUserBean().getUserId();
+                String details = act_joke_comment_et.getText().toString();
+                if (XString.isEmpty(details)) {
+                    ToastUtils.showShort("请输入内容");
+                    break;
+                }
+                mPresenter.addComment(jokeId, userId, details);
+                break;
+        }
     }
 }
