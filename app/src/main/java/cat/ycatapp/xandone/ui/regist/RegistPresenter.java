@@ -1,7 +1,6 @@
 package cat.ycatapp.xandone.ui.regist;
 
 
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -38,11 +37,7 @@ public class RegistPresenter extends RxPresenter<RegistContact.View> implements 
                 .subscribeWith(new CommonSubscriber<BaseResponse<List<RegistBean>>>(view) {
                     @Override
                     public void onNext(BaseResponse<List<RegistBean>> registBeen) {
-
-                        if (registBeen != null) {
-                            LogUtils.d("借口：" + registBeen.getMsg());
-                            view.showContent(registBeen);
-                        }
+                        view.showContent(registBeen);
                     }
                 })
         );

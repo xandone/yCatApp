@@ -17,7 +17,7 @@ import retrofit2.http.Query;
  */
 
 public interface Api {
-    String HOST = "http://192.168.3.102:8080/";
+    String HOST = "http://192.168.3.109:8080/";
 
     @GET("ycat/regist")
     Flowable<BaseResponse<List<RegistBean>>> regist(
