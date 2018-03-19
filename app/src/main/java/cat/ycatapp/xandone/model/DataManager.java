@@ -24,7 +24,7 @@ public class DataManager implements HttpHelper {
     }
 
     @Override
-    public Flowable<BaseResponse<List<RegistBean>>> regist(String name, String psw, String nick) {
+    public Flowable<BaseResponse<List<UserBean>>> regist(String name, String psw, String nick) {
         return mHttpHelper.regist(name, psw, nick);
     }
 

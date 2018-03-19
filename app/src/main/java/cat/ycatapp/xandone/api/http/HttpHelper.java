@@ -16,7 +16,7 @@ import io.reactivex.Flowable;
  */
 
 public interface HttpHelper {
-    Flowable<BaseResponse<List<RegistBean>>> regist(String type, String id, String page);
+    Flowable<BaseResponse<List<UserBean>>> regist(String type, String id, String page);
 
     Flowable<BaseResponse<List<UserBean>>> login(String name, String psw);
 

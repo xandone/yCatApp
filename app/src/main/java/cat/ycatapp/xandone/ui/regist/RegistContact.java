@@ -6,6 +6,7 @@ import cat.ycatapp.xandone.base.BasePresenter;
 import cat.ycatapp.xandone.base.BaseView;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.RegistBean;
+import cat.ycatapp.xandone.model.bean.UserBean;
 
 /**
  * author: xandone
@@ -15,7 +16,7 @@ import cat.ycatapp.xandone.model.bean.RegistBean;
 public interface RegistContact {
 
     interface View extends BaseView {
-        void showContent(BaseResponse<List<RegistBean>> baseResponse);
+        void showContent(BaseResponse<List<UserBean>> baseResponse);
     }
 
     interface Presenter extends BasePresenter<View> {

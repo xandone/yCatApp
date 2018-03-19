@@ -17,6 +17,8 @@ import cat.ycatapp.xandone.base.RxBaseActivity;
 import cat.ycatapp.xandone.cache.UserInfoCache;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.RegistBean;
+import cat.ycatapp.xandone.model.bean.UserBean;
+import cat.ycatapp.xandone.ui.login.LoginActivity;
 import cat.ycatapp.xandone.uitils.ToastUtils;
 import cat.ycatapp.xandone.uitils.XString;
 
@@ -76,17 +78,15 @@ public class RegistActivity extends RxBaseActivity<RegistPresenter> implements R
     }
 
     @Override
-    public void showContent(BaseResponse<List<RegistBean>> baseResponse) {
-        if (baseResponse != null) {
-            if (!TextUtils.isEmpty(baseResponse.getMsg())) {
-                ToastUtils.showShort(baseResponse.getMsg());
-            }
-            if ("1".equals(baseResponse.getCode())) {
-                UserInfoCache.setLogin(true);
-                Intent intent = new Intent(RegistActivity.this, MainActivity.class);
-                intent.putExtra(MainActivity.X_USER_RELOAD, MainActivity.USER_REGIST);
-                startActivity(intent);
-            }
+    public void showContent(BaseResponse<List<UserBean>> baseResponse) {
+        if (UserInfoCache.isLogin()) {
+            Intent intent = new Intent(RegistActivity.this, MainActivity.class);
+            intent.putExtra(MainActivity.X_USER_RELOAD, MainActivity.USER_REGIST);
+            startActivity(intent);
+        } else if (!TextUtils.isEmpty(baseResponse.getMsg())) {
+            ToastUtils.showShort(baseResponse.getMsg());
+        } else {
+            ToastUtils.showShort("服务器异常,请稍后再试");
         }
 
     }

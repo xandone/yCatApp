@@ -9,8 +9,6 @@ import cat.ycatapp.xandone.api.Api;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.CommentBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
-import cat.ycatapp.xandone.model.bean.LoginBean;
-import cat.ycatapp.xandone.model.bean.RegistBean;
 import cat.ycatapp.xandone.model.bean.UserBean;
 import io.reactivex.Flowable;
 
@@ -28,7 +26,7 @@ public class RetrofitHelper implements HttpHelper {
     }
 
     @Override
-    public Flowable<BaseResponse<List<RegistBean>>> regist(String name, String psw, String nick) {
+    public Flowable<BaseResponse<List<UserBean>>> regist(String name, String psw, String nick) {
         return mApi.regist(name, psw, nick);
     }
 
