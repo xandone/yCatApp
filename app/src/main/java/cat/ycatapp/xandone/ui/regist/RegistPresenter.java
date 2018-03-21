@@ -47,6 +47,7 @@ public class RegistPresenter extends RxPresenter<RegistContact.View> implements 
                     public void onNext(BaseResponse<List<UserBean>> baseResponse) {
                         if (baseResponse != null) {
                             if ("1".equals(baseResponse.getCode()) && baseResponse.getDataList() != null
+
                                     && !baseResponse.getDataList().isEmpty()) {
                                 UserBean loginBean = baseResponse.getDataList().get(0);
                                 loginBean.setUserName(name);

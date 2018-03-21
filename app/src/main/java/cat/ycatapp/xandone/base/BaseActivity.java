@@ -1,5 +1,6 @@
 package cat.ycatapp.xandone.base;
 
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -71,5 +72,41 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setNavigationIcon(null);
+    }
+
+    protected android.app.AlertDialog showDialog(String msg,
+                                                 String positiveBtn, DialogInterface.OnClickListener positiveListener,
+                                                 String negativeBtn, DialogInterface.OnClickListener negativeListener) {
+        return showDialog(msg, positiveBtn, positiveListener, negativeBtn, negativeListener, false);
+    }
+
+    protected android.app.AlertDialog showDialog(String msg,
+                                                 String positiveBtn, DialogInterface.OnClickListener positiveListener,
+                                                 String negativeBtn, DialogInterface.OnClickListener negativeListener,
+                                                 boolean cancelable) {
+        return showDialog(msg, positiveBtn, positiveListener, negativeBtn, negativeListener, null, null, cancelable);
+    }
+
+    protected android.app.AlertDialog showDialog(String msg,
+                                                 String positiveBtn, DialogInterface.OnClickListener positiveListener,
+                                                 String negativeBtn, DialogInterface.OnClickListener negativeListener,
+                                                 String neutralBtn, DialogInterface.OnClickListener neutralListener,
+                                                 boolean cancelable) {
+        return showDialog("提示", msg, positiveBtn, positiveListener, negativeBtn, negativeListener, neutralBtn, neutralListener, cancelable);
+    }
+
+    private android.app.AlertDialog showDialog(String title, String msg,
+                                               String positiveBtn, DialogInterface.OnClickListener positiveListener,
+                                               String negativeBtn, DialogInterface.OnClickListener negativeListener,
+                                               String neutralBtn, DialogInterface.OnClickListener neutralListener,
+                                               boolean cancelable) {
+        return new android.app.AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(msg)
+                .setCancelable(cancelable)
+                .setPositiveButton(positiveBtn, positiveListener)
+                .setNegativeButton(negativeBtn, negativeListener)
+                .setNeutralButton(neutralBtn, neutralListener)
+                .show();
     }
 }

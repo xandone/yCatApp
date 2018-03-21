@@ -1,5 +1,6 @@
 package cat.ycatapp.xandone.ui.info;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.widget.Toolbar;
@@ -61,10 +62,17 @@ public class InfoFragment extends RxBaseFragment {
                 startActivity(new Intent(mActivity, LoginActivity.class));
                 break;
             case R.id.frag_info_out:
-                SPUtils.getInstance(Constants.USER_INFO_NAME).remove(Constants.USER_INFO_KEY);
-                UserInfoCache.setLogin(false);
-                UserInfoCache.setUserBean(null);
-                logout();
+
+                showDialog("是否退出登录", "确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SPUtils.getInstance(Constants.USER_INFO_NAME).remove(Constants.USER_INFO_KEY);
+                        UserInfoCache.setLogin(false);
+                        UserInfoCache.setUserBean(null);
+                        logout();
+
+                    }
+                }, "取消", null);
                 break;
         }
     }
@@ -79,12 +87,13 @@ public class InfoFragment extends RxBaseFragment {
     }
 
     /**
-     * 清除用户信息
+     * 退出登录清除用户信息
      */
     public void logout() {
         frag_info_login_ll.setVisibility(View.VISIBLE);
         frag_info_icon_ll.setVisibility(View.GONE);
         frag_info_nick.setText("");
     }
+
 
 }
