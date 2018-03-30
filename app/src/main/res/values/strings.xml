@@ -9,4 +9,5 @@
     <string name="x_personal_title">个人信息</string>
     <string name="x_bar_title">论坛</string>
     <string name="x_joke_comment_title">评论详情</string>
+    <string name="x_joke_add">添加笑话</string>
 </resources>
