@@ -1,5 +1,6 @@
 package cat.ycatapp.xandone.ui.jokeadd;
 
+import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 
 import butterknife.BindView;
@@ -15,6 +16,8 @@ public class JokeAddActivity extends RxBaseActivity {
     EditText act_jokeadd_title;
     @BindView(R.id.act_jokeadd_content)
     EditText act_jokeadd_content;
+    @BindView(R.id.toolBar)
+    Toolbar toolBar;
 
     @Override
     public void initInject() {
@@ -24,5 +27,11 @@ public class JokeAddActivity extends RxBaseActivity {
     @Override
     public int setLayout() {
         return R.layout.act_jokeadd_layout;
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+        setToolBar(toolBar, getTitle().toString());
     }
 }

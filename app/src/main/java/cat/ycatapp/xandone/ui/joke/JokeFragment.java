@@ -1,8 +1,10 @@
 package cat.ycatapp.xandone.ui.joke;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -13,10 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import cat.ycatapp.xandone.App;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseFragment;
 import cat.ycatapp.xandone.model.bean.JokeBean;
+import cat.ycatapp.xandone.ui.jokeadd.JokeAddActivity;
 import cat.ycatapp.xandone.widget.LoadingLayout;
 
 /**
@@ -120,5 +124,17 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
     public void showMsg(String msg, int loadStatus) {
         mRefreshLayout.finishRefresh();
         loadingLayout.setLoadingTips(loadStatus);
+    }
+
+
+    @OnClick({R.id.toolbar_add})
+    public void click(View view) {
+        switch (view.getId()) {
+            case R.id.toolbar_add:
+                Intent intent = new Intent(mActivity, JokeAddActivity.class);
+                startActivity(intent);
+                break;
+        }
+
     }
 }

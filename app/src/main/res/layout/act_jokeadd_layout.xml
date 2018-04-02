@@ -10,11 +10,13 @@
         android:id="@+id/act_jokeadd_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
         android:hint="输入标题.."
-        android:maxHeight="100dp"
+        android:maxHeight="80dp"
         android:textColor="@color/text_normal"
         android:textColorHint="@color/hint_normal"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:theme="@style/my_et" />
 
     <EditText
@@ -23,6 +25,8 @@
         android:layout_height="match_parent"
         android:gravity="start"
         android:hint="输入内容.."
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:textColor="@color/text_normal"
         android:textColorHint="@color/hint_normal"
         android:textSize="16sp"
