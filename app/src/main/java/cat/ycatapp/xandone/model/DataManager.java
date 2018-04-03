@@ -58,4 +58,9 @@ public class DataManager implements HttpHelper {
         return mHttpHelper.addComment(jokeId, userId, details);
     }
 
+    @Override
+    public Flowable<BaseResponse<List<Object>>> addJoke(String title, String userId, String content) {
+        return mHttpHelper.addJoke(title, userId, content);
+    }
+
 }

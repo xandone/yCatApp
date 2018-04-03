@@ -29,4 +29,6 @@ public interface HttpHelper {
     Flowable<CommentBean> getJokeCommentList(int page, int rows, String jokeId);
 
     Flowable<BaseResponse<List<CommentBean.RowsBean>>> addComment(String jokeId, String userId, String details);
+
+    Flowable<BaseResponse<List<Object>>> addJoke(String title, String userId, String content);
 }

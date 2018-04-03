@@ -60,4 +60,9 @@ public class RetrofitHelper implements HttpHelper {
         return mApi.addComment(jokeId, userId, details);
     }
 
+    @Override
+    public Flowable<BaseResponse<List<Object>>> addJoke(String title, String userId, String content) {
+        return mApi.addJoke(title, userId, content);
+    }
+
 }
