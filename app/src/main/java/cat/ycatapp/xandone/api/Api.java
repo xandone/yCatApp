@@ -62,8 +62,7 @@ public interface Api {
     @GET("ycat/joke/add")
     Flowable<BaseResponse<List<Object>>> addJoke(
             @Query("title") String title,
-            @Query("j" +
-                    "oke_user_id") String userId,
+            @Query("joke_user_id") String userId,
             @Query("content") String content
     );
 
