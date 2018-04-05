@@ -147,11 +147,13 @@ public class JokeCommentActivity extends RxBaseActivity<JokeCommentPresenter> im
     @Override
     public void showMsg(String msg, int loadStatus) {
         mRefreshLayout.finishRefresh();
+        mRefreshLayout.finishLoadmore();
         loadingLayout.setLoadingTips(loadStatus);
     }
 
     @Override
     public void showCommentResult(BaseResponse<List<CommentBean.RowsBean>> response) {
+        dismissLoadingDialog();
         if (response == null || response.getDataList() == null || response.getDataList().isEmpty()) {
             return;
         }
@@ -169,6 +171,11 @@ public class JokeCommentActivity extends RxBaseActivity<JokeCommentPresenter> im
         }
     }
 
+    @Override
+    public void showCommentError() {
+        dismissLoadingDialog();
+    }
+
     @OnClick({R.id.act_joke_comment_commit})
     public void click(View view) {
         switch (view.getId()) {
@@ -184,6 +191,7 @@ public class JokeCommentActivity extends RxBaseActivity<JokeCommentPresenter> im
                     ToastUtils.showShort("请输入内容");
                     break;
                 }
+                showLoadingDialog(false);
                 mPresenter.addComment(jokeId, userId, details);
                 break;
         }

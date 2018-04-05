@@ -123,6 +123,7 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
     @Override
     public void showMsg(String msg, int loadStatus) {
         mRefreshLayout.finishRefresh();
+        mRefreshLayout.finishLoadmore();
         loadingLayout.setLoadingTips(loadStatus);
     }
 

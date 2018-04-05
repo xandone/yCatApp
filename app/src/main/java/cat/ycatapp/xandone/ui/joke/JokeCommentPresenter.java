@@ -1,6 +1,8 @@
 package cat.ycatapp.xandone.ui.joke;
 
 
+import android.util.Log;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -57,6 +59,12 @@ public class JokeCommentPresenter extends RxPresenter<JokeCommentContact.MyView>
                     public void onNext(BaseResponse<List<CommentBean.RowsBean>> baseResponse) {
                         super.onNext(baseResponse);
                         view.showCommentResult(baseResponse);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        super.onError(t);
+                        view.showCommentError();
                     }
                 })
         );

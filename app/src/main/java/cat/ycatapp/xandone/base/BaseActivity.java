@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 
 import butterknife.ButterKnife;
 import cat.ycatapp.xandone.AppManager;
+import cat.ycatapp.xandone.uitils.ProgressDialogUtil;
 
 /**
  * author: xandone
@@ -72,6 +73,22 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setNavigationIcon(null);
+    }
+
+    protected void showLoadingDialog(boolean cancelable) {
+        showLoadingDialog("正在请求...", cancelable);
+    }
+
+    protected void showLoadingDialog(String msg, boolean cancelable) {
+        ProgressDialogUtil.showProgress(this, msg, cancelable);
+    }
+
+    protected void setLoadingMessage(String str) {
+        ProgressDialogUtil.setMessage(str);
+    }
+
+    protected void dismissLoadingDialog() {
+        ProgressDialogUtil.dismiss();
     }
 
     protected android.app.AlertDialog showDialog(String msg,

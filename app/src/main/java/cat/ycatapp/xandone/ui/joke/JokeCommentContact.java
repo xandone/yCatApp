@@ -23,6 +23,8 @@ public interface JokeCommentContact {
         void showContentMore(CommentBean commentBean);
 
         void showCommentResult(BaseResponse<List<CommentBean.RowsBean>> response);
+
+        void showCommentError();
     }
 
     interface Presenter extends BasePresenter<MyView> {
