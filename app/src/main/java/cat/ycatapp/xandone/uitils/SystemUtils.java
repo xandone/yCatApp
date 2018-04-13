@@ -93,15 +93,12 @@ public class SystemUtils {
             FileOutputStream fos = new FileOutputStream(imageFile);
             boolean isCompress = bitmap.compress(Bitmap.CompressFormat.PNG, 90, fos);
             if (isCompress) {
-                SnackbarUtil.showShort(container, "保存妹纸成功n(*≧▽≦*)n");
             } else {
-                SnackbarUtil.showShort(container, "保存妹纸失败ヽ(≧Д≦)ノ");
             }
             fos.flush();
             fos.close();
         } catch (IOException e) {
             e.printStackTrace();
-            SnackbarUtil.showShort(container, "保存妹纸失败ヽ(≧Д≦)ノ");
         }
         try {
             MediaStore.Images.Media.insertImage(context.getContentResolver(), imageFile.getAbsolutePath(), fileName, null);

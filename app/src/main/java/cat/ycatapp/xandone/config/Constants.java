@@ -12,12 +12,25 @@ import cat.ycatapp.xandone.App;
  */
 
 public class Constants {
+    /**
+     * App独立文件,不随app一起卸载
+     * Environment.getExternalStorageDirectory()：sdCard的路径为mnt/sdcard/ 即为SD卡根路径
+     * <p>
+     * APP私有文件，随app一起卸载
+     * getFilesDir()： data/data/< package name >/files/
+     * <p>
+     * App专属文件，随app一起卸载
+     * getExternalFilesDir/getExternalCacheDir：mnt/sdcard/Android/data/< package name >/files/…
+     */
+
 
     //================= PATH ====================
 
     public static final String PATH_DATA = App.sContext.getCacheDir().getAbsolutePath() + File.separator + "data";
 
-    public static final String PATH_CACHE = PATH_DATA + "/NetCache";
+    public static final String PATH_CACHE = PATH_DATA + "/ycatCache";
+
+    public static final String PATH_CACHE_EXTERNAL = App.sContext.getExternalCacheDir() + File.separator + "ycat" + File.separator;
 
     public static final String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "xandone" + File.separator + "ycat";
 

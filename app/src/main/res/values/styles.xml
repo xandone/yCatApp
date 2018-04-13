@@ -33,7 +33,7 @@
 
     <style name="main_footer_radio" parent="footer_bar">
         <!--<item name="android:drawablePadding">2dp</item>-->
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@drawable/footer_text_color</item>
     </style>
 
