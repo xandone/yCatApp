@@ -7,6 +7,7 @@ import android.util.Log;
 import cat.ycatapp.xandone.base.BaseView;
 import cat.ycatapp.xandone.exception.ApiException;
 import cat.ycatapp.xandone.uitils.LogUtils;
+import cat.ycatapp.xandone.uitils.ToastUtils;
 import cat.ycatapp.xandone.widget.LoadingLayout;
 import io.reactivex.subscribers.ResourceSubscriber;
 import retrofit2.HttpException;
@@ -43,12 +44,12 @@ public class CommonSubscriber<T> extends ResourceSubscriber<T> {
 
     @Override
     public void onNext(T t) {
-        Log.d("yandone","onnext");
+        Log.d("yandone", "onnext");
     }
 
     @Override
     public void onError(Throwable t) {
-        Log.d("yandone","onError");
+        Log.d("yandone", "onError");
         if (mView == null) {
             return;
         }
@@ -65,6 +66,8 @@ public class CommonSubscriber<T> extends ResourceSubscriber<T> {
         if (isShowErrorState) {
             mView.stateError();
         }
+
+        ToastUtils.showShort("服务器异常,请稍后再试");
     }
 
     @Override

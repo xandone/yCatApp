@@ -1,7 +1,6 @@
 package cat.ycatapp.xandone.ui.splash;
 
 
-
 import android.util.Log;
 
 import java.util.List;
@@ -17,6 +16,8 @@ import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.UserBean;
 import cat.ycatapp.xandone.uitils.GsonUtil;
 import cat.ycatapp.xandone.uitils.SPUtils;
+import cat.ycatapp.xandone.uitils.SystemUtils;
+import cat.ycatapp.xandone.uitils.ToastUtils;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -46,6 +47,12 @@ public class SplashPresenter extends RxPresenter<SplashContact.View> implements 
                             @Override
                             public void accept(@NonNull BaseResponse<List<UserBean>> baseResponse) throws Exception {
 
+                                if (!SystemUtils.isNetworkConnected()) {
+                                    ToastUtils.showShort("没有网络");
+                                    startAct();
+                                    return;
+                                }
+
                                 if (baseResponse != null) {
 //                                     密码正确
                                     if ("1".equals(baseResponse.getCode()) && baseResponse.getDataList() != null
@@ -60,7 +67,7 @@ public class SplashPresenter extends RxPresenter<SplashContact.View> implements 
                                         SPUtils spUtils = SPUtils.getInstance(Constants.USER_INFO_NAME);
                                         spUtils.put(Constants.USER_INFO_KEY, userResult);
 
-                                        Log.d("yandone", userResult);
+                                        Log.d("yandone", "splash====" + userResult);
                                     }
 
                                 }

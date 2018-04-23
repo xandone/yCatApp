@@ -8,6 +8,7 @@ import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.model.bean.UserBean;
 import io.reactivex.Flowable;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Query;
 
 /**
@@ -16,8 +17,8 @@ import retrofit2.http.Query;
  */
 
 public interface Api {
-    String HOST = "http://192.168.3.102:8080/";
-//    String HOST = "http://192.168.31.109:8080/";
+    //    String HOST = "http://192.168.3.102:8080/";
+    String HOST = "http://192.168.31.109:8080/";
 
     @GET("ycat/regist")
     Flowable<BaseResponse<List<UserBean>>> regist(
@@ -25,6 +26,7 @@ public interface Api {
             @Query("password") String psw,
             @Query("nickname") String nick);
 
+//    @Headers("Cache-Control:public,max-age=0")
     @GET("ycat/login")
     Flowable<BaseResponse<List<UserBean>>> login(
             @Query("name") String name,

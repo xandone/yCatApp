@@ -16,6 +16,7 @@ import cat.ycatapp.xandone.model.bean.UserBean;
 import cat.ycatapp.xandone.model.bean.UserPsw;
 import cat.ycatapp.xandone.uitils.GsonUtil;
 import cat.ycatapp.xandone.uitils.SPUtils;
+import cat.ycatapp.xandone.uitils.SystemUtils;
 import cat.ycatapp.xandone.uitils.ToastUtils;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -43,6 +44,11 @@ public class LoginPresenter extends RxPresenter<LoginContact.View> implements Lo
                     @Override
                     public void onNext(BaseResponse<List<UserBean>> baseResponse) {
 
+                        if (!SystemUtils.isNetworkConnected()) {
+                            ToastUtils.showShort("没有网络");
+                            return;
+                        }
+
                         if (baseResponse != null) {
                             if ("1".equals(baseResponse.getCode()) && baseResponse.getDataList() != null
                                     && !baseResponse.getDataList().isEmpty()) {
@@ -56,13 +62,14 @@ public class LoginPresenter extends RxPresenter<LoginContact.View> implements Lo
                                 String infoJson = GsonUtil.objToJson(loginBean);
                                 spUtils.put(Constants.USER_INFO_KEY, infoJson);
 
-                                Log.d("yandone", infoJson);
+                                Log.d("yandone", "login===" + infoJson);
                             }
                             view.showContent(baseResponse);
                         } else {
                             ToastUtils.showShort("服务器异常,请稍后再试");
                         }
                     }
+
                 })
         );
     }
