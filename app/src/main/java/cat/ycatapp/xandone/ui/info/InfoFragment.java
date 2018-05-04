@@ -6,10 +6,12 @@ import android.os.Handler;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseFragment;
@@ -20,6 +22,7 @@ import cat.ycatapp.xandone.ui.login.LoginActivity;
 import cat.ycatapp.xandone.ui.personal.PersonalActivity;
 import cat.ycatapp.xandone.uitils.GsonUtil;
 import cat.ycatapp.xandone.uitils.SPUtils;
+import cat.ycatapp.xandone.widget.BottomDialog;
 
 /**
  * author: xandone
@@ -35,6 +38,8 @@ public class InfoFragment extends RxBaseFragment {
     TextView frag_info_nick;
     @BindView(R.id.toolBar)
     Toolbar toolBar;
+    @BindView(R.id.frag_info_icon_iv)
+    ImageView frag_info_icon_iv;
 
     @Override
     public int setLayout() {
@@ -55,7 +60,7 @@ public class InfoFragment extends RxBaseFragment {
 //        getFragmentComponent().inject(this);
     }
 
-    @OnClick({R.id.frag_info_login, R.id.frag_info_out})
+    @OnClick({R.id.frag_info_login, R.id.frag_info_out, R.id.frag_info_icon_iv})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.frag_info_login:
@@ -73,6 +78,9 @@ public class InfoFragment extends RxBaseFragment {
 
                     }
                 }, "取消", null);
+                break;
+            case R.id.frag_info_icon_iv:
+                changeIconDialog();
                 break;
         }
     }
@@ -93,6 +101,24 @@ public class InfoFragment extends RxBaseFragment {
         frag_info_login_ll.setVisibility(View.VISIBLE);
         frag_info_icon_ll.setVisibility(View.GONE);
         frag_info_nick.setText("");
+    }
+
+    public void changeIconDialog() {
+        final BottomDialog bottomDialog = BottomDialog.create(getChildFragmentManager());
+        bottomDialog.setLayoutRes(R.layout.bottom_dialog_layout)
+                .setCancelOutside(true)
+                .setDimAmount(0.4f)
+                .setViewListener(new BottomDialog.ViewListener() {
+                    @Override
+                    public void bindView(View v) {
+                        TextView bottom_dialog_photo = (TextView) v.findViewById(R.id.bottom_dialog_photo);
+                        TextView bottom_dialog_camera = (TextView) v.findViewById(R.id.bottom_dialog_camera);
+                        TextView bottom_dialog_cancel = (TextView) v.findViewById(R.id.bottom_dialog_cancel);
+                        bottom_dialog_photo.setText("相册");
+                        bottom_dialog_camera.setText("拍照");
+                        bottom_dialog_cancel.setText("取消");
+                    }
+                }).show();
     }
 
 
