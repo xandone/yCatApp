@@ -18,12 +18,12 @@
             android:id="@+id/main_footer_care_rb"
             style="@style/main_footer_radio"
             android:checked="true"
-            android:text="笑话" />
+            android:text="@string/x_joke_title" />
 
         <RadioButton
             android:id="@+id/main_footer_video_rb"
             style="@style/main_footer_radio"
-            android:text="帖子" />
+            android:text="@string/x_img_title" />
 
         <RadioButton
             android:id="@+id/main_footer_home_rb"

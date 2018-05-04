@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.widget.RadioGroup;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,8 +14,7 @@ import java.util.TimerTask;
 
 import butterknife.BindView;
 import cat.ycatapp.xandone.base.RxBaseActivity;
-import cat.ycatapp.xandone.cache.UserInfoCache;
-import cat.ycatapp.xandone.ui.bar.BarFragment;
+import cat.ycatapp.xandone.ui.bar.ImageFragment;
 import cat.ycatapp.xandone.ui.info.InfoFragment;
 import cat.ycatapp.xandone.ui.joke.JokeFragment;
 import cat.ycatapp.xandone.uitils.ToastUtils;
@@ -33,7 +30,7 @@ public class MainActivity extends RxBaseActivity {
 
     private InfoFragment mInfoFragment;
     private JokeFragment mJokeFragment;
-    private BarFragment mBarFragment;
+    private ImageFragment mImageFragment;
 
     public static final String X_USER_RELOAD = MainActivity.class.getName() + "_USER_RELOAD";
     public static final int USER_LOGIN = 1;
@@ -54,10 +51,10 @@ public class MainActivity extends RxBaseActivity {
 
         mFragIndex = 0;
         mJokeFragment = new JokeFragment();
-        mBarFragment = new BarFragment();
+        mImageFragment = new ImageFragment();
         mInfoFragment = new InfoFragment();
 
-        fragList = new ArrayList<Fragment>(Arrays.asList(mJokeFragment, mBarFragment, mInfoFragment));
+        fragList = new ArrayList<Fragment>(Arrays.asList(mJokeFragment, mImageFragment, mInfoFragment));
         turnToFrag();
 
         main_foot_rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

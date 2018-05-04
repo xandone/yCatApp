@@ -22,8 +22,6 @@ import cat.ycatapp.xandone.App;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.uitils.TimeUtil;
-import cat.ycatapp.xandone.uitils.imgload.GlideLoader;
-import cat.ycatapp.xandone.uitils.imgload.ImageLoadInterface;
 import cat.ycatapp.xandone.uitils.imgload.XGlide;
 import cat.ycatapp.xandone.widget.UserCircleIcon;
 

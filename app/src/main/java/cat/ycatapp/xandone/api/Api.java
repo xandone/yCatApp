@@ -4,6 +4,7 @@ import java.util.List;
 
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.CommentBean;
+import cat.ycatapp.xandone.model.bean.ImageBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.model.bean.UserBean;
 import io.reactivex.Flowable;
@@ -26,7 +27,7 @@ public interface Api {
             @Query("password") String psw,
             @Query("nickname") String nick);
 
-//    @Headers("Cache-Control:public,max-age=0")
+    //    @Headers("Cache-Control:public,max-age=0")
     @GET("ycat/login")
     Flowable<BaseResponse<List<UserBean>>> login(
             @Query("name") String name,
@@ -67,6 +68,11 @@ public interface Api {
             @Query("joke_user_id") String userId,
             @Query("content") String content
     );
+
+    @GET("ycat/imagelist")
+    Flowable<ImageBean> getImageList(
+            @Query("page") int page,
+            @Query("rows") int count);
 
 
 }

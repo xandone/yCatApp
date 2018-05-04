@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import cat.ycatapp.xandone.api.Api;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.CommentBean;
+import cat.ycatapp.xandone.model.bean.ImageBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.model.bean.UserBean;
 import io.reactivex.Flowable;
@@ -63,6 +64,11 @@ public class RetrofitHelper implements HttpHelper {
     @Override
     public Flowable<BaseResponse<List<Object>>> addJoke(String title, String userId, String content) {
         return mApi.addJoke(title, userId, content);
+    }
+
+    @Override
+    public Flowable<ImageBean> getImageList(int page, int count) {
+        return mApi.getImageList(page, count);
     }
 
 }
