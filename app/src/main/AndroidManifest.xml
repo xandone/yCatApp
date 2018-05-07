@@ -56,6 +56,11 @@
             android:name=".ui.jokeadd.JokeAddActivity"
             android:label="@string/x_joke_add"
             android:windowSoftInputMode="stateAlwaysHidden" />
+        android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".ui.img.ImageDetailsActivity"
+            android:label="@string/x_img_details_title"
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
     </application>
 

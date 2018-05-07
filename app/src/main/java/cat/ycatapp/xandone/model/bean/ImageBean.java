@@ -1,5 +1,6 @@
 package cat.ycatapp.xandone.model.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -33,7 +34,7 @@ public class ImageBean {
         this.rows = rows;
     }
 
-    public static class RowsBean {
+    public static class RowsBean implements Serializable{
         /**
          * userId : 152146249752110
          * imgId : 152534259138809
