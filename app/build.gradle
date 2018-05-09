@@ -51,6 +51,7 @@ dependencies {
     compile rootProject.ext.dependencies["FlycoTabLayout_Lib"]
     compile rootProject.ext.dependencies["constraint-layout"]
     compile rootProject.ext.dependencies["SmartRefreshLayout"]
+    compile rootProject.ext.dependencies["photopick"]
 
     //rx
     compile rootProject.ext.dependencies["rxjava"]
@@ -80,6 +81,7 @@ dependencies {
     compile rootProject.ext.dependencies["logger"]
     compile rootProject.ext.dependencies["fragmentation"]
     compile rootProject.ext.dependencies["crashreport"]
+    compile rootProject.ext.dependencies["Luban"]
 
     //canary
     debugCompile rootProject.ext.dependencies["blockcanary-android"]

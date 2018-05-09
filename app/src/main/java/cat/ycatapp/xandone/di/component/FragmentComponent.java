@@ -6,6 +6,7 @@ import android.app.Activity;
 import cat.ycatapp.xandone.di.module.FragmentModule;
 import cat.ycatapp.xandone.di.scope.FragmentScope;
 import cat.ycatapp.xandone.ui.bar.ImageFragment;
+import cat.ycatapp.xandone.ui.info.InfoFragment;
 import cat.ycatapp.xandone.ui.joke.JokeFragment;
 import dagger.Component;
 
@@ -20,9 +21,11 @@ public interface FragmentComponent {
     Activity getActivity();
 
     void inject(JokeFragment jokeFragment);
-//
+
+    //
     void inject(ImageFragment imageFragment);
-//
-//    void inject(InfoFragment jokeFragment);
+
+    //
+    void inject(InfoFragment jokeFragment);
 
 }

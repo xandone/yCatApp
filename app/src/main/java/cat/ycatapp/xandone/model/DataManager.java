@@ -1,6 +1,7 @@
 package cat.ycatapp.xandone.model;
 
 import java.util.List;
+import java.util.Map;
 
 import cat.ycatapp.xandone.api.http.HttpHelper;
 import cat.ycatapp.xandone.model.base.BaseResponse;
@@ -11,6 +12,8 @@ import cat.ycatapp.xandone.model.bean.LoginBean;
 import cat.ycatapp.xandone.model.bean.RegistBean;
 import cat.ycatapp.xandone.model.bean.UserBean;
 import io.reactivex.Flowable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 /**
  * author: xandone
@@ -67,6 +70,11 @@ public class DataManager implements HttpHelper {
     @Override
     public Flowable<ImageBean> getImageList(int page, int count) {
         return mHttpHelper.getImageList(page, count);
+    }
+
+    @Override
+    public Flowable<ImageBean> changeUserIcon(MultipartBody.Part part) {
+        return mHttpHelper.changeUserIcon(part);
     }
 
 }

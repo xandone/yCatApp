@@ -82,7 +82,6 @@ public class ImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             if (rowsBean == null) {
                 return;
             }
-            Log.d("yandone", "tup:-----" + rowsBean.getImgUrl());
             XGlide.loadImage(requestManager, item_image_iv, rowsBean.getImgUrl(), R.drawable.img_place);
 
         }

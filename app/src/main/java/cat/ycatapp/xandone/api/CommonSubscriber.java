@@ -44,12 +44,10 @@ public class CommonSubscriber<T> extends ResourceSubscriber<T> {
 
     @Override
     public void onNext(T t) {
-        Log.d("yandone", "onnext");
     }
 
     @Override
     public void onError(Throwable t) {
-        Log.d("yandone", "onError");
         if (mView == null) {
             return;
         }

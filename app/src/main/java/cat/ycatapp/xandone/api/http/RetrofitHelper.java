@@ -1,7 +1,9 @@
 package cat.ycatapp.xandone.api.http;
 
 
+import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -12,6 +14,8 @@ import cat.ycatapp.xandone.model.bean.ImageBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.model.bean.UserBean;
 import io.reactivex.Flowable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 /**
  * author: xandone
@@ -69,6 +73,11 @@ public class RetrofitHelper implements HttpHelper {
     @Override
     public Flowable<ImageBean> getImageList(int page, int count) {
         return mApi.getImageList(page, count);
+    }
+
+    @Override
+    public Flowable<ImageBean> changeUserIcon(MultipartBody.Part part) {
+        return mApi.changeUserIcon(part);
     }
 
 }

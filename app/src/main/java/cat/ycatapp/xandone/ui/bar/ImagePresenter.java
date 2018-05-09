@@ -33,12 +33,12 @@ public class ImagePresenter extends RxPresenter<ImageContact.MyView> implements 
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new CommonSubscriber<ImageBean>(view) {
                     @Override
-                    public void onNext(ImageBean jokeBean) {
-                        super.onNext(jokeBean);
+                    public void onNext(ImageBean imageBean) {
+                        super.onNext(imageBean);
                         if (mode == JokeContact.MODE_ONE) {
-                            view.showContent(jokeBean);
+                            view.showContent(imageBean);
                         } else if (mode == JokeContact.MODE_MORE) {
-                            view.showContentMore(jokeBean);
+                            view.showContentMore(imageBean);
                         }
                     }
                 })

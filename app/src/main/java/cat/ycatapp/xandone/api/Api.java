@@ -9,6 +9,7 @@ import cat.ycatapp.xandone.model.bean.ImageBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.model.bean.UserBean;
 import io.reactivex.Flowable;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -17,6 +18,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 /**
  * author: xandone
@@ -82,9 +84,18 @@ public interface Api {
             @Query("rows") int count);
 
     @Multipart
-    @POST("ycat/imagelist")
-    Flowable<ImageBean> changeUserIcon(@Part("username") String username,
+    @POST("ycat/upload.do")
+    Flowable<ImageBean> changeUserIcon(@Part("userId") String username,
                                        @PartMap() Map<String, RequestBody> files);
+
+    @Multipart
+    @POST("ycat/upload.do")
+    Flowable<ImageBean> upImage(@QueryMap() Map<String, String> params,
+                                @PartMap() Map<String, RequestBody> files);
+
+    @Multipart
+    @POST("ycat/upload.do")
+    Flowable<ImageBean> changeUserIcon(@Part MultipartBody.Part part);
 
 
 }
