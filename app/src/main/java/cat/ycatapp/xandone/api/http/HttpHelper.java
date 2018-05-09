@@ -1,7 +1,6 @@
 package cat.ycatapp.xandone.api.http;
 
 
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -9,11 +8,9 @@ import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.CommentBean;
 import cat.ycatapp.xandone.model.bean.ImageBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
-import cat.ycatapp.xandone.model.bean.RegistBean;
 import cat.ycatapp.xandone.model.bean.UserBean;
 import io.reactivex.Flowable;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 /**
  * author: xandone
@@ -39,5 +36,5 @@ public interface HttpHelper {
 
     Flowable<ImageBean> getImageList(int page, int count);
 
-    Flowable<ImageBean> changeUserIcon(MultipartBody.Part part);
+    Flowable<ImageBean> changeUserIcon(MultipartBody.Part part, Map<String, String> maps);
 }

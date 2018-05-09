@@ -1,12 +1,11 @@
 package cat.ycatapp.xandone.ui.info;
 
-import java.util.List;
+
 import java.util.Map;
 
 import cat.ycatapp.xandone.base.BasePresenter;
 import cat.ycatapp.xandone.base.BaseView;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 /**
  * author: xandone
@@ -20,7 +19,7 @@ public interface InfoContact {
 
     interface Presenter extends BasePresenter<MyView> {
 
-        void changeUserIcon(String userId, MultipartBody.Part part);
+        void changeUserIcon(Map<String, String> maps, MultipartBody.Part part);
 
     }
 }

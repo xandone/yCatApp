@@ -31,9 +31,9 @@ public class InfoPresenter extends RxPresenter<InfoContact.MyView> implements In
     }
 
     @Override
-    public void changeUserIcon(String userId, MultipartBody.Part part) {
+    public void changeUserIcon(Map<String, String> maps, MultipartBody.Part part) {
 
-        Flowable<ImageBean> result = dataManager.changeUserIcon(part);
+        Flowable<ImageBean> result = dataManager.changeUserIcon(part, maps);
         addSubscrible(result.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new CommonSubscriber<ImageBean>(view) {

@@ -16,6 +16,7 @@ import cat.ycatapp.xandone.model.bean.UserBean;
 import io.reactivex.Flowable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.http.QueryMap;
 
 /**
  * author: xandone
@@ -76,8 +77,8 @@ public class RetrofitHelper implements HttpHelper {
     }
 
     @Override
-    public Flowable<ImageBean> changeUserIcon(MultipartBody.Part part) {
-        return mApi.changeUserIcon(part);
+    public Flowable<ImageBean> changeUserIcon(MultipartBody.Part part, Map<String, String> maps) {
+        return mApi.changeUserIcon(part, maps);
     }
 
 }

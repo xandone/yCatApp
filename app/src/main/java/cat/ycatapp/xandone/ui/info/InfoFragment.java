@@ -150,11 +150,13 @@ public class InfoFragment extends RxBaseFragment<InfoPresenter> implements View.
                     @Override
                     public void onSuccess(File file) {
                         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-
                         MultipartBody.Part body =
                                 MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+                        Map<String, String> map = new HashMap();
+                        map.put("userId", UserInfoCache.getUserBean().getUserId());
+                        Log.d("yandone", UserInfoCache.getUserBean().getUserId());
 
-                        mPresenter.changeUserIcon("", body);
+                        mPresenter.changeUserIcon(map, body);
                     }
 
                     @Override
