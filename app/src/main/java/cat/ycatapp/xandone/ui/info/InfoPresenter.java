@@ -1,7 +1,5 @@
 package cat.ycatapp.xandone.ui.info;
 
-import java.io.File;
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -13,9 +11,7 @@ import cat.ycatapp.xandone.model.bean.ImageBean;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.MediaType;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 /**
  * author: xandone
@@ -40,6 +36,7 @@ public class InfoPresenter extends RxPresenter<InfoContact.MyView> implements In
                     @Override
                     public void onNext(ImageBean jokeBean) {
                         super.onNext(jokeBean);
+
 
                     }
                 })

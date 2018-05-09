@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +22,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cat.ycatapp.xandone.App;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseFragment;
 import cat.ycatapp.xandone.cache.UserInfoCache;
@@ -28,6 +32,7 @@ import cat.ycatapp.xandone.ui.login.LoginActivity;
 import cat.ycatapp.xandone.ui.personal.PersonalActivity;
 import cat.ycatapp.xandone.uitils.GsonUtil;
 import cat.ycatapp.xandone.uitils.SPUtils;
+import cat.ycatapp.xandone.uitils.imgload.XGlide;
 import cat.ycatapp.xandone.widget.BottomDialog;
 import me.iwf.photopicker.PhotoPicker;
 import okhttp3.MediaType;
@@ -43,7 +48,7 @@ import static android.app.Activity.RESULT_OK;
  * created on: 2018/3/6 13:35
  */
 
-public class InfoFragment extends RxBaseFragment<InfoPresenter> implements View.OnClickListener {
+public class InfoFragment extends RxBaseFragment<InfoPresenter> implements View.OnClickListener, InfoContact.MyView {
     @BindView(R.id.frag_info_login_ll)
     LinearLayout frag_info_login_ll;
     @BindView(R.id.frag_info_icon_ll)
@@ -55,6 +60,9 @@ public class InfoFragment extends RxBaseFragment<InfoPresenter> implements View.
     @BindView(R.id.frag_info_icon_iv)
     ImageView frag_info_icon_iv;
 
+    private BottomDialog bottomDialog;
+    private RequestManager requestManager;
+
     @Override
     public int setLayout() {
         return R.layout.frag_info_layout;
@@ -64,6 +72,8 @@ public class InfoFragment extends RxBaseFragment<InfoPresenter> implements View.
     public void initData() {
         super.initData();
         setToolBar(toolBar, getString(R.string.x_personal_title));
+        requestManager = Glide.with(App.sContext);
+
         if (UserInfoCache.isLogin()) {
             showUserInfo();
         }
@@ -106,6 +116,7 @@ public class InfoFragment extends RxBaseFragment<InfoPresenter> implements View.
         frag_info_login_ll.setVisibility(View.GONE);
         frag_info_icon_ll.setVisibility(View.VISIBLE);
         frag_info_nick.setText(UserInfoCache.getUserBean().getNickName());
+        XGlide.loadImage(requestManager, frag_info_icon_iv, UserInfoCache.getUserBean().getIconUrl());
     }
 
     /**
@@ -118,7 +129,7 @@ public class InfoFragment extends RxBaseFragment<InfoPresenter> implements View.
     }
 
     public void changeIconDialog() {
-        final BottomDialog bottomDialog = BottomDialog.create(getChildFragmentManager());
+        bottomDialog = BottomDialog.create(getChildFragmentManager());
         bottomDialog.setLayoutRes(R.layout.bottom_dialog_layout)
                 .setCancelOutside(true)
                 .setDimAmount(0.4f)
@@ -133,6 +144,8 @@ public class InfoFragment extends RxBaseFragment<InfoPresenter> implements View.
                         bottom_dialog_cancel.setText("取消");
 
                         bottom_dialog_photo.setOnClickListener(InfoFragment.this);
+                        bottom_dialog_camera.setOnClickListener(InfoFragment.this);
+                        bottom_dialog_cancel.setOnClickListener(InfoFragment.this);
                     }
                 }).show();
     }
@@ -183,12 +196,26 @@ public class InfoFragment extends RxBaseFragment<InfoPresenter> implements View.
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bottom_dialog_photo:
+                if (bottomDialog != null) {
+                    bottomDialog.dismiss();
+                }
+
                 PhotoPicker.builder()
                         .setPhotoCount(1)
                         .setShowCamera(true)
                         .setShowGif(true)
                         .setPreviewEnabled(false)
                         .start(mActivity, this);
+                break;
+            case R.id.bottom_dialog_camera:
+                if (bottomDialog != null) {
+                    bottomDialog.dismiss();
+                }
+                break;
+            case R.id.bottom_dialog_cancel:
+                if (bottomDialog != null) {
+                    bottomDialog.dismiss();
+                }
                 break;
         }
     }
