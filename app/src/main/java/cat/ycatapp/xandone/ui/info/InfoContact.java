@@ -1,10 +1,13 @@
 package cat.ycatapp.xandone.ui.info;
 
 
+import java.util.List;
 import java.util.Map;
 
 import cat.ycatapp.xandone.base.BasePresenter;
 import cat.ycatapp.xandone.base.BaseView;
+import cat.ycatapp.xandone.model.base.BaseResponse;
+import cat.ycatapp.xandone.model.bean.UserBean;
 import okhttp3.MultipartBody;
 
 /**
@@ -14,6 +17,7 @@ import okhttp3.MultipartBody;
 
 public interface InfoContact {
     interface MyView extends BaseView {
+        void showContent(BaseResponse<List<UserBean>> baseResponse);
 
     }
 

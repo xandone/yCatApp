@@ -77,7 +77,7 @@ public class RetrofitHelper implements HttpHelper {
     }
 
     @Override
-    public Flowable<ImageBean> changeUserIcon(MultipartBody.Part part, Map<String, String> maps) {
+    public Flowable<BaseResponse<List<UserBean>>> changeUserIcon(MultipartBody.Part part, Map<String, String> maps) {
         return mApi.changeUserIcon(part, maps);
     }
 

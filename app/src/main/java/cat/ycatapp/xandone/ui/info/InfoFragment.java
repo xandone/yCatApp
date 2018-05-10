@@ -27,6 +27,7 @@ import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseFragment;
 import cat.ycatapp.xandone.cache.UserInfoCache;
 import cat.ycatapp.xandone.config.Constants;
+import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.UserBean;
 import cat.ycatapp.xandone.ui.login.LoginActivity;
 import cat.ycatapp.xandone.ui.personal.PersonalActivity;
@@ -218,5 +219,10 @@ public class InfoFragment extends RxBaseFragment<InfoPresenter> implements View.
                 }
                 break;
         }
+    }
+
+    @Override
+    public void showContent(BaseResponse<List<UserBean>> baseResponse) {
+        XGlide.loadImage(requestManager, frag_info_icon_iv, baseResponse.getDataList().get(0).getIconUrl());
     }
 }

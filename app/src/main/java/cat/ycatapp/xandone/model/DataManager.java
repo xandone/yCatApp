@@ -73,7 +73,7 @@ public class DataManager implements HttpHelper {
     }
 
     @Override
-    public Flowable<ImageBean> changeUserIcon(MultipartBody.Part part, Map<String, String> maps) {
+    public Flowable<BaseResponse<List<UserBean>>> changeUserIcon(MultipartBody.Part part, Map<String, String> maps) {
         return mHttpHelper.changeUserIcon(part, maps);
     }
 

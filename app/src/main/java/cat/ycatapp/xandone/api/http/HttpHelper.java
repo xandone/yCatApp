@@ -36,5 +36,5 @@ public interface HttpHelper {
 
     Flowable<ImageBean> getImageList(int page, int count);
 
-    Flowable<ImageBean> changeUserIcon(MultipartBody.Part part, Map<String, String> maps);
+    Flowable<BaseResponse<List<UserBean>>> changeUserIcon(MultipartBody.Part part, Map<String, String> maps);
 }

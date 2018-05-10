@@ -94,8 +94,8 @@ public interface Api {
                                 @PartMap() Map<String, RequestBody> files);
 
     @Multipart
-    @POST("ycat/upload.do")
-    Flowable<ImageBean> changeUserIcon(@Part MultipartBody.Part part,@QueryMap Map<String, String> maps);
+    @POST("ycat/user/upIcon")
+    Flowable<BaseResponse<List<UserBean>>> changeUserIcon(@Part MultipartBody.Part part, @QueryMap Map<String, String> maps);
 
 
 }
