@@ -1,5 +1,6 @@
 package cat.ycatapp.xandone.uitils;
 
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -11,6 +12,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 
 import java.io.BufferedReader;
@@ -162,5 +164,60 @@ public class SystemUtils {
             }
         }
         return null;
+    }
+
+    /**
+     * Show the soft input.
+     *
+     * @param activity The activity.
+     */
+    public static void showSoftInput(final Activity activity) {
+        InputMethodManager imm =
+                (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        if (imm == null) return;
+        View view = activity.getCurrentFocus();
+        if (view == null) view = new View(activity);
+        imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
+    }
+
+    /**
+     * Show the soft input.
+     *
+     * @param view The view.
+     */
+    public static void showSoftInput(final View view) {
+        InputMethodManager imm =
+                (InputMethodManager) App.sContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm == null) return;
+        view.setFocusable(true);
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
+    }
+
+    /**
+     * Hide the soft input.
+     *
+     * @param activity The activity.
+     */
+    public static void hideSoftInput(final Activity activity) {
+        InputMethodManager imm =
+                (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        if (imm == null) return;
+        View view = activity.getCurrentFocus();
+        if (view == null) view = new View(activity);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    /**
+     * Hide the soft input.
+     *
+     * @param view The view.
+     */
+    public static void hideSoftInput(final View view) {
+        InputMethodManager imm =
+                (InputMethodManager) App.sContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm == null) return;
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

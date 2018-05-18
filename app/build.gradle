@@ -48,7 +48,6 @@ dependencies {
     compile rootProject.ext.dependencies["PhotoView"]
     compile rootProject.ext.dependencies["glide-transformations"]
     compile rootProject.ext.dependencies["html-textview"]
-    compile rootProject.ext.dependencies["FlycoTabLayout_Lib"]
     compile rootProject.ext.dependencies["constraint-layout"]
     compile rootProject.ext.dependencies["SmartRefreshLayout"]
     compile rootProject.ext.dependencies["photopick"]
@@ -56,7 +55,6 @@ dependencies {
     //rx
     compile rootProject.ext.dependencies["rxjava"]
     compile rootProject.ext.dependencies["rxandroid"]
-    compile rootProject.ext.dependencies["rxpermissions"]
 
     //network
     compile rootProject.ext.dependencies["gson"]
@@ -67,7 +65,6 @@ dependencies {
     compile rootProject.ext.dependencies["okhttp-logging-interceptor"]
     compile rootProject.ext.dependencies["glide"]
     compile rootProject.ext.dependencies["glide-okhttp3-integration"]
-    compile rootProject.ext.dependencies["jsoup"]
 
     //di
     compile rootProject.ext.dependencies["dagger"]
@@ -79,7 +76,6 @@ dependencies {
     //other
     compile rootProject.ext.dependencies["multidex"]
     compile rootProject.ext.dependencies["logger"]
-    compile rootProject.ext.dependencies["fragmentation"]
     compile rootProject.ext.dependencies["crashreport"]
     compile rootProject.ext.dependencies["Luban"]
 

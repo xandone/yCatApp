@@ -55,6 +55,8 @@ public class InfoPresenter extends RxPresenter<InfoContact.MyView> implements In
                                 UserInfoCache.setLogin(true);
                                 UserInfoCache.setUserBean(userCache);
 
+                                Log.d("yandone", "userCache===" + GsonUtil.objToJson(baseResponse));
+
                                 SPUtils spUtils = SPUtils.getInstance(Constants.USER_INFO_NAME);
                                 String infoJson = GsonUtil.objToJson(userCache);
                                 spUtils.put(Constants.USER_INFO_KEY, infoJson);
