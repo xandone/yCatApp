@@ -22,10 +22,11 @@
             <ImageView
                 android:id="@+id/toolbar_add"
                 android:layout_width="50dp"
-                android:padding="12dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="right"
-                android:layout_marginRight="6dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="6dp"
+                android:contentDescription="@null"
+                android:padding="16dp"
                 android:src="@drawable/add" />
 
         </android.support.v7.widget.Toolbar>

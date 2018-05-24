@@ -43,7 +43,9 @@ public class XGlide {
             view.setImageResource(placeholder);
         } else {
             if (view instanceof UserCircleIcon) {
-                BitmapRequestBuilder builder = loader.load(url).asBitmap()
+                BitmapRequestBuilder builder = loader
+                        .load(url)
+                        .asBitmap()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .placeholder(placeholder)
                         .error(error);
@@ -61,7 +63,11 @@ public class XGlide {
                             }
                         });
             } else {
-                DrawableRequestBuilder builder = loader.load(url).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(placeholder).error(error);
+                DrawableRequestBuilder builder = loader
+                        .load(url)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .placeholder(placeholder)
+                        .error(error);
                 if (isCenterCrop)
                     builder.centerCrop();
                 builder.into(view);

@@ -8,7 +8,6 @@
         android:id="@+id/main_foot_rg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:paddingLeft="6dp"
         android:paddingRight="6dp"
@@ -18,17 +17,17 @@
             android:id="@+id/main_footer_care_rb"
             style="@style/main_footer_radio"
             android:checked="true"
-            android:text="@string/x_joke_title" />
+            android:drawableTop="@drawable/foot_1_bg_selector" />
 
         <RadioButton
             android:id="@+id/main_footer_video_rb"
             style="@style/main_footer_radio"
-            android:text="@string/x_img_title" />
+            android:drawableTop="@drawable/foot_2_bg_selector" />
 
         <RadioButton
             android:id="@+id/main_footer_home_rb"
             style="@style/main_footer_radio"
-            android:text="我的" />
+            android:drawableTop="@drawable/foot_3_bg_selector" />
 
     </RadioGroup>
 

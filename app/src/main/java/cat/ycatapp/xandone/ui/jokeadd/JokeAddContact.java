@@ -10,7 +10,8 @@ import cat.ycatapp.xandone.base.BaseView;
 
 public interface JokeAddContact{
     interface MyView extends BaseView{
-
+        void showSuccess();
+        void showFail();
     }
 
     interface Presenter extends BasePresenter<MyView> {

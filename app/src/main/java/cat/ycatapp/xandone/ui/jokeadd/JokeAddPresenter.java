@@ -43,7 +43,11 @@ public class JokeAddPresenter extends RxPresenter<JokeAddContact.MyView> impleme
                 .subscribeWith(new CommonSubscriber<BaseResponse<List<Object>>>(view) {
                     @Override
                     public void onNext(BaseResponse<List<Object>> baseResponse) {
-
+                        if (baseResponse != null && "1".equals(baseResponse.getCode())) {
+                            view.showSuccess();
+                        } else {
+                            view.showFail();
+                        }
 
                     }
                 })

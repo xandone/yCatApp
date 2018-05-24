@@ -10,14 +10,16 @@ import butterknife.OnClick;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseActivity;
 import cat.ycatapp.xandone.cache.UserInfoCache;
+import cat.ycatapp.xandone.uitils.SystemUtils;
 import cat.ycatapp.xandone.uitils.ToastUtils;
+import cat.ycatapp.xandone.uitils.XString;
 
 /**
  * author: xandone
  * Created by xandone on 2018/3/30.
  */
 
-public class JokeAddActivity extends RxBaseActivity<JokeAddPresenter> {
+public class JokeAddActivity extends RxBaseActivity<JokeAddPresenter> implements JokeAddContact.MyView {
     @BindView(R.id.act_jokeadd_title)
     EditText act_jokeadd_title;
     @BindView(R.id.act_jokeadd_content)
@@ -54,8 +56,39 @@ public class JokeAddActivity extends RxBaseActivity<JokeAddPresenter> {
                 String title = act_jokeadd_title.getText().toString();
                 String content = act_jokeadd_content.getText().toString();
                 String userId = UserInfoCache.getUserBean().getUserId();
+
+                if (XString.isEmpty(title)) {
+                    ToastUtils.showShort("请输入标题");
+                    break;
+                }
+                if (XString.isEmpty(content)) {
+                    ToastUtils.showShort("请输入内容");
+                    break;
+                }
+
+                SystemUtils.hideSoftInput(this);
+                showLoadingDialog(false);
                 mPresenter.addJoke(title, userId, content);
                 break;
         }
+    }
+
+    @Override
+    public void showSuccess() {
+        showLoadingDialog(false);
+        ToastUtils.showShort("请求成功");
+        finish();
+    }
+
+    @Override
+    public void showFail() {
+        showLoadingDialog(false);
+        ToastUtils.showShort("请求失败,请稍后重试");
+    }
+
+    @Override
+    public void showMsg(String msg, int loadStatus) {
+        super.showMsg(msg, loadStatus);
+        ToastUtils.showShort(msg);
     }
 }
