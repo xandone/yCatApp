@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.widget.RadioGroup;
 
 import java.util.ArrayList;
@@ -16,12 +17,15 @@ import butterknife.BindView;
 import cat.ycatapp.xandone.base.RxBaseActivity;
 import cat.ycatapp.xandone.ui.bar.ImageFragment;
 import cat.ycatapp.xandone.ui.info.InfoFragment;
+import cat.ycatapp.xandone.ui.info.LeftSlideFragment;
 import cat.ycatapp.xandone.ui.joke.JokeFragment;
 import cat.ycatapp.xandone.uitils.ToastUtils;
 
-public class MainActivity extends RxBaseActivity {
+public class MainActivity extends RxBaseActivity implements LeftSlideFragment.OnCloseDrawerLayout {
     @BindView(R.id.main_foot_rg)
     RadioGroup main_foot_rg;
+    @BindView(R.id.drawerlayout)
+    DrawerLayout drawerlayout;
 
     private int mFragIndex;
     private Fragment mCurrentFrag;
@@ -128,5 +132,10 @@ public class MainActivity extends RxBaseActivity {
         } else {
             AppManager.newInstance().finishAllActivity();
         }
+    }
+
+    @Override
+    public void OnClose() {
+        drawerlayout.closeDrawers();
     }
 }

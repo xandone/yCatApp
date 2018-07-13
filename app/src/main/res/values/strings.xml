@@ -12,4 +12,9 @@
     <string name="x_bar_title">论坛</string>
     <string name="x_joke_comment_title">评论详情</string>
     <string name="x_joke_add">添加笑话</string>
+    <string name="s_about">关于</string>
+    <string name="s_city">城市</string>
+    <string name="s_set">设置</string>
+    <string name="s_exit">退出</string>
+    <string name="s_name">狗蛋</string>
 </resources>
