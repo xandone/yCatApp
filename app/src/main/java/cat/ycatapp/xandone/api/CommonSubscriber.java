@@ -48,6 +48,7 @@ public class CommonSubscriber<T> extends ResourceSubscriber<T> {
 
     @Override
     public void onError(Throwable t) {
+        Log.d("yandone", t.toString());
         if (mView == null) {
             return;
         }

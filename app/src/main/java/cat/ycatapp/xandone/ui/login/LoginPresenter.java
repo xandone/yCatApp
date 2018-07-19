@@ -13,10 +13,9 @@ import cat.ycatapp.xandone.config.Constants;
 import cat.ycatapp.xandone.model.DataManager;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.UserBean;
-import cat.ycatapp.xandone.model.bean.UserPsw;
 import cat.ycatapp.xandone.uitils.GsonUtil;
 import cat.ycatapp.xandone.uitils.SPUtils;
-import cat.ycatapp.xandone.uitils.SystemUtils;
+import cat.ycatapp.xandone.uitils.SimpleUtils;
 import cat.ycatapp.xandone.uitils.ToastUtils;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -44,7 +43,7 @@ public class LoginPresenter extends RxPresenter<LoginContact.View> implements Lo
                     @Override
                     public void onNext(BaseResponse<List<UserBean>> baseResponse) {
 
-                        if (!SystemUtils.isNetworkConnected()) {
+                        if (!SimpleUtils.isNetworkConnected()) {
                             ToastUtils.showShort("没有网络");
                             return;
                         }

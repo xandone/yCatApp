@@ -21,6 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Locale;
 
 import cat.ycatapp.xandone.App;
 import cat.ycatapp.xandone.config.Constants;
@@ -30,7 +31,7 @@ import cat.ycatapp.xandone.config.Constants;
  * created on: 2017/11/27 17:43
  */
 
-public class SystemUtils {
+public class SimpleUtils {
 
     /**
      * 检查WIFI是否连接
@@ -219,5 +220,16 @@ public class SystemUtils {
                 (InputMethodManager) App.sContext.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm == null) return;
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public static String int2STime(int duration) {
+        int h = duration / 3600;
+        duration = duration % 3600;
+        int m = duration / 60;
+        int s = duration % 60;
+        if (h == 0) {
+            return String.format(Locale.getDefault(), "%02d'%02d\"", m, s);
+        }
+        return String.format(Locale.getDefault(), "%02d'%02d'%02d\"", h, m, s);
     }
 }

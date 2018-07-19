@@ -19,6 +19,7 @@ import cat.ycatapp.xandone.ui.bar.ImageFragment;
 import cat.ycatapp.xandone.ui.info.InfoFragment;
 import cat.ycatapp.xandone.ui.info.LeftSlideFragment;
 import cat.ycatapp.xandone.ui.joke.JokeFragment;
+import cat.ycatapp.xandone.ui.video.VideoListFragment;
 import cat.ycatapp.xandone.uitils.ToastUtils;
 
 public class MainActivity extends RxBaseActivity implements LeftSlideFragment.OnCloseDrawerLayout {
@@ -32,7 +33,7 @@ public class MainActivity extends RxBaseActivity implements LeftSlideFragment.On
     private List<Fragment> fragList;
     private boolean isState = true;
 
-    private InfoFragment mInfoFragment;
+    private VideoListFragment mInfoFragment;
     private JokeFragment mJokeFragment;
     private ImageFragment mImageFragment;
 
@@ -56,7 +57,7 @@ public class MainActivity extends RxBaseActivity implements LeftSlideFragment.On
         mFragIndex = 0;
         mJokeFragment = new JokeFragment();
         mImageFragment = new ImageFragment();
-        mInfoFragment = new InfoFragment();
+        mInfoFragment = new VideoListFragment();
 
         fragList = new ArrayList<Fragment>(Arrays.asList(mJokeFragment, mImageFragment, mInfoFragment));
         turnToFrag();
@@ -107,12 +108,12 @@ public class MainActivity extends RxBaseActivity implements LeftSlideFragment.On
         switch (action) {
             case USER_LOGIN:
                 if (mInfoFragment != null) {
-                    mInfoFragment.showUserInfo();
+//                    mInfoFragment.showUserInfo();
                 }
                 break;
             case USER_REGIST:
                 if (mInfoFragment != null) {
-                    mInfoFragment.showUserInfo();
+//                    mInfoFragment.showUserInfo();
                 }
                 break;
         }

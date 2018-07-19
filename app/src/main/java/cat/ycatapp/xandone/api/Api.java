@@ -8,6 +8,7 @@ import cat.ycatapp.xandone.model.bean.CommentBean;
 import cat.ycatapp.xandone.model.bean.ImageBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.model.bean.UserBean;
+import cat.ycatapp.xandone.model.video.VideoInfo;
 import io.reactivex.Flowable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -96,6 +97,5 @@ public interface Api {
     @Multipart
     @POST("ycat/user/upIcon")
     Flowable<BaseResponse<List<UserBean>>> changeUserIcon(@Part MultipartBody.Part part, @QueryMap Map<String, String> maps);
-
 
 }

@@ -9,6 +9,7 @@ import cat.ycatapp.xandone.model.bean.CommentBean;
 import cat.ycatapp.xandone.model.bean.ImageBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.model.bean.UserBean;
+import cat.ycatapp.xandone.model.video.VideoInfo;
 import io.reactivex.Flowable;
 import okhttp3.MultipartBody;
 
@@ -37,4 +38,6 @@ public interface HttpHelper {
     Flowable<ImageBean> getImageList(int page, int count);
 
     Flowable<BaseResponse<List<UserBean>>> changeUserIcon(MultipartBody.Part part, Map<String, String> maps);
+
+    Flowable<VideoInfo> getVideoList(Map<String, String> map);
 }

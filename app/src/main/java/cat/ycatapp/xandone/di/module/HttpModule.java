@@ -9,8 +9,11 @@ import javax.inject.Singleton;
 
 import cat.ycatapp.xandone.BuildConfig;
 import cat.ycatapp.xandone.api.Api;
+import cat.ycatapp.xandone.api.KyApi;
 import cat.ycatapp.xandone.config.Constants;
-import cat.ycatapp.xandone.uitils.SystemUtils;
+import cat.ycatapp.xandone.di.kyUrl;
+import cat.ycatapp.xandone.di.myUrl;
+import cat.ycatapp.xandone.uitils.SimpleUtils;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.Cache;
@@ -46,13 +49,13 @@ public class HttpModule {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
-                if (!SystemUtils.isNetworkConnected()) {
+                if (!SimpleUtils.isNetworkConnected()) {
                     request = request.newBuilder()
                             .cacheControl(CacheControl.FORCE_CACHE)
                             .build();
                 }
                 Response response = chain.proceed(request);
-                if (SystemUtils.isNetworkConnected()) {
+                if (SimpleUtils.isNetworkConnected()) {
                     int maxAge = 0;
                     // 有网络时, 不缓存, 最大保存时长为0
                     response.newBuilder()
@@ -101,19 +104,34 @@ public class HttpModule {
 
     @Singleton
     @Provides
+    OkHttpClient.Builder provideOkHttpBuilder() {
+        return new OkHttpClient.Builder();
+    }
+
+
+    @Singleton
+    @Provides
+    @myUrl
     Retrofit provideNewsRetrofit(Retrofit.Builder builder, OkHttpClient client) {
         return createRetrofit(builder, client, Api.HOST);
     }
 
     @Singleton
     @Provides
-    OkHttpClient.Builder provideOkHttpBuilder() {
-        return new OkHttpClient.Builder();
+    Api provideNewsService(@myUrl Retrofit retrofit) {
+        return retrofit.create(Api.class);
     }
 
     @Singleton
     @Provides
-    Api provideNewsService(Retrofit retrofit) {
-        return retrofit.create(Api.class);
+    @kyUrl
+    Retrofit provideKyApiRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+        return createRetrofit(builder, client, KyApi.HOST);
+    }
+
+    @Singleton
+    @Provides
+    KyApi provideKyApiService(@kyUrl Retrofit retrofit) {
+        return retrofit.create(KyApi.class);
     }
 }

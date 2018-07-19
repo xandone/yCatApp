@@ -99,7 +99,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     }
 
-    public void setToolBar(Toolbar toolbar,String title) {
+    public void setToolBar(Toolbar toolbar, String title) {
         toolbar.setTitle(title);
         mActivity.setSupportActionBar(toolbar);
         mActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);

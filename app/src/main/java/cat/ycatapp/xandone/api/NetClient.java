@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import cat.ycatapp.xandone.BuildConfig;
 import cat.ycatapp.xandone.config.Constants;
-import cat.ycatapp.xandone.uitils.SystemUtils;
+import cat.ycatapp.xandone.uitils.SimpleUtils;
 import okhttp3.Cache;
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
@@ -43,13 +43,13 @@ public class NetClient {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
-                if (!SystemUtils.isNetworkConnected() && isCache) {
+                if (!SimpleUtils.isNetworkConnected() && isCache) {
                     request = request.newBuilder()
                             .cacheControl(CacheControl.FORCE_CACHE)
                             .build();
                 }
                 Response response = chain.proceed(request);
-                if (SystemUtils.isNetworkConnected()) {
+                if (SimpleUtils.isNetworkConnected()) {
                     int maxAge = 0;
                     // 有网络时, 不缓存, 最大保存时长为0
                     response.newBuilder()

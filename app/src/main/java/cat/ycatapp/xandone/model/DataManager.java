@@ -11,6 +11,7 @@ import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.model.bean.LoginBean;
 import cat.ycatapp.xandone.model.bean.RegistBean;
 import cat.ycatapp.xandone.model.bean.UserBean;
+import cat.ycatapp.xandone.model.video.VideoInfo;
 import io.reactivex.Flowable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -75,6 +76,11 @@ public class DataManager implements HttpHelper {
     @Override
     public Flowable<BaseResponse<List<UserBean>>> changeUserIcon(MultipartBody.Part part, Map<String, String> maps) {
         return mHttpHelper.changeUserIcon(part, maps);
+    }
+
+    @Override
+    public Flowable<VideoInfo> getVideoList(Map<String, String> map) {
+        return mHttpHelper.getVideoList(map);
     }
 
 }

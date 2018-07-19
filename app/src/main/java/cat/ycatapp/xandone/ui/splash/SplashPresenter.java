@@ -16,7 +16,7 @@ import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.UserBean;
 import cat.ycatapp.xandone.uitils.GsonUtil;
 import cat.ycatapp.xandone.uitils.SPUtils;
-import cat.ycatapp.xandone.uitils.SystemUtils;
+import cat.ycatapp.xandone.uitils.SimpleUtils;
 import cat.ycatapp.xandone.uitils.ToastUtils;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -47,7 +47,7 @@ public class SplashPresenter extends RxPresenter<SplashContact.View> implements 
                             @Override
                             public void accept(@NonNull BaseResponse<List<UserBean>> baseResponse) throws Exception {
 
-                                if (!SystemUtils.isNetworkConnected()) {
+                                if (!SimpleUtils.isNetworkConnected()) {
                                     ToastUtils.showShort("没有网络");
                                     startAct();
                                     return;

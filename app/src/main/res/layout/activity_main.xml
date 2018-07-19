@@ -6,26 +6,25 @@
     android:layout_height="match_parent"
     tools:context="cat.ycatapp.xandone.MainActivity">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-   >
-
-    <FrameLayout
-        android:id="@+id/main_frame"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/divide_line"
-        android:background="@color/layout_bg_color" />
+        <FrameLayout
+            android:id="@+id/main_frame"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-    <include layout="@layout/layout_main_footer" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divide_line"
+            android:background="@color/layout_bg_color" />
 
-</LinearLayout>
+        <include layout="@layout/layout_main_footer" />
+
+    </LinearLayout>
 
     <fragment
         android:id="@+id/leftSlide_frag"

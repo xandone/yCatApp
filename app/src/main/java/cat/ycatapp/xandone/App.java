@@ -16,6 +16,7 @@ import com.squareup.leakcanary.LeakCanary;
 import cat.ycatapp.xandone.di.component.AppComponent;
 import cat.ycatapp.xandone.di.component.DaggerAppComponent;
 import cat.ycatapp.xandone.di.module.AppModule;
+import cat.ycatapp.xandone.di.module.HttpModule;
 
 /**
  * author: xandone
@@ -64,6 +65,7 @@ public class App extends MultiDexApplication {
         if (appComponent == null) {
             appComponent = DaggerAppComponent.builder()
                     .appModule(new AppModule())
+                    .httpModule(new HttpModule())
                     .build();
         }
         return appComponent;

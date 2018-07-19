@@ -8,6 +8,7 @@ import cat.ycatapp.xandone.di.scope.FragmentScope;
 import cat.ycatapp.xandone.ui.bar.ImageFragment;
 import cat.ycatapp.xandone.ui.info.InfoFragment;
 import cat.ycatapp.xandone.ui.joke.JokeFragment;
+import cat.ycatapp.xandone.ui.video.VideoListFragment;
 import dagger.Component;
 
 /**
@@ -27,5 +28,7 @@ public interface FragmentComponent {
 
     //
     void inject(InfoFragment jokeFragment);
+
+    void inject(VideoListFragment videoListFragment);
 
 }

@@ -10,7 +10,7 @@ import butterknife.OnClick;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseActivity;
 import cat.ycatapp.xandone.cache.UserInfoCache;
-import cat.ycatapp.xandone.uitils.SystemUtils;
+import cat.ycatapp.xandone.uitils.SimpleUtils;
 import cat.ycatapp.xandone.uitils.ToastUtils;
 import cat.ycatapp.xandone.uitils.XString;
 
@@ -66,7 +66,7 @@ public class JokeAddActivity extends RxBaseActivity<JokeAddPresenter> implements
                     break;
                 }
 
-                SystemUtils.hideSoftInput(this);
+                SimpleUtils.hideSoftInput(this);
                 showLoadingDialog(false);
                 mPresenter.addJoke(title, userId, content);
                 break;

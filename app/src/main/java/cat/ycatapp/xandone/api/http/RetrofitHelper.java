@@ -1,22 +1,21 @@
 package cat.ycatapp.xandone.api.http;
 
 
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
 import cat.ycatapp.xandone.api.Api;
+import cat.ycatapp.xandone.api.KyApi;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.CommentBean;
 import cat.ycatapp.xandone.model.bean.ImageBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.model.bean.UserBean;
+import cat.ycatapp.xandone.model.video.VideoInfo;
 import io.reactivex.Flowable;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.http.QueryMap;
 
 /**
  * author: xandone
@@ -25,10 +24,12 @@ import retrofit2.http.QueryMap;
 
 public class RetrofitHelper implements HttpHelper {
     private Api mApi;
+    private KyApi mKyApi;
 
     @Inject
-    public RetrofitHelper(Api api) {
+    public RetrofitHelper(Api api, KyApi kyApi) {
         this.mApi = api;
+        this.mKyApi = kyApi;
     }
 
     @Override
@@ -79,6 +80,11 @@ public class RetrofitHelper implements HttpHelper {
     @Override
     public Flowable<BaseResponse<List<UserBean>>> changeUserIcon(MultipartBody.Part part, Map<String, String> maps) {
         return mApi.changeUserIcon(part, maps);
+    }
+
+    @Override
+    public Flowable<VideoInfo> getVideoList(Map<String, String> map) {
+        return mKyApi.getVideoList(map);
     }
 
 }

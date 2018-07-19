@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -26,8 +25,7 @@ import cat.ycatapp.xandone.cache.UserInfoCache;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.CommentBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
-import cat.ycatapp.xandone.uitils.GsonUtil;
-import cat.ycatapp.xandone.uitils.SystemUtils;
+import cat.ycatapp.xandone.uitils.SimpleUtils;
 import cat.ycatapp.xandone.uitils.ToastUtils;
 import cat.ycatapp.xandone.uitils.XString;
 import cat.ycatapp.xandone.widget.LoadingLayout;
@@ -192,7 +190,7 @@ public class JokeCommentActivity extends RxBaseActivity<JokeCommentPresenter> im
                     ToastUtils.showShort("请输入内容");
                     break;
                 }
-                SystemUtils.hideSoftInput(this);
+                SimpleUtils.hideSoftInput(this);
                 showLoadingDialog(false);
                 mPresenter.addComment(jokeId, userId, details);
                 break;
