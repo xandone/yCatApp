@@ -1,9 +1,14 @@
 package cat.ycatapp.xandone.ui.videodetails;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
+
+import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +37,11 @@ public class VideoOtherFragment extends RxBaseFragment<VideoOtherPresenter> impl
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
     public void initData() {
         super.initData();
 
@@ -41,6 +51,19 @@ public class VideoOtherFragment extends RxBaseFragment<VideoOtherPresenter> impl
         video_list_rv.setAdapter(mVideoRecyclerAdapter);
 
         loadVideoList();
+
+        mVideoRecyclerAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (position == 0) {
+                    return;
+                }
+                Intent intent = new Intent();
+                intent.putExtra(VideoDetailsActivity.VIDEO_BEAN, datas.get(position));
+                intent.setAction(VideoDetailsActivity.VIDEO_CHANGE_ACTION);
+                mActivity.sendBroadcast(intent);
+            }
+        });
     }
 
     @Override
@@ -64,14 +87,12 @@ public class VideoOtherFragment extends RxBaseFragment<VideoOtherPresenter> impl
 
     @Override
     public void showContent(VideoInfo videoInfo) {
-        if (videoInfo == null
-                || videoInfo.getItemList() == null
-                || videoInfo.getItemList().isEmpty()) {
+        if (videoInfo == null || videoInfo.getItemList() == null) {
             return;
         }
         datas.clear();
+        datas.add(new VideoInfo.ItemListBean(1));
         datas.addAll(videoInfo.getItemList());
-        datas.get(0).setItemType(1);
         mVideoRecyclerAdapter.notifyDataSetChanged();
     }
 }

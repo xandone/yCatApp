@@ -1,12 +1,13 @@
 package cat.ycatapp.xandone.ui.videodetails;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
 
 
 import butterknife.BindView;
@@ -28,6 +29,10 @@ public class VideoDetailsActivity extends RxBaseActivity {
     AJzVideoView mVideoView;
 
     private VideoInfo.ItemListBean mVideoInfo;
+    private VideoBroadCast mVideoBroadCast;
+
+    public static final String VIDEO_BEAN = "video_bean";
+    public static final String VIDEO_CHANGE_ACTION = "video_change_action";
 
     @Override
     public int setLayout() {
@@ -46,13 +51,23 @@ public class VideoDetailsActivity extends RxBaseActivity {
         JZVideoPlayer.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
         JZVideoPlayer.NORMAL_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
 
+        registerVideoBroadCast();
+
         Intent intent = getIntent();
         mVideoInfo = (VideoInfo.ItemListBean) intent.getSerializableExtra(VideoListFragment.KEY_VIDEOINFO);
         if (mVideoInfo == null) {
             return;
         }
-        playVideo("google机器人", mVideoInfo.getData().getCover().getDetail(), mVideoInfo.getData().getPlayUrl());
+        playVideo();
 
+    }
+
+    private void playVideo() {
+        try {
+            playVideo("google机器人", mVideoInfo.getData().getCover().getDetail(), mVideoInfo.getData().getPlayUrl());
+        } catch (Exception e) {
+
+        }
     }
 
     private void playVideo(String title, String thumImgUrl, String videoUrl) {
@@ -63,6 +78,19 @@ public class VideoDetailsActivity extends RxBaseActivity {
             Glide.with(this)
                     .load(thumImgUrl)
                     .into(mVideoView.thumbImageView);
+        }
+    }
+
+    private void registerVideoBroadCast() {
+        mVideoBroadCast = new VideoBroadCast();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(VIDEO_CHANGE_ACTION);
+        registerReceiver(mVideoBroadCast, filter);
+    }
+
+    private void unRegisterVideoBroadCast() {
+        if (mVideoBroadCast != null) {
+            unregisterReceiver(mVideoBroadCast);
         }
     }
 
@@ -83,6 +111,7 @@ public class VideoDetailsActivity extends RxBaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         JZVideoPlayer.releaseAllVideos();
+        unRegisterVideoBroadCast();
     }
 
     @Override
@@ -91,6 +120,24 @@ public class VideoDetailsActivity extends RxBaseActivity {
             return;
         }
         super.onBackPressed();
+    }
+
+
+    class VideoBroadCast extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent == null) {
+                return;
+            }
+            if (VIDEO_CHANGE_ACTION.equals(intent.getAction())) {
+                mVideoInfo = (VideoInfo.ItemListBean) intent.getSerializableExtra(VIDEO_BEAN);
+            }
+            if (mVideoInfo == null) {
+                return;
+            }
+            playVideo();
+        }
     }
 
 }

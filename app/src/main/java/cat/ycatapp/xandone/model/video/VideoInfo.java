@@ -110,6 +110,10 @@ public class VideoInfo implements Serializable {
         public static final int NORMAL = 0;
         private int itemType;
 
+        public ItemListBean(int itemType) {
+            this.itemType = itemType;
+        }
+
         public void setItemType(int itemType) {
             this.itemType = itemType;
         }
