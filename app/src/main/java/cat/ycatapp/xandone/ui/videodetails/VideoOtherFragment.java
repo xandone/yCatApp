@@ -2,6 +2,7 @@ package cat.ycatapp.xandone.ui.videodetails;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -21,10 +22,6 @@ import cat.ycatapp.xandone.model.video.VideoInfo;
 public class VideoOtherFragment extends RxBaseFragment<VideoOtherPresenter> implements VideoOtherContact.MyView {
     @BindView(R.id.video_list_rv)
     RecyclerView video_list_rv;
-    @BindView(R.id.video_title)
-    TextView video_title;
-    @BindView(R.id.video_content)
-    TextView video_content;
 
     private VideoRecyclerAdapter mVideoRecyclerAdapter;
     private List<VideoInfo.ItemListBean> datas;
@@ -39,11 +36,10 @@ public class VideoOtherFragment extends RxBaseFragment<VideoOtherPresenter> impl
         super.initData();
 
         datas = new ArrayList<>();
-        mVideoRecyclerAdapter = new VideoRecyclerAdapter(mActivity, R.layout.item_video_layout, datas);
+        mVideoRecyclerAdapter = new VideoRecyclerAdapter(mActivity, datas);
         video_list_rv.setLayoutManager(new LinearLayoutManager(mActivity));
         video_list_rv.setAdapter(mVideoRecyclerAdapter);
 
-        getData();
         loadVideoList();
     }
 
@@ -55,11 +51,6 @@ public class VideoOtherFragment extends RxBaseFragment<VideoOtherPresenter> impl
     @Override
     protected void lazyLoadData() {
 
-    }
-
-    private void getData() {
-        video_title.setText("google机器人");
-        video_content.setText("atlas是谷歌旗下的波士顿动力公司研发的人形机器人。Atlas的的产品迭代大概经历了三个大的版本更新。2016年2月24日，波士顿动力公司展示了最新升级版的Atlas人形机器人");
     }
 
     public void loadVideoList() {
@@ -80,6 +71,7 @@ public class VideoOtherFragment extends RxBaseFragment<VideoOtherPresenter> impl
         }
         datas.clear();
         datas.addAll(videoInfo.getItemList());
+        datas.get(0).setItemType(1);
         mVideoRecyclerAdapter.notifyDataSetChanged();
     }
 }

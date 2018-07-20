@@ -1,5 +1,7 @@
 package cat.ycatapp.xandone.model.video;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -55,7 +57,7 @@ public class VideoInfo implements Serializable {
         this.itemList = itemList;
     }
 
-    public static class ItemListBean implements Serializable {
+    public static class ItemListBean implements Serializable, MultiItemEntity {
 
         private String type;
         private DataBean data;
@@ -101,6 +103,20 @@ public class VideoInfo implements Serializable {
 
         public void setAdIndex(int adIndex) {
             this.adIndex = adIndex;
+        }
+
+
+        public static final int HEADER = 1;
+        public static final int NORMAL = 0;
+        private int itemType;
+
+        public void setItemType(int itemType) {
+            this.itemType = itemType;
+        }
+
+        @Override
+        public int getItemType() {
+            return itemType;
         }
 
         public static class DataBean implements Serializable {
