@@ -1,6 +1,7 @@
 package cat.ycatapp.xandone.ui.info;
 
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -33,7 +34,7 @@ public class LeftSlideFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.menu_1, R.id.menu_2, R.id.foot_menu_set, R.id.foot_menu_exit})
+    @OnClick({R.id.menu_1, R.id.menu_2, R.id.foot_menu_set, R.id.foot_menu_exit, R.id.user_icon_iv})
     public void click(View v) {
         switch (v.getId()) {
             case R.id.menu_1:
@@ -47,6 +48,9 @@ public class LeftSlideFragment extends BaseFragment {
                 break;
             case R.id.foot_menu_exit:
                 AppManager.newInstance().finishAllActivity();
+                break;
+            case R.id.user_icon_iv:
+                startActivity(new Intent(mActivity, InfoActivity.class));
                 break;
         }
         setOnCloseDrawerLayout(mActivity);

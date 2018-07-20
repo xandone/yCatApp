@@ -17,7 +17,9 @@ import butterknife.BindView;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseFragment;
 import cat.ycatapp.xandone.model.video.VideoInfo;
+import cat.ycatapp.xandone.ui.joke.JokeContact;
 import cat.ycatapp.xandone.ui.videodetails.VideoDetailsActivity;
+import cat.ycatapp.xandone.widget.LoadingLayout;
 
 /**
  * author: xandone
@@ -28,9 +30,12 @@ public class VideoListFragment extends RxBaseFragment<VideoListPresenter> implem
     RecyclerView video_list_recycler;
     @BindView(R.id.toolBar)
     Toolbar toolbar;
+    @BindView(R.id.loadingLayout)
+    LoadingLayout loadingLayout;
 
     private VideoListAdapter mVideoListAdapter;
     private List<VideoInfo.ItemListBean> datas;
+    private LoadingLayout.OnReloadListener onReloadListener;
 
     public static final String KEY_VIDEOINFO = "key_videoinfo";
 
@@ -63,6 +68,17 @@ public class VideoListFragment extends RxBaseFragment<VideoListPresenter> implem
                 startActivity(intent);
             }
         });
+
+        loadingLayout.setLoadingTips(LoadingLayout.loading);
+
+        onReloadListener = new LoadingLayout.OnReloadListener() {
+            @Override
+            public void reLoad() {
+                loadVideoList();
+                loadingLayout.setLoadingTips(LoadingLayout.loading);
+            }
+        };
+        loadingLayout.setOnReloadListener(onReloadListener);
     }
 
     @Override
@@ -92,10 +108,17 @@ public class VideoListFragment extends RxBaseFragment<VideoListPresenter> implem
         if (videoInfo == null
                 || videoInfo.getItemList() == null
                 || videoInfo.getItemList().isEmpty()) {
+            showMsg("无数据", LoadingLayout.empty);
             return;
         }
+        showMsg("加载完毕", LoadingLayout.finish);
         datas.clear();
         datas.addAll(videoInfo.getItemList());
         mVideoListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showMsg(String msg, int loadStatus) {
+        loadingLayout.setLoadingTips(loadStatus);
     }
 }

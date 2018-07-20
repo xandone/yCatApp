@@ -2,7 +2,6 @@ package cat.ycatapp.xandone.ui.info;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -20,18 +19,15 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cat.ycatapp.xandone.App;
 import cat.ycatapp.xandone.R;
-import cat.ycatapp.xandone.base.RxBaseFragment;
+import cat.ycatapp.xandone.base.RxBaseActivity;
 import cat.ycatapp.xandone.cache.UserInfoCache;
 import cat.ycatapp.xandone.config.Constants;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.UserBean;
 import cat.ycatapp.xandone.ui.login.LoginActivity;
-import cat.ycatapp.xandone.ui.personal.PersonalActivity;
-import cat.ycatapp.xandone.uitils.GsonUtil;
 import cat.ycatapp.xandone.uitils.SPUtils;
 import cat.ycatapp.xandone.uitils.imgload.XGlide;
 import cat.ycatapp.xandone.widget.BottomDialog;
@@ -42,14 +38,12 @@ import okhttp3.RequestBody;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
-import static android.app.Activity.RESULT_OK;
-
 /**
  * author: xandone
  * created on: 2018/3/6 13:35
  */
 
-public class InfoFragment extends RxBaseFragment<InfoPresenter> implements View.OnClickListener, InfoContact.MyView {
+public class InfoActivity extends RxBaseActivity<InfoPresenter> implements View.OnClickListener, InfoContact.MyView {
     @BindView(R.id.frag_info_login_ll)
     LinearLayout frag_info_login_ll;
     @BindView(R.id.frag_info_icon_ll)
@@ -81,15 +75,15 @@ public class InfoFragment extends RxBaseFragment<InfoPresenter> implements View.
     }
 
     @Override
-    protected void initInject() {
-        getFragmentComponent().inject(this);
+    public void initInject() {
+        getActivityComponent().inject(this);
     }
 
     @OnClick({R.id.frag_info_login, R.id.frag_info_out, R.id.frag_info_icon_iv})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.frag_info_login:
-                startActivity(new Intent(mActivity, LoginActivity.class));
+                startActivity(new Intent(this, LoginActivity.class));
                 break;
             case R.id.frag_info_out:
 
@@ -130,7 +124,7 @@ public class InfoFragment extends RxBaseFragment<InfoPresenter> implements View.
     }
 
     public void changeIconDialog() {
-        bottomDialog = BottomDialog.create(getChildFragmentManager());
+        bottomDialog = BottomDialog.create(getSupportFragmentManager());
         bottomDialog.setLayoutRes(R.layout.bottom_dialog_layout)
                 .setCancelOutside(true)
                 .setDimAmount(0.4f)
@@ -144,16 +138,16 @@ public class InfoFragment extends RxBaseFragment<InfoPresenter> implements View.
                         bottom_dialog_camera.setText("拍照");
                         bottom_dialog_cancel.setText("取消");
 
-                        bottom_dialog_photo.setOnClickListener(InfoFragment.this);
-                        bottom_dialog_camera.setOnClickListener(InfoFragment.this);
-                        bottom_dialog_cancel.setOnClickListener(InfoFragment.this);
+                        bottom_dialog_photo.setOnClickListener(InfoActivity.this);
+                        bottom_dialog_camera.setOnClickListener(InfoActivity.this);
+                        bottom_dialog_cancel.setOnClickListener(InfoActivity.this);
                     }
                 }).show();
     }
 
 
     public void compressImg(String photos) {
-        Luban.with(mActivity)
+        Luban.with(this)
                 .load(photos)                                   // 传人要压缩的图片列表
                 .ignoreBy(100)                                  // 忽略不压缩图片的大小
                 .setCompressListener(new OnCompressListener() { //设置回调
@@ -206,7 +200,7 @@ public class InfoFragment extends RxBaseFragment<InfoPresenter> implements View.
                         .setShowCamera(true)
                         .setShowGif(true)
                         .setPreviewEnabled(false)
-                        .start(mActivity, this);
+                        .start(this);
                 break;
             case R.id.bottom_dialog_camera:
                 if (bottomDialog != null) {

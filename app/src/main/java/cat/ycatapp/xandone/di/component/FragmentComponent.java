@@ -6,7 +6,6 @@ import android.app.Activity;
 import cat.ycatapp.xandone.di.module.FragmentModule;
 import cat.ycatapp.xandone.di.scope.FragmentScope;
 import cat.ycatapp.xandone.ui.bar.ImageFragment;
-import cat.ycatapp.xandone.ui.info.InfoFragment;
 import cat.ycatapp.xandone.ui.joke.JokeFragment;
 import cat.ycatapp.xandone.ui.video.VideoListFragment;
 import cat.ycatapp.xandone.ui.videodetails.VideoOtherFragment;
@@ -28,7 +27,7 @@ public interface FragmentComponent {
     void inject(ImageFragment imageFragment);
 
     //
-    void inject(InfoFragment jokeFragment);
+//    void inject(InfoActivity jokeFragment);
 
     void inject(VideoListFragment videoListFragment);
 

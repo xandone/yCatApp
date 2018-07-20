@@ -16,7 +16,6 @@ import java.util.TimerTask;
 import butterknife.BindView;
 import cat.ycatapp.xandone.base.RxBaseActivity;
 import cat.ycatapp.xandone.ui.bar.ImageFragment;
-import cat.ycatapp.xandone.ui.info.InfoFragment;
 import cat.ycatapp.xandone.ui.info.LeftSlideFragment;
 import cat.ycatapp.xandone.ui.joke.JokeFragment;
 import cat.ycatapp.xandone.ui.video.VideoListFragment;

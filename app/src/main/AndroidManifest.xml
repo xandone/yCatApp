@@ -56,7 +56,6 @@
             android:name=".ui.jokeadd.JokeAddActivity"
             android:label="@string/x_joke_add"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.img.ImageDetailsActivity"
             android:label="@string/x_img_details_title"
@@ -75,6 +74,11 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+
+        <activity
+            android:name=".ui.info.InfoActivity"
+            android:label="@string/x_personal_title"
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
     </application>
 

@@ -6,9 +6,22 @@
 
     <include layout="@layout/toolbar_layout" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/video_list_recycler"
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/video_list_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <cat.ycatapp.xandone.widget.LoadingLayout
+            android:id="@+id/loadingLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center" />
+    </FrameLayout>
 
 </LinearLayout>

@@ -102,9 +102,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="60dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
-                android:background="@color/white"
                 android:textColor="@color/text_light"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -142,7 +141,7 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:paddingTop="10dp"
-            android:textColor="@color/text_normal"
+            android:textColor="@color/text_light"
             android:textSize="16sp"
             tools:text="11" />
 
@@ -157,7 +156,7 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:paddingTop="10dp"
-            android:textColor="@color/text_normal"
+            android:textColor="@color/text_light"
             android:textSize="16sp"
             tools:text="11" />
 

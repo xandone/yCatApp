@@ -17,6 +17,7 @@ import butterknife.BindView;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseFragment;
 import cat.ycatapp.xandone.model.bean.ImageBean;
+import cat.ycatapp.xandone.ui.joke.JokeContact;
 import cat.ycatapp.xandone.widget.LoadingLayout;
 
 /**
@@ -31,11 +32,15 @@ public class ImageFragment extends RxBaseFragment<ImagePresenter> implements Ima
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.frag_img_recycler)
     RecyclerView frag_img_recycler;
+    @BindView(R.id.loadingLayout)
+    LoadingLayout loadingLayout;
+
 
     private ImageAdapter mImageAdapter;
     private List<ImageBean.RowsBean> datas = new ArrayList<>();
     private int mPage = 1;
     private int mCount = 10;
+    private LoadingLayout.OnReloadListener onReloadListener;
 
 
     @Override
@@ -78,6 +83,18 @@ public class ImageFragment extends RxBaseFragment<ImagePresenter> implements Ima
             }
         });
 
+        loadingLayout.setLoadingTips(LoadingLayout.loading);
+
+        onReloadListener = new LoadingLayout.OnReloadListener() {
+            @Override
+            public void reLoad() {
+                mPage = 1;
+                mPresenter.getImageList(mPage, mCount, JokeContact.MODE_ONE);
+                loadingLayout.setLoadingTips(LoadingLayout.loading);
+            }
+        };
+        loadingLayout.setOnReloadListener(onReloadListener);
+
     }
 
     @Override
@@ -107,6 +124,7 @@ public class ImageFragment extends RxBaseFragment<ImagePresenter> implements Ima
     public void showMsg(String msg, int loadStatus) {
         mRefreshLayout.finishRefresh();
         mRefreshLayout.finishLoadmore();
+        loadingLayout.setLoadingTips(loadStatus);
     }
 
 }
