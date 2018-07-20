@@ -1,9 +1,6 @@
 package cat.ycatapp.xandone.ui.video;
 
 
-import android.util.Log;
-
-import com.google.gson.Gson;
 
 import java.util.Map;
 

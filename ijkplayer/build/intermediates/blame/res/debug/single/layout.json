@@ -1,0 +1,46 @@
+[
+    {
+        "merged": "D:\\workplace\\app\\yCatApp\\ijkplayer\\build\\intermediates\\res\\merged\\debug\\layout\\widget_toolbar.xml",
+        "source": "D:\\workplace\\app\\yCatApp\\ijkplayer\\res\\layout\\widget_toolbar.xml"
+    },
+    {
+        "merged": "D:\\workplace\\app\\yCatApp\\ijkplayer\\build\\intermediates\\res\\merged\\debug\\layout\\table_media_info_row2.xml",
+        "source": "D:\\workplace\\app\\yCatApp\\ijkplayer\\res\\layout\\table_media_info_row2.xml"
+    },
+    {
+        "merged": "D:\\workplace\\app\\yCatApp\\ijkplayer\\build\\intermediates\\res\\merged\\debug\\layout\\table_media_info_row1.xml",
+        "source": "D:\\workplace\\app\\yCatApp\\ijkplayer\\res\\layout\\table_media_info_row1.xml"
+    },
+    {
+        "merged": "D:\\workplace\\app\\yCatApp\\ijkplayer\\build\\intermediates\\res\\merged\\debug\\layout\\activity_app.xml",
+        "source": "D:\\workplace\\app\\yCatApp\\ijkplayer\\res\\layout\\activity_app.xml"
+    },
+    {
+        "merged": "D:\\workplace\\app\\yCatApp\\ijkplayer\\build\\intermediates\\res\\merged\\debug\\layout\\table_media_info.xml",
+        "source": "D:\\workplace\\app\\yCatApp\\ijkplayer\\res\\layout\\table_media_info.xml"
+    },
+    {
+        "merged": "D:\\workplace\\app\\yCatApp\\ijkplayer\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_file_list_item.xml",
+        "source": "D:\\workplace\\app\\yCatApp\\ijkplayer\\res\\layout\\fragment_file_list_item.xml"
+    },
+    {
+        "merged": "D:\\workplace\\app\\yCatApp\\ijkplayer\\build\\intermediates\\res\\merged\\debug\\layout\\table_media_info_section.xml",
+        "source": "D:\\workplace\\app\\yCatApp\\ijkplayer\\res\\layout\\table_media_info_section.xml"
+    },
+    {
+        "merged": "D:\\workplace\\app\\yCatApp\\ijkplayer\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_file_list.xml",
+        "source": "D:\\workplace\\app\\yCatApp\\ijkplayer\\res\\layout\\fragment_file_list.xml"
+    },
+    {
+        "merged": "D:\\workplace\\app\\yCatApp\\ijkplayer\\build\\intermediates\\res\\merged\\debug\\layout\\activity_player.xml",
+        "source": "D:\\workplace\\app\\yCatApp\\ijkplayer\\res\\layout\\activity_player.xml"
+    },
+    {
+        "merged": "D:\\workplace\\app\\yCatApp\\ijkplayer\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
+        "source": "D:\\workplace\\app\\yCatApp\\ijkplayer\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "D:\\workplace\\app\\yCatApp\\ijkplayer\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_track_list.xml",
+        "source": "D:\\workplace\\app\\yCatApp\\ijkplayer\\res\\layout\\fragment_track_list.xml"
+    }
+]

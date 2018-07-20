@@ -1,7 +1,9 @@
 package cat.ycatapp.xandone.ui.video;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -15,6 +17,7 @@ import butterknife.BindView;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseFragment;
 import cat.ycatapp.xandone.model.video.VideoInfo;
+import cat.ycatapp.xandone.ui.videodetails.VideoDetailsActivity;
 
 /**
  * author: xandone
@@ -23,6 +26,8 @@ import cat.ycatapp.xandone.model.video.VideoInfo;
 public class VideoListFragment extends RxBaseFragment<VideoListPresenter> implements VideoContact.MyView {
     @BindView(R.id.video_list_recycler)
     RecyclerView video_list_recycler;
+    @BindView(R.id.toolBar)
+    Toolbar toolbar;
 
     private VideoListAdapter mVideoListAdapter;
     private List<VideoInfo.ItemListBean> datas;
@@ -42,6 +47,8 @@ public class VideoListFragment extends RxBaseFragment<VideoListPresenter> implem
     }
 
     private void init() {
+        setToolBar(toolbar, getString(R.string.x_video_title));
+
         datas = new ArrayList<>();
 
         mVideoListAdapter = new VideoListAdapter(mActivity, R.layout.item_video_list_layout, datas);
@@ -51,9 +58,9 @@ public class VideoListFragment extends RxBaseFragment<VideoListPresenter> implem
         mVideoListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                Intent intent = new Intent(mActivity, VideoDetailsActivity.class);
-//                intent.putExtra(KEY_VIDEOINFO, datas.get(position));
-//                startActivity(intent);
+                Intent intent = new Intent(mActivity, VideoDetailsActivity.class);
+                intent.putExtra(KEY_VIDEOINFO, datas.get(position));
+                startActivity(intent);
             }
         });
     }
