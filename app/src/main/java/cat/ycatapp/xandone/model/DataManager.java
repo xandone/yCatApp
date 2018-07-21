@@ -44,7 +44,7 @@ public class DataManager implements HttpHelper {
     }
 
     @Override
-    public Flowable<BaseResponse> getThumbsJoke(String jokeId, String jokeUserId) {
+    public Flowable<BaseResponse<List<JokeBean.RowsBean>>> getThumbsJoke(String jokeId, String jokeUserId) {
         return mHttpHelper.getThumbsJoke(jokeId, jokeUserId);
     }
 

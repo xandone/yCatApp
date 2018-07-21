@@ -19,6 +19,7 @@
         android:id="@+id/content_info_more"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/r_arrow"
         android:text="简介"
         android:textColor="@color/text_light"
         android:textSize="14sp"

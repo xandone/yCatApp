@@ -48,7 +48,7 @@ public interface Api {
             @Query("rows") int count);
 
     @GET("ycat/joke/thumbs/self")
-    Flowable<BaseResponse> getThumbsJoke(
+    Flowable<BaseResponse<List<JokeBean.RowsBean>>> getThumbsJoke(
             @Query("jokeId") String jokeId,
             @Query("jokeUserId") String jokeUserId);
 

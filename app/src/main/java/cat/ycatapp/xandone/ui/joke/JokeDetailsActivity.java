@@ -14,6 +14,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.google.gson.Gson;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -155,16 +158,19 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
     }
 
     @Override
-    public void showContent(BaseResponse baseResponse) {
-        if (baseResponse == null) {
+    public void showContent(BaseResponse<List<JokeBean.RowsBean>> baseResponse) {
+        if (baseResponse == null || baseResponse.getDataList() == null || baseResponse.getDataList().isEmpty()) {
             return;
         }
+        Log.d("yandone",new Gson().toJson(baseResponse));
+        jokeBean = baseResponse.getDataList().get(0);
         //已点赞
         if ("2".equals(baseResponse.getCode())) {
             act_joke_details_like.setCompoundDrawables(null, drawable1, null, null);
         } else {
             act_joke_details_like.setCompoundDrawables(null, drawable2, null, null);
         }
+        act_joke_details_like.setText(String.valueOf(jokeBean.getArticle_like_count()));
     }
 
     /**
@@ -181,7 +187,9 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
         if ("2".equals(baseResponse.getCode())) {
             ToastUtils.showShort("老铁你已经点赞了");
         } else {
+            jokeBean.setArticle_like_count(jokeBean.getArticle_like_count() + 1);
             act_joke_details_like.setCompoundDrawables(null, drawable1, null, null);
+            act_joke_details_like.setText(String.valueOf(jokeBean.getArticle_like_count()));
         }
     }
 

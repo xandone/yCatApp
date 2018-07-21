@@ -1,11 +1,14 @@
 package cat.ycatapp.xandone.ui.joke;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import cat.ycatapp.xandone.api.CommonSubscriber;
 import cat.ycatapp.xandone.base.RxPresenter;
 import cat.ycatapp.xandone.model.DataManager;
 import cat.ycatapp.xandone.model.base.BaseResponse;
+import cat.ycatapp.xandone.model.bean.JokeBean;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -25,12 +28,12 @@ public class JokeDetailsPresenter extends RxPresenter<JokeDetailsContact.View>im
 
     @Override
     public void getThumbsJoke(String jokeId, String jokeUserId) {
-        Flowable<BaseResponse> result = dataManager.getThumbsJoke(jokeId, jokeUserId);
+        Flowable<BaseResponse<List<JokeBean.RowsBean>>> result = dataManager.getThumbsJoke(jokeId, jokeUserId);
         addSubscrible(result.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new CommonSubscriber<BaseResponse>(view) {
+                .subscribeWith(new CommonSubscriber<BaseResponse<List<JokeBean.RowsBean>>>(view) {
                     @Override
-                    public void onNext(BaseResponse baseResponse) {
+                    public void onNext(BaseResponse<List<JokeBean.RowsBean>> baseResponse) {
                         super.onNext(baseResponse);
                         view.showContent(baseResponse);
                     }

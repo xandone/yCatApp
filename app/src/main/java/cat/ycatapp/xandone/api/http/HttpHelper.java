@@ -25,7 +25,7 @@ public interface HttpHelper {
 
     Flowable<JokeBean> getJokeList(int page, int count);
 
-    Flowable<BaseResponse> getThumbsJoke(String jokeId, String jokeUserId);
+    Flowable<BaseResponse<List<JokeBean.RowsBean>>> getThumbsJoke(String jokeId, String jokeUserId);
 
     Flowable<BaseResponse> thumbsJoke(String jokeId, String jokeUserId);
 
