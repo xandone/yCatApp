@@ -3,7 +3,11 @@ package cat.ycatapp.xandone.ui.info;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -11,11 +15,18 @@ import cat.ycatapp.xandone.AppManager;
 import cat.ycatapp.xandone.MainActivity;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.BaseFragment;
+import cat.ycatapp.xandone.cache.UserInfoCache;
+import cat.ycatapp.xandone.model.bean.UserBean;
 import cat.ycatapp.xandone.uitils.ToastUtils;
+import cat.ycatapp.xandone.uitils.imgload.XGlide;
 
 public class LeftSlideFragment extends BaseFragment {
     @BindView(R.id.menu_1)
     LinearLayout menu_1;
+    @BindView(R.id.user_icon_iv)
+    ImageView user_icon_iv;
+    @BindView(R.id.user_name_tv)
+    TextView user_name_tv;
 
     private MainActivity mActivity;
 
@@ -27,11 +38,22 @@ public class LeftSlideFragment extends BaseFragment {
     @Override
     public void initData() {
         mActivity = (MainActivity) getActivity();
+        loadUserInfo();
     }
 
     @Override
     protected void lazyLoadData() {
 
+    }
+
+    public void loadUserInfo() {
+        if (UserInfoCache.isLogin()) {
+            XGlide.loadImage(Glide.with(this), user_icon_iv, UserInfoCache.getUserBean().getIconUrl());
+            user_name_tv.setText(UserInfoCache.getUserBean().getNickName());
+        } else {
+            user_icon_iv.setImageResource(R.drawable.df_head);
+            user_name_tv.setText(getString(R.string.s_name));
+        }
     }
 
     @OnClick({R.id.menu_1, R.id.menu_2, R.id.foot_menu_set, R.id.foot_menu_exit, R.id.user_icon_iv})

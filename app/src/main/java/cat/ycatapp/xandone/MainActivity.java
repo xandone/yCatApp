@@ -35,10 +35,12 @@ public class MainActivity extends RxBaseActivity implements LeftSlideFragment.On
     private VideoListFragment mInfoFragment;
     private JokeFragment mJokeFragment;
     private ImageFragment mImageFragment;
+    private LeftSlideFragment mLeftSlideFragment;
 
     public static final String X_USER_RELOAD = MainActivity.class.getName() + "_USER_RELOAD";
     public static final int USER_LOGIN = 1;
     public static final int USER_REGIST = 2;
+    public static final int USER_LOGOUT = 3;
 
     @Override
     public int setLayout() {
@@ -79,6 +81,7 @@ public class MainActivity extends RxBaseActivity implements LeftSlideFragment.On
             }
         });
 
+        mLeftSlideFragment = (LeftSlideFragment) getSupportFragmentManager().findFragmentById(R.id.leftSlide_frag);
     }
 
     public void turnToFrag() {
@@ -106,13 +109,18 @@ public class MainActivity extends RxBaseActivity implements LeftSlideFragment.On
         int action = intent.getIntExtra(X_USER_RELOAD, 0);
         switch (action) {
             case USER_LOGIN:
-                if (mInfoFragment != null) {
-//                    mInfoFragment.showUserInfo();
+                if (mLeftSlideFragment != null) {
+                    mLeftSlideFragment.loadUserInfo();
                 }
                 break;
             case USER_REGIST:
-                if (mInfoFragment != null) {
-//                    mInfoFragment.showUserInfo();
+                if (mLeftSlideFragment != null) {
+                    mLeftSlideFragment.loadUserInfo();
+                }
+                break;
+            case USER_LOGOUT:
+                if (mLeftSlideFragment != null) {
+                    mLeftSlideFragment.loadUserInfo();
                 }
                 break;
         }

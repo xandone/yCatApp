@@ -22,6 +22,7 @@ import cat.ycatapp.xandone.model.bean.UserPsw;
 import cat.ycatapp.xandone.ui.regist.RegistActivity;
 import cat.ycatapp.xandone.uitils.GsonUtil;
 import cat.ycatapp.xandone.uitils.SPUtils;
+import cat.ycatapp.xandone.uitils.SimpleUtils;
 import cat.ycatapp.xandone.uitils.ToastUtils;
 import cat.ycatapp.xandone.uitils.XString;
 
@@ -79,6 +80,7 @@ public class LoginActivity extends RxBaseActivity<LoginPresenter> implements Log
     @Override
     public void showContent(BaseResponse<List<UserBean>> baseResponse) {
         if (UserInfoCache.isLogin()) {
+            SimpleUtils.hideSoftInput(this);
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             intent.putExtra(MainActivity.X_USER_RELOAD, MainActivity.USER_REGIST);
             startActivity(intent);
@@ -87,5 +89,10 @@ public class LoginActivity extends RxBaseActivity<LoginPresenter> implements Log
         } else {
             ToastUtils.showShort("服务器异常,请稍后再试");
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

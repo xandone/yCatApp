@@ -162,7 +162,6 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
         if (baseResponse == null || baseResponse.getDataList() == null || baseResponse.getDataList().isEmpty()) {
             return;
         }
-        Log.d("yandone",new Gson().toJson(baseResponse));
         jokeBean = baseResponse.getDataList().get(0);
         //已点赞
         if ("2".equals(baseResponse.getCode())) {
@@ -185,7 +184,7 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
         }
         //已点赞
         if ("2".equals(baseResponse.getCode())) {
-            ToastUtils.showShort("老铁你已经点赞了");
+            ToastUtils.showShort(getString(R.string.s_have_thimb));
         } else {
             jokeBean.setArticle_like_count(jokeBean.getArticle_like_count() + 1);
             act_joke_details_like.setCompoundDrawables(null, drawable1, null, null);

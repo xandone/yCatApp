@@ -21,6 +21,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cat.ycatapp.xandone.App;
+import cat.ycatapp.xandone.MainActivity;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseActivity;
 import cat.ycatapp.xandone.cache.UserInfoCache;
@@ -121,6 +122,10 @@ public class InfoActivity extends RxBaseActivity<InfoPresenter> implements View.
         frag_info_login_ll.setVisibility(View.VISIBLE);
         frag_info_icon_ll.setVisibility(View.GONE);
         frag_info_nick.setText("");
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra(MainActivity.X_USER_RELOAD, MainActivity.USER_LOGOUT);
+        startActivity(intent);
     }
 
     public void changeIconDialog() {
