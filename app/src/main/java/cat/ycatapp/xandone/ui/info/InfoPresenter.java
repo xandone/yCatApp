@@ -1,13 +1,12 @@
 package cat.ycatapp.xandone.ui.info;
 
-import android.util.Log;
 
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
-import cat.ycatapp.xandone.api.CommonSubscriber;
+import cat.ycatapp.xandone.api.DialogSubscriber;
 import cat.ycatapp.xandone.base.RxPresenter;
 import cat.ycatapp.xandone.cache.UserInfoCache;
 import cat.ycatapp.xandone.config.Constants;
@@ -41,7 +40,7 @@ public class InfoPresenter extends RxPresenter<InfoContact.MyView> implements In
         Flowable<BaseResponse<List<UserBean>>> result = dataManager.changeUserIcon(part, maps);
         addSubscrible(result.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new CommonSubscriber<BaseResponse<List<UserBean>>>(view) {
+                .subscribeWith(new DialogSubscriber<BaseResponse<List<UserBean>>>(view) {
                     @Override
                     public void onNext(BaseResponse<List<UserBean>> baseResponse) {
                         super.onNext(baseResponse);
@@ -55,13 +54,10 @@ public class InfoPresenter extends RxPresenter<InfoContact.MyView> implements In
                                 UserInfoCache.setLogin(true);
                                 UserInfoCache.setUserBean(userCache);
 
-                                Log.d("yandone", "userCache===" + GsonUtil.objToJson(baseResponse));
-
                                 SPUtils spUtils = SPUtils.getInstance(Constants.USER_INFO_NAME);
                                 String infoJson = GsonUtil.objToJson(userCache);
                                 spUtils.put(Constants.USER_INFO_KEY, infoJson);
 
-                                Log.d("yandone", "userIcon===" + infoJson);
                             }
                             view.showContent(baseResponse);
                         } else {

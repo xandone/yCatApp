@@ -70,7 +70,7 @@ public class JokeCommentActivity extends RxBaseActivity<JokeCommentPresenter> im
         super.initData();
         setToolBar(toolBar, getString(R.string.x_joke_comment_title));
 
-        jokeBean = (JokeBean.RowsBean) getIntent().getSerializableExtra(JokeListAdapter.JOKEBEAN_TAG);
+        jokeBean = (JokeBean.RowsBean) getIntent().getSerializableExtra(JokeListAdapter.KEY_JOKEBEAN);
         if (jokeBean == null) {
             return;
         }

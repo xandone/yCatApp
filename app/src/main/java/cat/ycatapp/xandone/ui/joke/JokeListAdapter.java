@@ -1,7 +1,9 @@
 package cat.ycatapp.xandone.ui.joke;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,15 +34,18 @@ import cat.ycatapp.xandone.widget.UserCircleIcon;
 
 public class JokeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<JokeBean.RowsBean> list;
-    private Context mContext;
+    private Activity mActivity;
+    private Fragment mFragment;
     private RequestManager requestManager;
 
-    public static final String JOKEBEAN_TAG = "JOKEBEAN_TAG";
+    public static final String KEY_JOKEBEAN = "key_jokebean";
+    public static final String KEY_JOKEBEAN_POSITION = "key_jokebean_position";
 
-    public JokeListAdapter(Context context, List list) {
+    public JokeListAdapter(Activity activity, Fragment fragment, List list) {
         this.list = list;
-        this.mContext = context;
-        requestManager = Glide.with(mContext);
+        this.mActivity = activity;
+        this.mFragment = fragment;
+        requestManager = Glide.with(mActivity);
     }
 
     @Override
@@ -90,9 +95,10 @@ public class JokeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public void click(View view) {
             switch (view.getId()) {
                 case R.id.item_joke_list_root:
-                    Intent intent = new Intent(mContext, JokeDetailsActivity.class);
-                    intent.putExtra(JOKEBEAN_TAG, list.get(getLayoutPosition()));
-                    mContext.startActivity(intent);
+                    Intent intent = new Intent(mActivity, JokeDetailsActivity.class);
+                    intent.putExtra(KEY_JOKEBEAN, list.get(getLayoutPosition()));
+                    intent.putExtra(KEY_JOKEBEAN_POSITION, getLayoutPosition());
+                    mFragment.startActivityForResult(intent, JokeFragment.RQS_CODE_JOKEBEAN);
                     break;
             }
         }

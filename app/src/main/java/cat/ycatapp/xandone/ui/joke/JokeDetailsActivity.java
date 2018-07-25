@@ -61,10 +61,13 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
     TextView act_joke_details_comment_count;
 
     private JokeBean.RowsBean jokeBean;
+    private int mPosition;
     private RequestManager requestManager;
     private boolean isShowBottom = true;
+    private boolean isThumbNow;//现在点赞
 
     private Drawable drawable1, drawable2;
+
 
     @Override
     public int setLayout() {
@@ -83,7 +86,8 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
 
         setToolBar(toolBar, getTitle().toString());
         requestManager = Glide.with(this);
-        jokeBean = (JokeBean.RowsBean) getIntent().getSerializableExtra(JokeListAdapter.JOKEBEAN_TAG);
+        jokeBean = (JokeBean.RowsBean) getIntent().getSerializableExtra(JokeListAdapter.KEY_JOKEBEAN);
+        mPosition = getIntent().getIntExtra(JokeListAdapter.KEY_JOKEBEAN_POSITION, 0);
         if (jokeBean == null) {
             return;
         }
@@ -122,7 +126,7 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
                 break;
             case R.id.act_joke_details_comment_count:
                 Intent intent = new Intent(this, JokeCommentActivity.class);
-                intent.putExtra(JokeListAdapter.JOKEBEAN_TAG, jokeBean);
+                intent.putExtra(JokeListAdapter.KEY_JOKEBEAN, jokeBean);
                 startActivity(intent);
                 break;
         }
@@ -162,14 +166,12 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
         if (baseResponse == null || baseResponse.getDataList() == null || baseResponse.getDataList().isEmpty()) {
             return;
         }
-        jokeBean = baseResponse.getDataList().get(0);
         //已点赞
         if ("2".equals(baseResponse.getCode())) {
             act_joke_details_like.setCompoundDrawables(null, drawable1, null, null);
         } else {
             act_joke_details_like.setCompoundDrawables(null, drawable2, null, null);
         }
-        act_joke_details_like.setText(String.valueOf(jokeBean.getArticle_like_count()));
     }
 
     /**
@@ -185,9 +187,12 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
         //已点赞
         if ("2".equals(baseResponse.getCode())) {
             ToastUtils.showShort(getString(R.string.s_have_thimb));
+            isThumbNow = false;
         } else {
-            jokeBean.setArticle_like_count(jokeBean.getArticle_like_count() + 1);
+            isThumbNow = true;
             act_joke_details_like.setCompoundDrawables(null, drawable1, null, null);
+
+            jokeBean.setArticle_like_count(jokeBean.getArticle_like_count() + 1);
             act_joke_details_like.setText(String.valueOf(jokeBean.getArticle_like_count()));
         }
     }
@@ -196,5 +201,14 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
     @Override
     public void showMsg(String msg, int loadStatus) {
         ToastUtils.showShort(msg);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra(JokeFragment.KEY_RQS_IS_THUMB, isThumbNow);
+        intent.putExtra(JokeListAdapter.KEY_JOKEBEAN_POSITION, mPosition);
+        setResult(RESULT_OK, intent);
+        super.onBackPressed();
     }
 }

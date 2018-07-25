@@ -39,5 +39,7 @@ public interface HttpHelper {
 
     Flowable<BaseResponse<List<UserBean>>> changeUserIcon(MultipartBody.Part part, Map<String, String> maps);
 
+    Flowable<BaseResponse<List<ImageBean.RowsBean>>> upImage(MultipartBody.Part part, Map<String, String> maps);
+
     Flowable<VideoInfo> getVideoList(Map<String, String> map);
 }

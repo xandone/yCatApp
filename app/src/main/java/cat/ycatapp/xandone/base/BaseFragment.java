@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
+import cat.ycatapp.xandone.uitils.ProgressDialogUtil;
 
 /**
  * author: xandone
@@ -105,6 +106,18 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         mActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mActivity.getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setNavigationIcon(null);
+    }
+
+    protected void showLoadingDialog(boolean cancelable) {
+        showLoadingDialog("正在请求...", cancelable);
+    }
+
+    protected void showLoadingDialog(String msg, boolean cancelable) {
+        ProgressDialogUtil.showProgress(mActivity, msg, cancelable);
+    }
+
+    protected void setLoadingMessage(String str) {
+        ProgressDialogUtil.setMessage(str);
     }
 
     protected android.app.AlertDialog showDialog(String msg,

@@ -83,6 +83,11 @@ public class RetrofitHelper implements HttpHelper {
     }
 
     @Override
+    public Flowable<BaseResponse<List<ImageBean.RowsBean>>> upImage(MultipartBody.Part part, Map<String, String> maps) {
+        return mApi.upImage(part, maps);
+    }
+
+    @Override
     public Flowable<VideoInfo> getVideoList(Map<String, String> map) {
         return mKyApi.getVideoList(map);
     }

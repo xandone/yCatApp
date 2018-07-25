@@ -18,6 +18,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cat.ycatapp.xandone.App;
 import cat.ycatapp.xandone.R;
+import cat.ycatapp.xandone.base.BaseActivity;
 import cat.ycatapp.xandone.base.RxBaseFragment;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.ui.jokeadd.JokeAddActivity;
@@ -45,6 +46,9 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
 
     private LoadingLayout.OnReloadListener onReloadListener;
 
+    public static final int RQS_CODE_JOKEBEAN = 1;
+    public static final String KEY_RQS_IS_THUMB = "key_rqs_is_thumb";
+
     @Override
     public int setLayout() {
         return R.layout.frag_joke_layout;
@@ -62,7 +66,7 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
         setToolBar(toolBar, getString(R.string.x_joke_title));
 
         jokes = new ArrayList<>();
-        jokeListAdapter = new JokeListAdapter(mActivity, jokes);
+        jokeListAdapter = new JokeListAdapter(mActivity, this, jokes);
         frag_joke_list.setAdapter(jokeListAdapter);
         frag_joke_list.setLayoutManager(new LinearLayoutManager(App.sContext));
 
@@ -127,6 +131,13 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
         loadingLayout.setLoadingTips(loadStatus);
     }
 
+    private void updataDatas(boolean isThumb, int position) {
+        if (isThumb) {
+            jokes.get(position).setArticle_like_count(jokes.get(position).getArticle_like_count() + 1);
+            jokeListAdapter.notifyItemChanged(position);
+        }
+    }
+
 
     @OnClick({R.id.toolbar_add})
     public void click(View view) {
@@ -137,5 +148,23 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
                 break;
         }
 
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != BaseActivity.RESULT_OK) {
+            return;
+        }
+
+        if (data == null) {
+            return;
+        }
+        if (requestCode == 1) {
+            boolean isThumb = data.getBooleanExtra(KEY_RQS_IS_THUMB, false);
+            int position = data.getIntExtra(JokeListAdapter.KEY_JOKEBEAN_POSITION, 0);
+            updataDatas(isThumb, position);
+        }
     }
 }

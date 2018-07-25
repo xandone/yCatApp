@@ -1,8 +1,11 @@
 package cat.ycatapp.xandone.ui.bar;
 
+import java.util.Map;
+
 import cat.ycatapp.xandone.base.BasePresenter;
 import cat.ycatapp.xandone.base.BaseView;
 import cat.ycatapp.xandone.model.bean.ImageBean;
+import okhttp3.MultipartBody;
 
 /**
  * author: xandone
@@ -19,11 +22,15 @@ public interface ImageContact {
 
         void showContentMore(ImageBean jokeBean);
 
+        void showUpImageResult(ImageBean.RowsBean jokeBean);
+
     }
 
     interface MyPresenter extends BasePresenter<MyView> {
 
         void getImageList(int page, int count, int mode);
+
+        void upImage(Map<String, String> maps, MultipartBody.Part part);
 
     }
 }

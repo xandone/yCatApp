@@ -79,6 +79,11 @@ public class DataManager implements HttpHelper {
     }
 
     @Override
+    public Flowable<BaseResponse<List<ImageBean.RowsBean>>> upImage(MultipartBody.Part part, Map<String, String> maps) {
+        return mHttpHelper.upImage(part, maps);
+    }
+
+    @Override
     public Flowable<VideoInfo> getVideoList(Map<String, String> map) {
         return mHttpHelper.getVideoList(map);
     }

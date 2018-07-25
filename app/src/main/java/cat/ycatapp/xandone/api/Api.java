@@ -84,17 +84,13 @@ public interface Api {
             @Query("rows") int count);
 
     @Multipart
-    @POST("ycat/upload.do")
-    Flowable<ImageBean> changeUserIcon(@Part("userId") String username,
-                                       @PartMap() Map<String, RequestBody> files);
-
-    @Multipart
-    @POST("ycat/upload.do")
-    Flowable<ImageBean> upImage(@QueryMap() Map<String, String> params,
-                                @PartMap() Map<String, RequestBody> files);
+    @POST("ycat/upImage")
+    Flowable<BaseResponse<List<ImageBean.RowsBean>>> upImage(@Part MultipartBody.Part part,
+                                                   @QueryMap Map<String, String> maps);
 
     @Multipart
     @POST("ycat/user/upIcon")
-    Flowable<BaseResponse<List<UserBean>>> changeUserIcon(@Part MultipartBody.Part part, @QueryMap Map<String, String> maps);
+    Flowable<BaseResponse<List<UserBean>>> changeUserIcon(@Part MultipartBody.Part part,
+                                                          @QueryMap Map<String, String> maps);
 
 }

@@ -165,11 +165,12 @@ public class InfoActivity extends RxBaseActivity<InfoPresenter> implements View.
                         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
                         MultipartBody.Part body =
                                 MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-                        Map<String, String> map = new HashMap();
+                        Map<String, String> map = new HashMap<>();
                         map.put("userId", UserInfoCache.getUserBean().getUserId());
                         Log.d("yandone", UserInfoCache.getUserBean().getUserId());
 
                         mPresenter.changeUserIcon(map, body);
+                        showLoadingDialog(false);
                     }
 
                     @Override
@@ -223,5 +224,10 @@ public class InfoActivity extends RxBaseActivity<InfoPresenter> implements View.
     @Override
     public void showContent(BaseResponse<List<UserBean>> baseResponse) {
         XGlide.loadImage(requestManager, frag_info_icon_iv, baseResponse.getDataList().get(0).getIconUrl());
+
+        Intent intent = new Intent();
+        intent.setAction(LeftSlideFragment.ACTION_LEFT_SLIDE_FRAGMENT);
+        intent.putExtra(LeftSlideFragment.KEY_LOAD_USER_ICON, LeftSlideFragment.VALUE_LOAD_USER_ICON);
+        sendBroadcast(intent);
     }
 }

@@ -1,7 +1,11 @@
 package cat.ycatapp.xandone.ui.info;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,6 +33,12 @@ public class LeftSlideFragment extends BaseFragment {
     TextView user_name_tv;
 
     private MainActivity mActivity;
+    private MyBroadCast mMyBroadCast;
+
+    public static final String ACTION_LEFT_SLIDE_FRAGMENT = "action_left_slide_fragment";
+    public static final String KEY_LOAD_USER_ICON = "key_load_user_icon";
+
+    public static final int VALUE_LOAD_USER_ICON = 1;
 
     @Override
     public int setLayout() {
@@ -39,6 +49,11 @@ public class LeftSlideFragment extends BaseFragment {
     public void initData() {
         mActivity = (MainActivity) getActivity();
         loadUserInfo();
+
+        mMyBroadCast = new MyBroadCast();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(ACTION_LEFT_SLIDE_FRAGMENT);
+        mActivity.registerReceiver(mMyBroadCast, filter);
     }
 
     @Override
@@ -84,6 +99,28 @@ public class LeftSlideFragment extends BaseFragment {
 
     public void setOnCloseDrawerLayout(OnCloseDrawerLayout onCloseDrawerLayout) {
         onCloseDrawerLayout.OnClose();
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mActivity != null) {
+            mActivity.unregisterReceiver(mMyBroadCast);
+        }
+        super.onDestroy();
+    }
+
+    class MyBroadCast extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent == null) {
+                return;
+            }
+            int key = intent.getIntExtra(KEY_LOAD_USER_ICON, 0);
+            if (key == VALUE_LOAD_USER_ICON) {
+                loadUserInfo();
+            }
+        }
     }
 
 }
