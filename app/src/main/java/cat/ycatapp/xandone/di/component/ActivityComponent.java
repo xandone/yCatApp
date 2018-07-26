@@ -2,6 +2,7 @@ package cat.ycatapp.xandone.di.component;
 
 import cat.ycatapp.xandone.di.module.ActivityModule;
 import cat.ycatapp.xandone.di.scope.ActivityScope;
+import cat.ycatapp.xandone.ui.collect.CollectionActivity;
 import cat.ycatapp.xandone.ui.info.InfoActivity;
 import cat.ycatapp.xandone.ui.joke.JokeCommentActivity;
 import cat.ycatapp.xandone.ui.joke.JokeDetailsActivity;
@@ -32,6 +33,8 @@ public interface ActivityComponent {
     void inject(JokeAddActivity jokeAddActivity);
 
     void inject(InfoActivity infoActivity);
+
+    void inject(CollectionActivity collectionActivity);
 
 
 }

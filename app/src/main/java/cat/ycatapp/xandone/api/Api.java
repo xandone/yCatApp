@@ -7,17 +7,14 @@ import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.CommentBean;
 import cat.ycatapp.xandone.model.bean.ImageBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
+import cat.ycatapp.xandone.model.bean.JokeListBean;
 import cat.ycatapp.xandone.model.bean.UserBean;
-import cat.ycatapp.xandone.model.video.VideoInfo;
 import io.reactivex.Flowable;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
@@ -43,12 +40,12 @@ public interface Api {
             @Query("password") String psw);
 
     @GET("ycat/joke/list")
-    Flowable<JokeBean> getJokeList(
+    Flowable<JokeListBean> getJokeList(
             @Query("page") int page,
             @Query("rows") int count);
 
     @GET("ycat/joke/thumbs/self")
-    Flowable<BaseResponse<List<JokeBean.RowsBean>>> getThumbsJoke(
+    Flowable<BaseResponse<List<JokeBean>>> getThumbsJoke(
             @Query("jokeId") String jokeId,
             @Query("jokeUserId") String jokeUserId);
 

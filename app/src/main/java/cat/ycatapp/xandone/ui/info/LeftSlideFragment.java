@@ -21,6 +21,7 @@ import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.BaseFragment;
 import cat.ycatapp.xandone.cache.UserInfoCache;
 import cat.ycatapp.xandone.model.bean.UserBean;
+import cat.ycatapp.xandone.ui.collect.CollectionActivity;
 import cat.ycatapp.xandone.uitils.ToastUtils;
 import cat.ycatapp.xandone.uitils.imgload.XGlide;
 
@@ -71,14 +72,16 @@ public class LeftSlideFragment extends BaseFragment {
         }
     }
 
-    @OnClick({R.id.menu_1, R.id.menu_2, R.id.foot_menu_set, R.id.foot_menu_exit, R.id.user_icon_iv})
+    @OnClick({R.id.menu_1, R.id.menu_2, R.id.menu_3, R.id.foot_menu_set, R.id.foot_menu_exit, R.id.user_icon_iv})
     public void click(View v) {
         switch (v.getId()) {
             case R.id.menu_1:
 //                mActivity.startActivity(new Intent(mActivity, ChooseCityActivity.class));
                 break;
             case R.id.menu_2:
-                ToastUtils.showShort("by xandone...");
+                startActivity(new Intent(mActivity, CollectionActivity.class));
+                break;
+            case R.id.menu_3:
                 break;
             case R.id.foot_menu_set:
 //                mActivity.startActivity(new Intent(mActivity, SetActivity.class));

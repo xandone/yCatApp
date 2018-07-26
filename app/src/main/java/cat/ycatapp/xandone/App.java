@@ -17,6 +17,7 @@ import cat.ycatapp.xandone.di.component.AppComponent;
 import cat.ycatapp.xandone.di.component.DaggerAppComponent;
 import cat.ycatapp.xandone.di.module.AppModule;
 import cat.ycatapp.xandone.di.module.HttpModule;
+import cat.ycatapp.xandone.greendao.DaoManager;
 
 /**
  * author: xandone
@@ -58,6 +59,8 @@ public class App extends MultiDexApplication {
         }
         LeakCanary.install(this);
         // Normal app init code...
+
+        DaoManager.getInstance(this);
 
     }
 

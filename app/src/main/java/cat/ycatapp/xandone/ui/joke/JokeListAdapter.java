@@ -1,7 +1,6 @@
 package cat.ycatapp.xandone.ui.joke;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +22,7 @@ import butterknife.OnClick;
 import cat.ycatapp.xandone.App;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.model.bean.JokeBean;
+import cat.ycatapp.xandone.model.bean.JokeListBean;
 import cat.ycatapp.xandone.uitils.TimeUtil;
 import cat.ycatapp.xandone.uitils.imgload.XGlide;
 import cat.ycatapp.xandone.widget.UserCircleIcon;
@@ -33,7 +33,7 @@ import cat.ycatapp.xandone.widget.UserCircleIcon;
  */
 
 public class JokeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<JokeBean.RowsBean> list;
+    private List<JokeBean> list;
     private Activity mActivity;
     private Fragment mFragment;
     private RequestManager requestManager;
@@ -103,7 +103,7 @@ public class JokeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             }
         }
 
-        public void bindView(JokeBean.RowsBean jokeBean) {
+        public void bindView(JokeBean jokeBean) {
             if (jokeBean == null) {
                 return;
             }

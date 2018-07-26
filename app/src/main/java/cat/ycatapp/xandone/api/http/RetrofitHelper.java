@@ -12,6 +12,7 @@ import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.CommentBean;
 import cat.ycatapp.xandone.model.bean.ImageBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
+import cat.ycatapp.xandone.model.bean.JokeListBean;
 import cat.ycatapp.xandone.model.bean.UserBean;
 import cat.ycatapp.xandone.model.video.VideoInfo;
 import io.reactivex.Flowable;
@@ -43,12 +44,12 @@ public class RetrofitHelper implements HttpHelper {
     }
 
     @Override
-    public Flowable<JokeBean> getJokeList(int page, int count) {
+    public Flowable<JokeListBean> getJokeList(int page, int count) {
         return mApi.getJokeList(page, count);
     }
 
     @Override
-    public Flowable<BaseResponse<List<JokeBean.RowsBean>>> getThumbsJoke(String jokeId, String jokeUserId) {
+    public Flowable<BaseResponse<List<JokeBean>>> getThumbsJoke(String jokeId, String jokeUserId) {
         return mApi.getThumbsJoke(jokeId, jokeUserId);
     }
 

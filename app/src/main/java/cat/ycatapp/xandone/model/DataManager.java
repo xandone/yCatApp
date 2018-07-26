@@ -8,13 +8,11 @@ import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.CommentBean;
 import cat.ycatapp.xandone.model.bean.ImageBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
-import cat.ycatapp.xandone.model.bean.LoginBean;
-import cat.ycatapp.xandone.model.bean.RegistBean;
+import cat.ycatapp.xandone.model.bean.JokeListBean;
 import cat.ycatapp.xandone.model.bean.UserBean;
 import cat.ycatapp.xandone.model.video.VideoInfo;
 import io.reactivex.Flowable;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 /**
  * author: xandone
@@ -39,12 +37,12 @@ public class DataManager implements HttpHelper {
     }
 
     @Override
-    public Flowable<JokeBean> getJokeList(int page, int count) {
+    public Flowable<JokeListBean> getJokeList(int page, int count) {
         return mHttpHelper.getJokeList(page, count);
     }
 
     @Override
-    public Flowable<BaseResponse<List<JokeBean.RowsBean>>> getThumbsJoke(String jokeId, String jokeUserId) {
+    public Flowable<BaseResponse<List<JokeBean>>> getThumbsJoke(String jokeId, String jokeUserId) {
         return mHttpHelper.getThumbsJoke(jokeId, jokeUserId);
     }
 

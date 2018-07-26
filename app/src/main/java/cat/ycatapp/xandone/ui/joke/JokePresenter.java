@@ -6,7 +6,7 @@ import javax.inject.Inject;
 import cat.ycatapp.xandone.api.CommonSubscriber;
 import cat.ycatapp.xandone.base.RxPresenter;
 import cat.ycatapp.xandone.model.DataManager;
-import cat.ycatapp.xandone.model.bean.JokeBean;
+import cat.ycatapp.xandone.model.bean.JokeListBean;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -25,12 +25,12 @@ public class JokePresenter extends RxPresenter<JokeContact.View> implements Joke
     }
 
     public void getJokeList(int page, int count, final int mode) {
-        Flowable<JokeBean> result = dataManager.getJokeList(page, count);
+        Flowable<JokeListBean> result = dataManager.getJokeList(page, count);
         addSubscrible(result.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new CommonSubscriber<JokeBean>(view) {
+                .subscribeWith(new CommonSubscriber<JokeListBean>(view) {
                     @Override
-                    public void onNext(JokeBean jokeBean) {
+                    public void onNext(JokeListBean jokeBean) {
                         super.onNext(jokeBean);
                         if (mode == JokeContact.MODE_ONE) {
                             view.showContent(jokeBean);

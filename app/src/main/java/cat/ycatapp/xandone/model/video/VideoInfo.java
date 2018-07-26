@@ -2,6 +2,9 @@ package cat.ycatapp.xandone.model.video;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,6 +14,7 @@ import java.util.List;
  */
 public class VideoInfo implements Serializable {
 
+    private static final long serialVersionUID = -5066399130342862242L;
     private int count;
     private int total;
     private Object nextPageUrl;
@@ -59,6 +63,7 @@ public class VideoInfo implements Serializable {
 
     public static class ItemListBean implements Serializable, MultiItemEntity {
 
+        private static final long serialVersionUID = -5828997640838260563L;
         private String type;
         private DataBean data;
         private Object tag;
@@ -123,7 +128,13 @@ public class VideoInfo implements Serializable {
             return itemType;
         }
 
+        @Entity
         public static class DataBean implements Serializable {
+
+            private static final long serialVersionUID = -5284174036844462277L;
+
+            @Id
+            private Long kyVideoId;
 
             private String dataType;
             private int id;
@@ -505,6 +516,7 @@ public class VideoInfo implements Serializable {
             }
 
             public static class ConsumptionBean implements Serializable {
+                private static final long serialVersionUID = -7651761558174378329L;
                 /**
                  * collectionCount : 1260
                  * shareCount : 764
@@ -541,6 +553,7 @@ public class VideoInfo implements Serializable {
             }
 
             public static class ProviderBean implements Serializable {
+                private static final long serialVersionUID = -629677275298024392L;
                 /**
                  * name : Vimeo
                  * alias : vimeo
@@ -577,6 +590,7 @@ public class VideoInfo implements Serializable {
             }
 
             public static class AuthorBean implements Serializable {
+                private static final long serialVersionUID = -5557531198291939361L;
                 /**
                  * id : 1147
                  * icon : http://img.kaiyanapp.com/255365dbfc2622930eb0cdb33e43abf0.jpeg?imageMogr2/quality/60/format/jpg
@@ -702,6 +716,7 @@ public class VideoInfo implements Serializable {
                 }
 
                 public static class FollowBean implements Serializable {
+                    private static final long serialVersionUID = 6869698735474262039L;
                     /**
                      * itemType : author
                      * itemId : 1147
@@ -738,6 +753,7 @@ public class VideoInfo implements Serializable {
                 }
 
                 public static class ShieldBean implements Serializable {
+                    private static final long serialVersionUID = -826762992314151677L;
                     /**
                      * itemType : author
                      * itemId : 1147
@@ -775,6 +791,7 @@ public class VideoInfo implements Serializable {
             }
 
             public static class CoverBean implements Serializable {
+                private static final long serialVersionUID = 1759170983952364550L;
                 /**
                  * feed : http://img.kaiyanapp.com/d592b7f6b10a4ecd0fdca9d4aea7380d.jpeg?imageMogr2/quality/60/format/jpg
                  * detail : http://img.kaiyanapp.com/d592b7f6b10a4ecd0fdca9d4aea7380d.jpeg?imageMogr2/quality/60/format/jpg
@@ -831,6 +848,7 @@ public class VideoInfo implements Serializable {
             }
 
             public static class WebUrlBean implements Serializable {
+                private static final long serialVersionUID = 6480195142518776684L;
                 /**
                  * raw : http://www.eyepetizer.net/detail.html?vid=102035
                  * forWeibo : http://www.eyepetizer.net/detail.html?vid=102035
@@ -857,6 +875,7 @@ public class VideoInfo implements Serializable {
             }
 
             public static class TagsBean implements Serializable {
+                private static final long serialVersionUID = -2996688764044588184L;
                 /**
                  * id : 14
                  * name : 动画
@@ -943,6 +962,7 @@ public class VideoInfo implements Serializable {
             }
 
             public static class PlayInfoBean implements Serializable {
+                private static final long serialVersionUID = -7558782664339454673L;
                 /**
                  * height : 480
                  * width : 854
@@ -1008,6 +1028,7 @@ public class VideoInfo implements Serializable {
                 }
 
                 public static class UrlListBean implements Serializable {
+                    private static final long serialVersionUID = -8087062573594764982L;
                     /**
                      * name : aliyun
                      * url : http://baobab.kaiyanapp.com/api/v1/playUrl?vid=102035&resourceType=video&editionType=normal&source=aliyun

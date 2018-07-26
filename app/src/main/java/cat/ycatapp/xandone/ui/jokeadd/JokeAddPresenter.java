@@ -7,6 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import cat.ycatapp.xandone.api.CommonSubscriber;
+import cat.ycatapp.xandone.api.DialogSubscriber;
 import cat.ycatapp.xandone.base.RxPresenter;
 import cat.ycatapp.xandone.cache.UserInfoCache;
 import cat.ycatapp.xandone.config.Constants;
@@ -40,9 +41,10 @@ public class JokeAddPresenter extends RxPresenter<JokeAddContact.MyView> impleme
         Flowable<BaseResponse<List<Object>>> result = mDataManager.addJoke(title, userId, content);
         addSubscrible(result.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new CommonSubscriber<BaseResponse<List<Object>>>(view) {
+                .subscribeWith(new DialogSubscriber<BaseResponse<List<Object>>>(view) {
                     @Override
                     public void onNext(BaseResponse<List<Object>> baseResponse) {
+                        super.onNext(baseResponse);
                         if (baseResponse != null && "1".equals(baseResponse.getCode())) {
                             view.showSuccess();
                         } else {

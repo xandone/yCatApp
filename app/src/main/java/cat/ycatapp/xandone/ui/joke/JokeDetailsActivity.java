@@ -1,35 +1,29 @@
 package cat.ycatapp.xandone.ui.joke;
 
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.LinearInterpolator;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
-import com.google.gson.Gson;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import cat.ycatapp.xandone.R;
-import cat.ycatapp.xandone.base.BaseActivity;
 import cat.ycatapp.xandone.base.RxBaseActivity;
 import cat.ycatapp.xandone.cache.UserInfoCache;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.JokeBean;
+import cat.ycatapp.xandone.model.bean.JokeListBean;
 import cat.ycatapp.xandone.uitils.TimeUtil;
 import cat.ycatapp.xandone.uitils.ToastUtils;
-import cat.ycatapp.xandone.uitils.imgload.GlideLoader;
-import cat.ycatapp.xandone.uitils.imgload.ImageLoadInterface;
 import cat.ycatapp.xandone.uitils.imgload.XGlide;
 import cat.ycatapp.xandone.widget.UserCircleIcon;
 
@@ -60,7 +54,7 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
     @BindView(R.id.act_joke_details_comment_count)
     TextView act_joke_details_comment_count;
 
-    private JokeBean.RowsBean jokeBean;
+    private JokeBean jokeBean;
     private int mPosition;
     private RequestManager requestManager;
     private boolean isShowBottom = true;
@@ -86,7 +80,7 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
 
         setToolBar(toolBar, getTitle().toString());
         requestManager = Glide.with(this);
-        jokeBean = (JokeBean.RowsBean) getIntent().getSerializableExtra(JokeListAdapter.KEY_JOKEBEAN);
+        jokeBean = (JokeBean) getIntent().getSerializableExtra(JokeListAdapter.KEY_JOKEBEAN);
         mPosition = getIntent().getIntExtra(JokeListAdapter.KEY_JOKEBEAN_POSITION, 0);
         if (jokeBean == null) {
             return;
@@ -110,7 +104,8 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
 
     }
 
-    @OnClick({R.id.act_joke_details_root, R.id.act_joke_details_like, R.id.act_joke_details_comment_count})
+    @OnClick({R.id.act_joke_details_root, R.id.act_joke_details_like, R.id.act_joke_details_comment_count,
+            R.id.act_joke_details_collection})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.act_joke_details_root:
@@ -128,6 +123,13 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
                 Intent intent = new Intent(this, JokeCommentActivity.class);
                 intent.putExtra(JokeListAdapter.KEY_JOKEBEAN, jokeBean);
                 startActivity(intent);
+                break;
+            case R.id.act_joke_details_collection:
+                if (!UserInfoCache.isLogin()) {
+                    ToastUtils.showShort("你还未登录");
+                    break;
+                }
+                mPresenter.addToCollection(jokeBean);
                 break;
         }
     }
@@ -162,7 +164,7 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
     }
 
     @Override
-    public void showContent(BaseResponse<List<JokeBean.RowsBean>> baseResponse) {
+    public void showContent(BaseResponse<List<JokeBean>> baseResponse) {
         if (baseResponse == null || baseResponse.getDataList() == null || baseResponse.getDataList().isEmpty()) {
             return;
         }
@@ -194,6 +196,15 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
 
             jokeBean.setArticle_like_count(jokeBean.getArticle_like_count() + 1);
             act_joke_details_like.setText(String.valueOf(jokeBean.getArticle_like_count()));
+        }
+    }
+
+    @Override
+    public void showCollectionResult(boolean success) {
+        if (success) {
+            ToastUtils.showShort("收藏成功");
+        } else {
+            ToastUtils.showShort("收藏失败");
         }
     }
 

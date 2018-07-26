@@ -31,8 +31,8 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:text="@string/s_name"
-            android:textSize="16sp"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="16sp" />
     </RelativeLayout>
 
     <View style="@style/LeftSlideitem_view" />
@@ -58,6 +58,19 @@
 
         <LinearLayout
             android:id="@+id/menu_2"
+            style="@style/LeftSlideitem_ll">
+
+            <ImageView
+                style="@style/LeftSlideitem_iv"
+                android:background="@drawable/icon_collection" />
+
+            <TextView
+                style="@style/LeftSlideitem_tv"
+                android:text="@string/s_collection" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/menu_3"
             style="@style/LeftSlideitem_ll">
 
             <ImageView

@@ -79,6 +79,10 @@
             android:name=".ui.info.InfoActivity"
             android:label="@string/x_personal_title"
             android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".ui.collect.CollectionActivity"
+            android:label="@string/s_collection"
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
     </application>
 

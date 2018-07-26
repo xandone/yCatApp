@@ -6,7 +6,6 @@ import cat.ycatapp.xandone.base.BasePresenter;
 import cat.ycatapp.xandone.base.BaseView;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.CommentBean;
-import cat.ycatapp.xandone.model.bean.JokeBean;
 
 /**
  * author: xandone

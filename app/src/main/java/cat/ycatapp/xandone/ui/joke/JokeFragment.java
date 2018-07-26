@@ -21,6 +21,7 @@ import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.BaseActivity;
 import cat.ycatapp.xandone.base.RxBaseFragment;
 import cat.ycatapp.xandone.model.bean.JokeBean;
+import cat.ycatapp.xandone.model.bean.JokeListBean;
 import cat.ycatapp.xandone.ui.jokeadd.JokeAddActivity;
 import cat.ycatapp.xandone.widget.LoadingLayout;
 
@@ -40,7 +41,7 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
     Toolbar toolBar;
 
     private JokeListAdapter jokeListAdapter;
-    private List<JokeBean.RowsBean> jokes;
+    private List<JokeBean> jokes;
     private int mPage = 1;
     private int mCount = 10;
 
@@ -63,7 +64,7 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
     public void initData() {
         super.initData();
 
-        setToolBar(toolBar, getString(R.string.x_joke_title));
+        setToolBar(toolBar, getString(R.string.x_joke_title), R.drawable.icon_show_left);
 
         jokes = new ArrayList<>();
         jokeListAdapter = new JokeListAdapter(mActivity, this, jokes);
@@ -102,7 +103,7 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
     }
 
     @Override
-    public void showContent(JokeBean jokeBean) {
+    public void showContent(JokeListBean jokeBean) {
         mRefreshLayout.finishRefresh();
         if (jokeBean == null || jokeBean.getRows() == null || jokeBean.getRows().isEmpty()) {
             showMsg("无数据", LoadingLayout.empty);
@@ -115,7 +116,7 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
     }
 
     @Override
-    public void showContentMore(JokeBean jokeBean) {
+    public void showContentMore(JokeListBean jokeBean) {
         mRefreshLayout.finishLoadmore();
         if (jokeBean == null || jokeBean.getRows() == null || jokeBean.getRows().isEmpty()) {
             return;

@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.view.MenuItem;
 import android.widget.RadioGroup;
 
 import java.util.ArrayList;
@@ -127,6 +129,19 @@ public class MainActivity extends RxBaseActivity implements LeftSlideFragment.On
     }
 
     @Override
+    public void OnClose() {
+        drawerlayout.closeDrawers();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            drawerlayout.openDrawer(GravityCompat.START);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onBackPressed() {
         if (isState) {
             isState = false;
@@ -142,8 +157,4 @@ public class MainActivity extends RxBaseActivity implements LeftSlideFragment.On
         }
     }
 
-    @Override
-    public void OnClose() {
-        drawerlayout.closeDrawers();
-    }
 }

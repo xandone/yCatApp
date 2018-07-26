@@ -6,6 +6,7 @@ import cat.ycatapp.xandone.base.BasePresenter;
 import cat.ycatapp.xandone.base.BaseView;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.JokeBean;
+import cat.ycatapp.xandone.model.bean.JokeListBean;
 
 /**
  * author: xandone
@@ -14,14 +15,18 @@ import cat.ycatapp.xandone.model.bean.JokeBean;
 
 public interface JokeDetailsContact {
     interface View extends BaseView {
-        void showContent(BaseResponse<List<JokeBean.RowsBean>> baseResponse);
+        void showContent(BaseResponse<List<JokeBean>> baseResponse);
 
         void thumbsJokeResult(BaseResponse baseResponse);
+
+        void showCollectionResult(boolean success);
     }
 
     interface Presenter extends BasePresenter<View> {
         void getThumbsJoke(String jokeId, String jokeUserId);
 
         void thumbsJoke(String jokeId, String jokeUserId);
+
+        void addToCollection(JokeBean jokeBean);
     }
 }

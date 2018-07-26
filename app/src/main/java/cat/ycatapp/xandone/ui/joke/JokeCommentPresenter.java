@@ -3,6 +3,8 @@ package cat.ycatapp.xandone.ui.joke;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -58,6 +60,7 @@ public class JokeCommentPresenter extends RxPresenter<JokeCommentContact.MyView>
                     @Override
                     public void onNext(BaseResponse<List<CommentBean.RowsBean>> baseResponse) {
                         super.onNext(baseResponse);
+                        Log.d("yandone", "CommentBean:" + new Gson().toJson(baseResponse));
                         view.showCommentResult(baseResponse);
                     }
 

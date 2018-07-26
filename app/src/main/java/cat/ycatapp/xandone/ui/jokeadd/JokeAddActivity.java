@@ -75,20 +75,17 @@ public class JokeAddActivity extends RxBaseActivity<JokeAddPresenter> implements
 
     @Override
     public void showSuccess() {
-        showLoadingDialog(false);
         ToastUtils.showShort("请求成功");
         finish();
     }
 
     @Override
     public void showFail() {
-        showLoadingDialog(false);
         ToastUtils.showShort("请求失败,请稍后重试");
     }
 
     @Override
     public void showMsg(String msg, int loadStatus) {
-        super.showMsg(msg, loadStatus);
         ToastUtils.showShort(msg);
     }
 }

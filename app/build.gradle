@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
-apply plugin: 'realm-android'
+apply plugin: 'org.greenrobot.greendao' // apply plugin
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -79,7 +79,8 @@ dependencies {
     compile rootProject.ext.dependencies["logger"]
     compile rootProject.ext.dependencies["crashreport"]
     compile rootProject.ext.dependencies["Luban"]
-    compile rootProject.ext.dependencies["jiaozivideoplayer"]
+    compile rootProject.ext.dependencies["filedownloader"]
+    compile rootProject.ext.dependencies["greendao"]
 
     //canary
     debugCompile rootProject.ext.dependencies["blockcanary-android"]
@@ -90,4 +91,12 @@ dependencies {
     //module
     compile project(path: ':jiaozivideoplayer')
     compile project(path: ':ijkplayer')
+}
+
+
+greendao {
+    /*数据库版本*/
+    schemaVersion 1
+    daoPackage 'cat.ycatapp.xandone.greendao.gen'
+    targetGenDir 'src/main/java'
 }

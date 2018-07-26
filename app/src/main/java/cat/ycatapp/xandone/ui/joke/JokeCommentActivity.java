@@ -25,6 +25,7 @@ import cat.ycatapp.xandone.cache.UserInfoCache;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.CommentBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
+import cat.ycatapp.xandone.model.bean.JokeListBean;
 import cat.ycatapp.xandone.uitils.SimpleUtils;
 import cat.ycatapp.xandone.uitils.ToastUtils;
 import cat.ycatapp.xandone.uitils.XString;
@@ -53,7 +54,7 @@ public class JokeCommentActivity extends RxBaseActivity<JokeCommentPresenter> im
     private int mCount = 10;
 
     private LoadingLayout.OnReloadListener onReloadListener;
-    private JokeBean.RowsBean jokeBean;
+    private JokeBean jokeBean;
 
     @Override
     public void initInject() {
@@ -70,7 +71,7 @@ public class JokeCommentActivity extends RxBaseActivity<JokeCommentPresenter> im
         super.initData();
         setToolBar(toolBar, getString(R.string.x_joke_comment_title));
 
-        jokeBean = (JokeBean.RowsBean) getIntent().getSerializableExtra(JokeListAdapter.KEY_JOKEBEAN);
+        jokeBean = (JokeBean) getIntent().getSerializableExtra(JokeListAdapter.KEY_JOKEBEAN);
         if (jokeBean == null) {
             return;
         }
@@ -156,15 +157,16 @@ public class JokeCommentActivity extends RxBaseActivity<JokeCommentPresenter> im
         if (response == null || response.getDataList() == null || response.getDataList().isEmpty()) {
             return;
         }
-        CommentBean.RowsBean commentBean = response.getDataList().get(0);
-        comments.add(commentBean);
-        jokeCommentAdapter.notifyDataSetChanged();
         if ("1".equals(response.getCode())) {
             if (loadingLayout.getVisibility() == View.VISIBLE) {
                 loadingLayout.setVisibility(View.GONE);
             }
             ToastUtils.showShort("评论成功");
             act_joke_comment_et.setText("");
+
+            CommentBean.RowsBean commentBean = response.getDataList().get(0);
+            comments.add(0, commentBean);
+            jokeCommentAdapter.notifyItemChanged(0);
         } else {
             ToastUtils.showShort("评论失败");
         }

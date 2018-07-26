@@ -108,6 +108,11 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         toolbar.setNavigationIcon(null);
     }
 
+    public void setToolBar(Toolbar toolBar, String title, int icon) {
+        setToolBar(toolBar, title);
+        toolBar.setNavigationIcon(icon);
+    }
+
     protected void showLoadingDialog(boolean cancelable) {
         showLoadingDialog("正在请求...", cancelable);
     }
