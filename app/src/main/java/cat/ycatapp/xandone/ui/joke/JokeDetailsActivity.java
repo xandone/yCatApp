@@ -21,7 +21,6 @@ import cat.ycatapp.xandone.base.RxBaseActivity;
 import cat.ycatapp.xandone.cache.UserInfoCache;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.JokeBean;
-import cat.ycatapp.xandone.model.bean.JokeListBean;
 import cat.ycatapp.xandone.uitils.TimeUtil;
 import cat.ycatapp.xandone.uitils.ToastUtils;
 import cat.ycatapp.xandone.uitils.imgload.XGlide;
@@ -200,12 +199,8 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
     }
 
     @Override
-    public void showCollectionResult(boolean success) {
-        if (success) {
-            ToastUtils.showShort("收藏成功");
-        } else {
-            ToastUtils.showShort("收藏失败");
-        }
+    public void showCollectionResult(boolean success, String msg) {
+        ToastUtils.showShort(msg);
     }
 
 

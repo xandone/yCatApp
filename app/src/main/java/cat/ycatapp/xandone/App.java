@@ -18,6 +18,7 @@ import cat.ycatapp.xandone.di.component.DaggerAppComponent;
 import cat.ycatapp.xandone.di.module.AppModule;
 import cat.ycatapp.xandone.di.module.HttpModule;
 import cat.ycatapp.xandone.greendao.DaoManager;
+import cat.ycatapp.xandone.greendao.gen.DaoSession;
 
 /**
  * author: xandone
@@ -72,5 +73,9 @@ public class App extends MultiDexApplication {
                     .build();
         }
         return appComponent;
+    }
+
+    public static DaoSession getDaoSession() {
+        return DaoManager.getInstance(sContext).getSession();
     }
 }

@@ -63,11 +63,19 @@ public class JokeDetailsPresenter extends RxPresenter<JokeDetailsContact.View> i
     @Override
     public void addToCollection(JokeBean jokeBean) {
         try {
-            JokeBeanDao jokeBeanDao = DaoManager.getInstance(App.sContext).getSession().getJokeBeanDao();
+            List<JokeBean> list = App.getDaoSession().loadAll(JokeBean.class);
+            JokeBeanDao jokeBeanDao = App.getDaoSession().getJokeBeanDao();
+            for (JokeBean j : list) {
+                if (jokeBean.getJoke_id().equals(j.getJoke_id())) {
+                    view.showCollectionResult(false, "您已收藏，不能重复收藏哦");
+                    return;
+                }
+            }
+
             jokeBeanDao.insert(jokeBean);
-            view.showCollectionResult(true);
+            view.showCollectionResult(true, "收藏成功");
         } catch (Exception e) {
-            view.showCollectionResult(false);
+            view.showCollectionResult(false, "收藏失败");
             e.printStackTrace();
         }
 

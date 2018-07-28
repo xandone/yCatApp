@@ -79,6 +79,10 @@ public class LeftSlideFragment extends BaseFragment {
 //                mActivity.startActivity(new Intent(mActivity, ChooseCityActivity.class));
                 break;
             case R.id.menu_2:
+                if (!UserInfoCache.isLogin()) {
+                    ToastUtils.showShort(R.string.s_no_login);
+                    break;
+                }
                 startActivity(new Intent(mActivity, CollectionActivity.class));
                 break;
             case R.id.menu_3:

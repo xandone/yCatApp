@@ -35,7 +35,7 @@ public class CollectionActivity extends RxBaseActivity<CollectPresenter> impleme
     Toolbar toolBar;
 
     private List<JokeBean> datas;
-    private CollectAdapter mCollectAdapter;
+    private CollectSimpleAdapter mCollectAdapter;
 
     @Override
     public void initInject() {
@@ -51,22 +51,23 @@ public class CollectionActivity extends RxBaseActivity<CollectPresenter> impleme
     public void initData() {
         super.initData();
 
-        setToolBar(toolBar, getString(R.string.x_joke_title), R.drawable.back_icon);
+        setToolBar(toolBar, getTitle().toString(), R.drawable.back_icon);
 
         datas = new ArrayList<>();
-        mCollectAdapter = new CollectAdapter(this, R.layout.item_collect_list, datas);
+        mCollectAdapter = new CollectSimpleAdapter(this, datas);
         collect_recycler.setAdapter(mCollectAdapter);
         collect_recycler.setLayoutManager(new LinearLayoutManager(this));
 
-        mCollectAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(CollectionActivity.this, JokeDetailsActivity.class);
-                intent.putExtra(JokeListAdapter.KEY_JOKEBEAN, datas.get(position));
-                intent.putExtra(JokeListAdapter.KEY_JOKEBEAN_POSITION, position);
-                startActivityForResult(intent, JokeFragment.RQS_CODE_JOKEBEAN);
-            }
-        });
+        //和SwipeMenuView冲突
+//        mCollectAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//                Intent intent = new Intent(CollectionActivity.this, JokeDetailsActivity.class);
+//                intent.putExtra(JokeListAdapter.KEY_JOKEBEAN, datas.get(position));
+//                intent.putExtra(JokeListAdapter.KEY_JOKEBEAN_POSITION, position);
+//                startActivityForResult(intent, JokeFragment.RQS_CODE_JOKEBEAN);
+//            }
+//        });
 
         mPresenter.getJokeCollect();
     }

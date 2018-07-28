@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/v_delete_tv"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:background="@color/red"
+        android:gravity="center"
+        android:text="@string/s_delete"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+
+</merge>

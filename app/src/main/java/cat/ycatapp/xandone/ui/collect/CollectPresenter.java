@@ -26,7 +26,7 @@ public class CollectPresenter extends RxPresenter<CollectContact.MyView> impleme
     @Override
     public void getJokeCollect() {
         try {
-            List<JokeBean> list = DaoManager.getInstance(App.sContext).getSession().getJokeBeanDao().loadAll();
+            List<JokeBean> list = App.getDaoSession().getJokeBeanDao().loadAll();
             view.showJokeCollect(list);
         } catch (Exception e) {
             e.printStackTrace();

@@ -26,6 +26,7 @@ import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseActivity;
 import cat.ycatapp.xandone.cache.UserInfoCache;
 import cat.ycatapp.xandone.config.Constants;
+import cat.ycatapp.xandone.greendao.DaoManager;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.UserBean;
 import cat.ycatapp.xandone.ui.login.LoginActivity;
@@ -88,12 +89,9 @@ public class InfoActivity extends RxBaseActivity<InfoPresenter> implements View.
                 break;
             case R.id.frag_info_out:
 
-                showDialog("是否退出登录", "确定", new DialogInterface.OnClickListener() {
+                showDialog("退出登录后好，会清空用户本地的个人信息数据。\n是否退出登录?", "确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SPUtils.getInstance(Constants.USER_INFO_NAME).remove(Constants.USER_INFO_KEY);
-                        UserInfoCache.setLogin(false);
-                        UserInfoCache.setUserBean(null);
                         logout();
 
                     }
@@ -122,6 +120,12 @@ public class InfoActivity extends RxBaseActivity<InfoPresenter> implements View.
         frag_info_login_ll.setVisibility(View.VISIBLE);
         frag_info_icon_ll.setVisibility(View.GONE);
         frag_info_nick.setText("");
+
+        SPUtils.getInstance(Constants.USER_INFO_NAME).remove(Constants.USER_INFO_KEY);
+        UserInfoCache.setLogin(false);
+        UserInfoCache.setUserBean(null);
+
+        App.getDaoSession().getJokeBeanDao().deleteAll();
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(MainActivity.X_USER_RELOAD, MainActivity.USER_LOGOUT);

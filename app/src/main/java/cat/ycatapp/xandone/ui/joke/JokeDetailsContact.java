@@ -19,7 +19,7 @@ public interface JokeDetailsContact {
 
         void thumbsJokeResult(BaseResponse baseResponse);
 
-        void showCollectionResult(boolean success);
+        void showCollectionResult(boolean success, String msg);
     }
 
     interface Presenter extends BasePresenter<View> {
