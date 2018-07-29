@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -86,6 +87,11 @@ public class LeftSlideFragment extends BaseFragment {
                 startActivity(new Intent(mActivity, CollectionActivity.class));
                 break;
             case R.id.menu_3:
+                new android.app.AlertDialog.Builder(mActivity)
+                        .setTitle("Author")
+                        .setMessage(Html.fromHtml("by xandone\t<a href='https://github.com/xandone/yCatApp'>github</a>"))
+                        .setCancelable(true)
+                        .show();
                 break;
             case R.id.foot_menu_set:
 //                mActivity.startActivity(new Intent(mActivity, SetActivity.class));

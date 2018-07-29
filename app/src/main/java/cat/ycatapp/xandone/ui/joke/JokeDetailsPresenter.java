@@ -23,7 +23,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class JokeDetailsPresenter extends RxPresenter<JokeDetailsContact.View> implements JokeDetailsContact.Presenter {
-    DataManager dataManager;
+    private DataManager dataManager;
 
     @Inject
     public JokeDetailsPresenter(DataManager dataManager) {
@@ -63,13 +63,15 @@ public class JokeDetailsPresenter extends RxPresenter<JokeDetailsContact.View> i
     @Override
     public void addToCollection(JokeBean jokeBean) {
         try {
-            List<JokeBean> list = App.getDaoSession().loadAll(JokeBean.class);
             JokeBeanDao jokeBeanDao = App.getDaoSession().getJokeBeanDao();
-            for (JokeBean j : list) {
-                if (jokeBean.getJoke_id().equals(j.getJoke_id())) {
-                    view.showCollectionResult(false, "您已收藏，不能重复收藏哦");
-                    return;
-                }
+            JokeBean bean = jokeBeanDao
+                    .queryBuilder()
+                    .where(JokeBeanDao.Properties.Joke_id.eq(jokeBean.getJoke_id()))
+                    .build()
+                    .unique();
+            if (bean != null) {
+                view.showCollectionResult(false, "您已收藏，不能重复收藏哦");
+                return;
             }
 
             jokeBeanDao.insert(jokeBean);

@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -16,9 +17,11 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cat.ycatapp.xandone.App;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseActivity;
 import cat.ycatapp.xandone.cache.UserInfoCache;
+import cat.ycatapp.xandone.greendao.gen.JokeBeanDao;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.uitils.TimeUtil;
@@ -52,6 +55,8 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
     TextView act_joke_details_like;
     @BindView(R.id.act_joke_details_comment_count)
     TextView act_joke_details_comment_count;
+    @BindView(R.id.act_joke_details_collection)
+    ImageView act_joke_details_collection;
 
     private JokeBean jokeBean;
     private int mPosition;
@@ -101,6 +106,22 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
         act_joke_details_like.setText(String.valueOf(jokeBean.getArticle_like_count()));
         act_joke_details_comment_count.setText(String.valueOf(jokeBean.getArticle_comment_count()));
 
+        initConllect();
+
+    }
+
+    private void initConllect() {
+        JokeBeanDao jokeBeanDao = App.getDaoSession().getJokeBeanDao();
+        JokeBean bean = jokeBeanDao
+                .queryBuilder()
+                .where(JokeBeanDao.Properties.Joke_id.eq(jokeBean.getJoke_id()))
+                .build()
+                .unique();
+        if (bean != null) {
+            act_joke_details_collection.setImageResource(R.drawable.collected);
+            return;
+        }
+        act_joke_details_collection.setImageResource(R.drawable.collect);
     }
 
     @OnClick({R.id.act_joke_details_root, R.id.act_joke_details_like, R.id.act_joke_details_comment_count,
@@ -200,6 +221,9 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
 
     @Override
     public void showCollectionResult(boolean success, String msg) {
+        if (success) {
+            act_joke_details_collection.setImageResource(R.drawable.collected);
+        }
         ToastUtils.showShort(msg);
     }
 

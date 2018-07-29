@@ -4,7 +4,9 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 
 import java.io.Serializable;
+
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Property;
 
 /**
  * author: xandone
@@ -27,6 +29,7 @@ public class JokeBean implements Serializable {
     @Id(autoincrement = true)
     private Long jokeDaoId;
 
+    @Property
     private String joke_id;
     private String joke_user_id;
     private String title;
@@ -39,9 +42,9 @@ public class JokeBean implements Serializable {
 
     @Generated(hash = 2141584347)
     public JokeBean(Long jokeDaoId, String joke_id, String joke_user_id,
-            String title, String content, long post_time, int article_like_count,
-            int article_comment_count, String joke_user_nick,
-            String joke_user_icon) {
+                    String title, String content, long post_time, int article_like_count,
+                    int article_comment_count, String joke_user_nick,
+                    String joke_user_icon) {
         this.jokeDaoId = jokeDaoId;
         this.joke_id = joke_id;
         this.joke_user_id = joke_user_id;
