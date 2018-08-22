@@ -79,7 +79,7 @@ public class HttpModule {
         builder.cache(cache);
         //设置超时
         builder.connectTimeout(5, TimeUnit.SECONDS);
-        builder.readTimeout(10, TimeUnit.SECONDS);
+        builder.readTimeout(30, TimeUnit.SECONDS);
         builder.writeTimeout(10, TimeUnit.SECONDS);
         //错误重连
         builder.retryOnConnectionFailure(true);

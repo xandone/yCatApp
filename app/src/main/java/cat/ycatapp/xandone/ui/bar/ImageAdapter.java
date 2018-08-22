@@ -72,13 +72,12 @@ public class ImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         @BindView(R.id.item_image_iv)
         ImageView item_image_iv;
 
-
-        public ImageHolder(View itemView) {
+         ImageHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        public void bindView(ImageBean.RowsBean rowsBean) {
+         void bindView(ImageBean.RowsBean rowsBean) {
             if (rowsBean == null) {
                 return;
             }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -82,7 +83,7 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
     public void initData() {
         super.initData();
 
-        setToolBar(toolBar, getTitle().toString());
+        setToolBar(toolBar, getTitle().toString(), R.drawable.back_icon);
         requestManager = Glide.with(this);
         jokeBean = (JokeBean) getIntent().getSerializableExtra(JokeListAdapter.KEY_JOKEBEAN);
         mPosition = getIntent().getIntExtra(JokeListAdapter.KEY_JOKEBEAN_POSITION, 0);
@@ -122,6 +123,14 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
             return;
         }
         act_joke_details_collection.setImageResource(R.drawable.collect);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @OnClick({R.id.act_joke_details_root, R.id.act_joke_details_like, R.id.act_joke_details_comment_count,

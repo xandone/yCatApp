@@ -22,8 +22,9 @@ public class CommonSubscriber<T> extends ResourceSubscriber<T> {
     private String mErrorMsg;
     private boolean isShowErrorState;
 
+    //默认开启
     public CommonSubscriber(BaseView baseView) {
-        this.mView = baseView;
+        this(baseView, true);
     }
 
     protected CommonSubscriber(BaseView view, String errorMsg) {
@@ -52,17 +53,18 @@ public class CommonSubscriber<T> extends ResourceSubscriber<T> {
         if (mView == null) {
             return;
         }
-        if (!TextUtils.isEmpty(mErrorMsg)) {
-            mView.showMsg(mErrorMsg, LoadingLayout.serverError);
-        } else if (t instanceof ApiException) {
-            mView.showMsg(t.toString(), LoadingLayout.serverError);
-        } else if (t instanceof HttpException) {
-            mView.showMsg("数据加载失败", LoadingLayout.netError);
-        } else {
-            mView.showMsg("未知错误", LoadingLayout.serverError);
-            LogUtils.d(t.toString());
-        }
         if (isShowErrorState) {
+            if (!TextUtils.isEmpty(mErrorMsg)) {
+                mView.showMsg(mErrorMsg, LoadingLayout.serverError);
+            } else if (t instanceof ApiException) {
+                mView.showMsg(t.toString(), LoadingLayout.serverError);
+            } else if (t instanceof HttpException) {
+                mView.showMsg("数据加载失败", LoadingLayout.netError);
+            } else {
+                mView.showMsg("未知错误", LoadingLayout.serverError);
+                LogUtils.d(t.toString());
+            }
+
             mView.stateError();
         }
 

@@ -65,7 +65,7 @@ public class LeftSlideFragment extends BaseFragment {
 
     public void loadUserInfo() {
         if (UserInfoCache.isLogin()) {
-            XGlide.loadImage(Glide.with(this), user_icon_iv, UserInfoCache.getUserBean().getIconUrl());
+            XGlide.loadImage(Glide.with(this), user_icon_iv, UserInfoCache.getUserBean().getIconUrl(), R.drawable.df_icon);
             user_name_tv.setText(UserInfoCache.getUserBean().getNickName());
         } else {
             user_icon_iv.setImageResource(R.drawable.df_head);

@@ -59,15 +59,13 @@ public class ImagePresenter extends RxPresenter<ImageContact.MyView> implements 
         Flowable<BaseResponse<List<ImageBean.RowsBean>>> result = dataManager.upImage(part, maps);
         addSubscrible(result.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DialogSubscriber<BaseResponse<List<ImageBean.RowsBean>>>(view) {
+                .subscribeWith(new DialogSubscriber<BaseResponse<List<ImageBean.RowsBean>>>(view, false) {
                     @Override
                     public void onNext(BaseResponse<List<ImageBean.RowsBean>> listBasePresenter) {
-                        Log.d("yandone", "upimage onNext..");
                         super.onNext(listBasePresenter);
                         if (listBasePresenter == null
                                 || listBasePresenter.getDataList() == null
                                 || listBasePresenter.getDataList().isEmpty()) {
-                            Log.d("yandone", "up image response is null");
                             return;
                         }
                         view.showUpImageResult(listBasePresenter.getDataList().get(0));

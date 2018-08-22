@@ -145,8 +145,8 @@ public class ImageFragment extends RxBaseFragment<ImagePresenter> implements Ima
     @Override
     public void showUpImageResult(ImageBean.RowsBean imageBean) {
         Log.d("yandone", "showUpImageResult");
-        datas.add(imageBean);
-        mImageAdapter.notifyItemChanged(0);
+        datas.add(0,imageBean);
+        mImageAdapter.notifyDataSetChanged();
     }
 
     @Override

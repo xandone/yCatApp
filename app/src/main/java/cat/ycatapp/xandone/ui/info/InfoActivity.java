@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -68,7 +69,8 @@ public class InfoActivity extends RxBaseActivity<InfoPresenter> implements View.
     @Override
     public void initData() {
         super.initData();
-        setToolBar(toolBar, getString(R.string.x_personal_title));
+        setToolBar(toolBar, getTitle().toString(), R.drawable.back_icon);
+
         requestManager = Glide.with(App.sContext);
 
         if (UserInfoCache.isLogin()) {
@@ -103,6 +105,14 @@ public class InfoActivity extends RxBaseActivity<InfoPresenter> implements View.
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     /**
      * 显示个人信息
      */
@@ -110,7 +120,7 @@ public class InfoActivity extends RxBaseActivity<InfoPresenter> implements View.
         frag_info_login_ll.setVisibility(View.GONE);
         frag_info_icon_ll.setVisibility(View.VISIBLE);
         frag_info_nick.setText(UserInfoCache.getUserBean().getNickName());
-        XGlide.loadImage(requestManager, frag_info_icon_iv, UserInfoCache.getUserBean().getIconUrl());
+        XGlide.loadImage(requestManager, frag_info_icon_iv, UserInfoCache.getUserBean().getIconUrl(), R.drawable.df_icon);
     }
 
     /**
@@ -227,7 +237,7 @@ public class InfoActivity extends RxBaseActivity<InfoPresenter> implements View.
 
     @Override
     public void showContent(BaseResponse<List<UserBean>> baseResponse) {
-        XGlide.loadImage(requestManager, frag_info_icon_iv, baseResponse.getDataList().get(0).getIconUrl());
+        XGlide.loadImage(requestManager, frag_info_icon_iv, baseResponse.getDataList().get(0).getIconUrl(), R.drawable.df_icon);
 
         Intent intent = new Intent();
         intent.setAction(LeftSlideFragment.ACTION_LEFT_SLIDE_FRAGMENT);
