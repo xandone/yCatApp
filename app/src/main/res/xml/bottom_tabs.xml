@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/main_footer_care_rb"
+        icon="@drawable/foot_1"
+        title="帖子" />
+    <tab
+        id="@+id/main_footer_video_rb"
+        icon="@drawable/foot_2"
+        title="图片" />
+    <tab
+        id="@+id/main_footer_home_rb"
+        icon="@drawable/foot_4"
+        title="视频" />
+</tabs>

@@ -18,7 +18,7 @@ public interface LoginContact {
         void showContent(BaseResponse<List<UserBean>> baseResponse);
     }
 
-    interface Presenter extends BasePresenter<LoginContact.View> {
+    interface Presenter extends BasePresenter<View> {
 
         void login(String email, String psw);
     }

@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
+apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'org.greenrobot.greendao' // apply plugin
 
 android {
@@ -19,7 +19,10 @@ android {
         ndk {
             abiFilters "armeabi"
         }
+
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -29,68 +32,69 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 
     //base
-    compile rootProject.ext.dependencies["appcompat-v7"]
-    compile rootProject.ext.dependencies["design"]
-    compile rootProject.ext.dependencies["recyclerview-v7"]
-    compile rootProject.ext.dependencies["cardview-v7"]
+    implementation rootProject.ext.dependencies["appcompat-v7"]
+    implementation rootProject.ext.dependencies["design"]
+    implementation rootProject.ext.dependencies["recyclerview-v7"]
+    implementation rootProject.ext.dependencies["cardview-v7"]
 
     //ui
-    compile rootProject.ext.dependencies["material-calendarview"]
-    compile rootProject.ext.dependencies["materialsearchview"]
-    compile rootProject.ext.dependencies["multiline-collapsingtoolbar"]
-    compile rootProject.ext.dependencies["PhotoView"]
-    compile rootProject.ext.dependencies["glide-transformations"]
-    compile rootProject.ext.dependencies["html-textview"]
-    compile rootProject.ext.dependencies["constraint-layout"]
-    compile rootProject.ext.dependencies["SmartRefreshLayout"]
-    compile rootProject.ext.dependencies["photopick"]
-    compile rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
+    implementation rootProject.ext.dependencies["material-calendarview"]
+    implementation rootProject.ext.dependencies["materialsearchview"]
+    implementation rootProject.ext.dependencies["multiline-collapsingtoolbar"]
+    implementation rootProject.ext.dependencies["PhotoView"]
+    implementation rootProject.ext.dependencies["glide-transformations"]
+    implementation rootProject.ext.dependencies["html-textview"]
+    implementation rootProject.ext.dependencies["constraint-layout"]
+    implementation rootProject.ext.dependencies["SmartRefreshLayout"]
+    implementation rootProject.ext.dependencies["photopick"]
+    implementation rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
+    implementation rootProject.ext.dependencies["bottom-bar"]
 
     //rx
-    compile rootProject.ext.dependencies["rxjava"]
-    compile rootProject.ext.dependencies["rxandroid"]
+    implementation rootProject.ext.dependencies["rxjava"]
+    implementation rootProject.ext.dependencies["rxandroid"]
 
     //network
-    compile rootProject.ext.dependencies["gson"]
-    compile rootProject.ext.dependencies["retrofit"]
-    compile rootProject.ext.dependencies["retrofit-converter-gson"]
-    compile rootProject.ext.dependencies["retrofit-adapter-rxjava2"]
-    compile rootProject.ext.dependencies["okhttp"]
-    compile rootProject.ext.dependencies["okhttp-logging-interceptor"]
-    compile rootProject.ext.dependencies["glide"]
-    compile rootProject.ext.dependencies["glide-okhttp3-integration"]
+    implementation rootProject.ext.dependencies["gson"]
+    implementation rootProject.ext.dependencies["retrofit"]
+    implementation rootProject.ext.dependencies["retrofit-converter-gson"]
+    implementation rootProject.ext.dependencies["retrofit-adapter-rxjava2"]
+    implementation rootProject.ext.dependencies["okhttp"]
+    implementation rootProject.ext.dependencies["okhttp-logging-interceptor"]
+    implementation rootProject.ext.dependencies["glide"]
+    implementation rootProject.ext.dependencies["glide-okhttp3-integration"]
 
     //di
-    compile rootProject.ext.dependencies["dagger"]
-    compile rootProject.ext.dependencies["dagger-compiler"]
-    compile rootProject.ext.dependencies["butterknife"]
-    apt rootProject.ext.dependencies["butterknife-compiler"]
-    provided rootProject.ext.dependencies["annotation"]
+    implementation rootProject.ext.dependencies["dagger"]
+    implementation rootProject.ext.dependencies["dagger-compiler"]
+    implementation rootProject.ext.dependencies["butterknife"]
+    annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
+    compileOnly rootProject.ext.dependencies["annotation"]
 
     //other
-    compile rootProject.ext.dependencies["multidex"]
-    compile rootProject.ext.dependencies["logger"]
-    compile rootProject.ext.dependencies["crashreport"]
-    compile rootProject.ext.dependencies["Luban"]
-    compile rootProject.ext.dependencies["filedownloader"]
-    compile rootProject.ext.dependencies["greendao"]
+    implementation rootProject.ext.dependencies["multidex"]
+    implementation rootProject.ext.dependencies["logger"]
+    implementation rootProject.ext.dependencies["crashreport"]
+    implementation rootProject.ext.dependencies["Luban"]
+    implementation rootProject.ext.dependencies["filedownloader"]
+    implementation rootProject.ext.dependencies["greendao"]
 
     //canary
-    debugCompile rootProject.ext.dependencies["blockcanary-android"]
-    releaseCompile rootProject.ext.dependencies["blockcanary-no-op"]
-    debugCompile rootProject.ext.dependencies["leakcanary-android"]
-    releaseCompile rootProject.ext.dependencies["leakcanary-android-no-op"]
+    debugImplementation rootProject.ext.dependencies["blockcanary-android"]
+    releaseImplementation rootProject.ext.dependencies["blockcanary-no-op"]
+    debugImplementation rootProject.ext.dependencies["leakcanary-android"]
+    releaseImplementation rootProject.ext.dependencies["leakcanary-android-no-op"]
 
     //module
-    compile project(path: ':jiaozivideoplayer')
-    compile project(path: ':ijkplayer')
+    implementation project(path: ':jiaozivideoplayer')
+    implementation project(path: ':ijkplayer')
 }
 
 

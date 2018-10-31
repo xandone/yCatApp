@@ -9,6 +9,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 import android.widget.RadioGroup;
 
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,10 +27,12 @@ import cat.ycatapp.xandone.ui.video.VideoListFragment;
 import cat.ycatapp.xandone.uitils.ToastUtils;
 
 public class MainActivity extends RxBaseActivity implements LeftSlideFragment.OnCloseDrawerLayout {
-    @BindView(R.id.main_foot_rg)
-    RadioGroup main_foot_rg;
+//    @BindView(R.id.main_foot_rg)
+//    RadioGroup main_foot_rg;
     @BindView(R.id.drawerlayout)
     DrawerLayout drawerlayout;
+    @BindView(R.id.bottomBar)
+    BottomBar bottomBar;
 
     private int mFragIndex;
     private Fragment mCurrentFrag;
@@ -63,12 +68,11 @@ public class MainActivity extends RxBaseActivity implements LeftSlideFragment.On
         mInfoFragment = new VideoListFragment();
 
         fragList = new ArrayList<Fragment>(Arrays.asList(mJokeFragment, mImageFragment, mInfoFragment));
-        turnToFrag();
 
-        main_foot_rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
+            public void onTabSelected(int tabId) {
+                switch (tabId) {
                     case R.id.main_footer_care_rb:
                         mFragIndex = 0;
                         break;
@@ -82,6 +86,7 @@ public class MainActivity extends RxBaseActivity implements LeftSlideFragment.On
                 turnToFrag();
             }
         });
+
 
         mLeftSlideFragment = (LeftSlideFragment) getSupportFragmentManager().findFragmentById(R.id.leftSlide_frag);
     }

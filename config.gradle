@@ -39,6 +39,7 @@ ext {
             "SmartRefreshLayout"         : "com.scwang.smartrefresh:SmartRefreshLayout:1.0.3",
             "photopick"                  : "me.iwf.photopicker:PhotoPicker:0.9.5@aar",
             "BaseRecyclerViewAdapterHelper"   : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.38",
+            "bottom-bar"                  : "com.roughike:bottom-bar:2.3.1",
 
 
             //rx

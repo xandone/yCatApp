@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 
 dependencies {
-    compile fileTree(dir: 'libs', include: '*.jar')
-    compile rootProject.ext.dependencies["support-v4"]
+    implementation fileTree(dir: 'libs', include: '*.jar')
+    implementation rootProject.ext.dependencies["support-v4"]
 }
 
 android {

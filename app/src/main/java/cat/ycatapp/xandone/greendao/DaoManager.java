@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import org.greenrobot.greendao.database.Database;
+import org.greenrobot.greendao.query.QueryBuilder;
 
 import cat.ycatapp.xandone.greendao.gen.DaoMaster;
 import cat.ycatapp.xandone.greendao.gen.DaoSession;
@@ -13,39 +14,80 @@ import cat.ycatapp.xandone.greendao.gen.DaoSession;
  * created on: 2018/7/26 17:31
  */
 public class DaoManager {
+    private static final String TAG = DaoManager.class.getSimpleName();
     private static final String DB_NAME = "data.db";
-    private static DaoMaster.DevOpenHelper mOpenHelper;
-    private static DaoSession mSession;
-    private static DaoManager mInstance;
 
-    public static DaoManager getInstance(Context context) {
-        if (null == mInstance) {
-            synchronized (DaoManager.class) {
-                if (null == mInstance) {
-                    mInstance = new DaoManager(context);
+    private Context context;
 
-                }
-            }
+    private volatile static DaoManager manager = new DaoManager();
+    private static DaoMaster sDaoMaster;
+    private static OpenHelper sHelper;
+    private static DaoSession sDaoSession;
+
+    public static DaoManager getInstance() {
+        return manager;
+    }
+
+    public void init(Context context) {
+        this.context = context;
+    }
+
+    /**
+     * 判断是否有存在数据库，如果没有则创建
+     *
+     * @return
+     */
+    public DaoMaster getDaoMaster() {
+        if (sDaoMaster == null) {
+            OpenHelper helper = new OpenHelper(context, DB_NAME);
+            sDaoMaster = new DaoMaster(helper.getWritableDatabase());
         }
-        return mInstance;
+        return sDaoMaster;
     }
 
-    private DaoManager(Context context) {
-        init(context);
+    /**
+     * 完成对数据库的添加、删除、修改、查询操作，仅仅是一个接口
+     *
+     * @return
+     */
+    public DaoSession getDaoSession() {
+        if (sDaoSession == null) {
+            if (sDaoMaster == null) {
+                sDaoMaster = getDaoMaster();
+            }
+            sDaoSession = sDaoMaster.newSession();
+        }
+        return sDaoSession;
     }
 
-    private void init(Context context) {
-        mOpenHelper = new OpenHelper(context.getApplicationContext(), DB_NAME);
-        DaoMaster daoMaster = new DaoMaster(mOpenHelper.getWritableDatabase());
-        mSession = daoMaster.newSession();
+    /**
+     * 打开输出日志，默认关闭
+     */
+    public void setDebug() {
+        QueryBuilder.LOG_SQL = true;
+        QueryBuilder.LOG_VALUES = true;
     }
 
-    public DaoSession getSession() {
-        return mSession;
+    /**
+     * 关闭所有的操作，数据库开启后，使用完毕要关闭
+     */
+    public void closeConnection() {
+        closeHelper();
+        closeDaoSession();
     }
 
-    public static DaoSession getSession(Context context) {
-        return getInstance(context).getSession();
+    public void closeHelper() {
+        if (sHelper != null) {
+            sHelper.close();
+            sHelper = null;
+        }
+    }
+
+    public void closeDaoSession() {
+        if (sDaoSession != null) {
+            sDaoSession.clear();
+            sDaoSession = null;
+        }
     }
 
 

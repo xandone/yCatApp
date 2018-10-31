@@ -1,6 +1,5 @@
 package cat.ycatapp.xandone.ui.collect;
 
-import android.util.Log;
 
 import java.util.List;
 
@@ -8,7 +7,6 @@ import javax.inject.Inject;
 
 import cat.ycatapp.xandone.App;
 import cat.ycatapp.xandone.base.RxPresenter;
-import cat.ycatapp.xandone.greendao.DaoManager;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 
 /**

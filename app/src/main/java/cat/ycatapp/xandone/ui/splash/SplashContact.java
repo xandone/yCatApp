@@ -20,7 +20,7 @@ public interface SplashContact {
     }
 
     interface Presenter extends BasePresenter<View> {
-        void getContent( String email,  String psw);
+        void getContent(String email, String psw);
     }
 
 

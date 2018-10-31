@@ -83,7 +83,7 @@ public interface Api {
     @Multipart
     @POST("ycat/upImage")
     Flowable<BaseResponse<List<ImageBean.RowsBean>>> upImage(@Part MultipartBody.Part part,
-                                                   @QueryMap Map<String, String> maps);
+                                                             @QueryMap Map<String, String> maps);
 
     @Multipart
     @POST("ycat/user/upIcon")

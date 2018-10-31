@@ -1,6 +1,8 @@
 package cat.ycatapp.xandone;
 
+import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -25,7 +27,7 @@ import cat.ycatapp.xandone.greendao.gen.DaoSession;
  * created on: 2018/3/5 15:35
  */
 
-public class App extends MultiDexApplication {
+public class App extends Application {
 
     public static AppComponent appComponent;
     public static Context sContext;
@@ -61,8 +63,14 @@ public class App extends MultiDexApplication {
         LeakCanary.install(this);
         // Normal app init code...
 
-        DaoManager.getInstance(this);
+        DaoManager.getInstance().init(this);
 
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     public static AppComponent getAppComponent() {
@@ -76,6 +84,6 @@ public class App extends MultiDexApplication {
     }
 
     public static DaoSession getDaoSession() {
-        return DaoManager.getInstance(sContext).getSession();
+        return DaoManager.getInstance().getDaoSession();
     }
 }
