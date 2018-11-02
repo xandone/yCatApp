@@ -1,15 +1,22 @@
 package cat.ycatapp.xandone.ui.login;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cat.ycatapp.xandone.App;
 import cat.ycatapp.xandone.MainActivity;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseActivity;
@@ -20,24 +27,31 @@ import cat.ycatapp.xandone.model.bean.LoginBean;
 import cat.ycatapp.xandone.model.bean.UserBean;
 import cat.ycatapp.xandone.model.bean.UserPsw;
 import cat.ycatapp.xandone.ui.regist.RegistActivity;
+import cat.ycatapp.xandone.uitils.AnimUtils;
 import cat.ycatapp.xandone.uitils.GsonUtil;
 import cat.ycatapp.xandone.uitils.SPUtils;
 import cat.ycatapp.xandone.uitils.SimpleUtils;
 import cat.ycatapp.xandone.uitils.ToastUtils;
 import cat.ycatapp.xandone.uitils.XString;
+import cat.ycatapp.xandone.widget.DrawableTextView;
+import cat.ycatapp.xandone.widget.KeyboardWatcher;
 
 /**
  * author: xandone
  * created on: 2018/3/6 15:09
  */
 
-public class LoginActivity extends RxBaseActivity<LoginPresenter> implements LoginContact.View {
+public class LoginActivity extends RxBaseActivity<LoginPresenter> implements LoginContact.View, KeyboardWatcher.SoftKeyboardStateListener {
     @BindView(R.id.act_login_et_email)
     EditText act_login_et_email;
     @BindView(R.id.act_login_et_psw)
     EditText act_login_et_psw;
-    @BindView(R.id.toolBar)
-    Toolbar toolBar;
+    @BindView(R.id.body)
+    ConstraintLayout body;
+    @BindView(R.id.act_login_title)
+    DrawableTextView act_login_title;
+
+    private KeyboardWatcher keyboardWatcher;
 
     @Override
     public void initInject() {
@@ -52,10 +66,12 @@ public class LoginActivity extends RxBaseActivity<LoginPresenter> implements Log
     @Override
     public void initData() {
         super.initData();
-        setToolBar(toolBar, getTitle().toString());
+
+        keyboardWatcher = new KeyboardWatcher(findViewById(Window.ID_ANDROID_CONTENT));
+        keyboardWatcher.addSoftKeyboardStateListener(this);
     }
 
-    @OnClick({R.id.act_login_regist, R.id.act_login_btn})
+    @OnClick({R.id.act_login_regist, R.id.act_login_btn, R.id.close})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.act_login_regist:
@@ -73,6 +89,9 @@ public class LoginActivity extends RxBaseActivity<LoginPresenter> implements Log
                     return;
                 }
                 mPresenter.login(email, psw);
+                break;
+            case R.id.close:
+                finish();
                 break;
         }
     }
@@ -94,5 +113,33 @@ public class LoginActivity extends RxBaseActivity<LoginPresenter> implements Log
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        keyboardWatcher.removeSoftKeyboardStateListener(this);
+    }
+
+
+    @Override
+    public void onSoftKeyboardOpened(int keyboardSize) {
+        int[] location = new int[2];
+        body.getLocationOnScreen(location); //获取body在屏幕中的坐标,控件左上角
+        int x = location[0];
+        int y = location[1];
+        int bottom = App.SCREEN_HEIGHT - (y + body.getHeight());
+        if (keyboardSize > bottom) {
+            ObjectAnimator mAnimatorTranslateY = ObjectAnimator.ofFloat(body, "translationY", 0.0f, -(keyboardSize - bottom));
+            mAnimatorTranslateY.setDuration(300);
+            mAnimatorTranslateY.setInterpolator(new AccelerateDecelerateInterpolator());
+            mAnimatorTranslateY.start();
+            AnimUtils.zoomIn(act_login_title, keyboardSize - bottom, 0.8f);
+
+        }
+    }
+
+    @Override
+    public void onSoftKeyboardClosed() {
+        ObjectAnimator mAnimatorTranslateY = ObjectAnimator.ofFloat(body, "translationY", body.getTranslationY(), 0);
+        mAnimatorTranslateY.setDuration(300);
+        mAnimatorTranslateY.setInterpolator(new AccelerateDecelerateInterpolator());
+        mAnimatorTranslateY.start();
+        AnimUtils.zoomOut(act_login_title, 0.8f);
     }
 }

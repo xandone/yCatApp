@@ -4,6 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
+import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.WindowManager;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreater;
@@ -32,6 +35,9 @@ public class App extends Application {
     public static AppComponent appComponent;
     public static Context sContext;
 
+    public static int SCREEN_WIDTH = -1;
+    public static int SCREEN_HEIGHT = -1;
+
     static {
         //设置全局的Header构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreater(new DefaultRefreshHeaderCreater() {
@@ -55,6 +61,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         sContext = this;
+        getScreenSize();
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.
@@ -85,5 +92,20 @@ public class App extends Application {
 
     public static DaoSession getDaoSession() {
         return DaoManager.getInstance().getDaoSession();
+    }
+
+
+    public void getScreenSize() {
+        WindowManager windowManager = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();
+        Display display = windowManager.getDefaultDisplay();
+        display.getMetrics(dm);
+        SCREEN_WIDTH = dm.widthPixels;
+        SCREEN_HEIGHT = dm.heightPixels;
+        if (SCREEN_WIDTH > SCREEN_HEIGHT) {
+            int t = SCREEN_HEIGHT;
+            SCREEN_HEIGHT = SCREEN_WIDTH;
+            SCREEN_WIDTH = t;
+        }
     }
 }

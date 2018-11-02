@@ -1,9 +1,13 @@
 package cat.ycatapp.xandone.ui.regist;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.EditText;
 
 import java.util.List;
@@ -11,6 +15,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cat.ycatapp.xandone.App;
 import cat.ycatapp.xandone.MainActivity;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseActivity;
@@ -19,23 +24,31 @@ import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.RegistBean;
 import cat.ycatapp.xandone.model.bean.UserBean;
 import cat.ycatapp.xandone.ui.login.LoginActivity;
+import cat.ycatapp.xandone.uitils.AnimUtils;
 import cat.ycatapp.xandone.uitils.ToastUtils;
 import cat.ycatapp.xandone.uitils.XString;
+import cat.ycatapp.xandone.widget.DrawableTextView;
+import cat.ycatapp.xandone.widget.KeyboardWatcher;
 
 /**
  * author: xandone
  * created on: 2018/3/6 20:16
  */
 
-public class RegistActivity extends RxBaseActivity<RegistPresenter> implements RegistContact.View {
+public class RegistActivity extends RxBaseActivity<RegistPresenter> implements RegistContact.View, KeyboardWatcher.SoftKeyboardStateListener {
     @BindView(R.id.act_regist_et_email)
     EditText act_regist_et_email;
     @BindView(R.id.act_regist_et_psw)
     EditText act_regist_et_psw;
     @BindView(R.id.act_regist_et_nick)
     EditText act_regist_et_nick;
-    @BindView(R.id.toolBar)
-    Toolbar toolBar;
+    @BindView(R.id.body)
+    ConstraintLayout body;
+    @BindView(R.id.act_regist_title)
+    DrawableTextView act_regist_title;
+
+
+    private KeyboardWatcher keyboardWatcher;
 
     @Override
     public void initInject() {
@@ -50,10 +63,12 @@ public class RegistActivity extends RxBaseActivity<RegistPresenter> implements R
     @Override
     public void initData() {
         super.initData();
-        setToolBar(toolBar, getTitle().toString());
+
+        keyboardWatcher = new KeyboardWatcher(findViewById(Window.ID_ANDROID_CONTENT));
+        keyboardWatcher.addSoftKeyboardStateListener(this);
     }
 
-    @OnClick({R.id.act_regist_btn})
+    @OnClick({R.id.act_regist_btn, R.id.close})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.act_regist_btn:
@@ -74,6 +89,9 @@ public class RegistActivity extends RxBaseActivity<RegistPresenter> implements R
                 }
                 mPresenter.regist(email, psw, nick);
                 break;
+            case R.id.close:
+                finish();
+                break;
         }
     }
 
@@ -89,5 +107,31 @@ public class RegistActivity extends RxBaseActivity<RegistPresenter> implements R
             ToastUtils.showShort("服务器异常,请稍后再试");
         }
 
+    }
+
+    @Override
+    public void onSoftKeyboardOpened(int keyboardSize) {
+        int[] location = new int[2];
+        body.getLocationOnScreen(location); //获取body在屏幕中的坐标,控件左上角
+        int x = location[0];
+        int y = location[1];
+        int bottom = App.SCREEN_HEIGHT - (y + body.getHeight());
+        if (keyboardSize > bottom) {
+            ObjectAnimator mAnimatorTranslateY = ObjectAnimator.ofFloat(body, "translationY", 0.0f, -(keyboardSize - bottom));
+            mAnimatorTranslateY.setDuration(300);
+            mAnimatorTranslateY.setInterpolator(new AccelerateDecelerateInterpolator());
+            mAnimatorTranslateY.start();
+            AnimUtils.zoomIn(act_regist_title, keyboardSize - bottom, 0.8f);
+
+        }
+    }
+
+    @Override
+    public void onSoftKeyboardClosed() {
+        ObjectAnimator mAnimatorTranslateY = ObjectAnimator.ofFloat(body, "translationY", body.getTranslationY(), 0);
+        mAnimatorTranslateY.setDuration(300);
+        mAnimatorTranslateY.setInterpolator(new AccelerateDecelerateInterpolator());
+        mAnimatorTranslateY.start();
+        AnimUtils.zoomOut(act_regist_title, 0.8f);
     }
 }
