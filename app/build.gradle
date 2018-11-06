@@ -56,6 +56,7 @@ dependencies {
     implementation rootProject.ext.dependencies["photopick"]
     implementation rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
     implementation rootProject.ext.dependencies["bottom-bar"]
+    implementation rootProject.ext.dependencies["shinebutton"]
 
     //rx
     implementation rootProject.ext.dependencies["rxjava"]

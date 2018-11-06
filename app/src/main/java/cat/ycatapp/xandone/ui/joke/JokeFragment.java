@@ -1,6 +1,7 @@
 package cat.ycatapp.xandone.ui.joke;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -8,7 +9,7 @@ import android.view.View;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
@@ -92,12 +93,13 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
             }
         });
 
-        mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+        mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 mPage++;
                 mPresenter.getJokeList(mPage, mCount, JokeContact.MODE_MORE);
             }
+
         });
 
     }
@@ -113,22 +115,31 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
         jokes.clear();
         jokes.addAll(jokeBean.getRows());
         jokeListAdapter.notifyDataSetChanged();
+
+        if (jokeBean.getTotal() <= mCount) {
+            mRefreshLayout.setNoMoreData(true);
+        }
     }
 
     @Override
     public void showContentMore(JokeListBean jokeBean) {
-        mRefreshLayout.finishLoadmore();
+        mRefreshLayout.finishLoadMore();
         if (jokeBean == null || jokeBean.getRows() == null || jokeBean.getRows().isEmpty()) {
             return;
         }
         jokes.addAll(jokeBean.getRows());
         jokeListAdapter.notifyDataSetChanged();
+
+        if (jokeBean.getTotal() <= mCount * mPage) {
+            mRefreshLayout.setNoMoreData(true);
+        }
+
     }
 
     @Override
     public void showMsg(String msg, int loadStatus) {
         mRefreshLayout.finishRefresh();
-        mRefreshLayout.finishLoadmore();
+        mRefreshLayout.finishLoadMore();
         loadingLayout.setLoadingTips(loadStatus);
     }
 

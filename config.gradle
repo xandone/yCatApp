@@ -36,10 +36,11 @@ ext {
             "glide-transformations"      : "jp.wasabeef:glide-transformations:1.2.1",
             "html-textview"              : "org.sufficientlysecure:html-textview:3.1",
             "constraint-layout"          : "com.android.support.constraint:constraint-layout:1.0.2",
-            "SmartRefreshLayout"         : "com.scwang.smartrefresh:SmartRefreshLayout:1.0.3",
+            "SmartRefreshLayout"         : "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14",
             "photopick"                  : "me.iwf.photopicker:PhotoPicker:0.9.5@aar",
             "BaseRecyclerViewAdapterHelper"   : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.38",
-            "bottom-bar"                  : "com.roughike:bottom-bar:2.3.1",
+            "bottom-bar"                 : "com.roughike:bottom-bar:2.3.1",
+            "shinebutton"                :"com.sackcentury:shinebutton:0.2.0",
 
 
             //rx

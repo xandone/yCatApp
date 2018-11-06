@@ -1,18 +1,18 @@
 package cat.ycatapp.xandone.ui.bar;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.LayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.io.File;
@@ -27,9 +27,7 @@ import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseFragment;
 import cat.ycatapp.xandone.cache.UserInfoCache;
 import cat.ycatapp.xandone.model.bean.ImageBean;
-import cat.ycatapp.xandone.ui.info.InfoActivity;
 import cat.ycatapp.xandone.ui.joke.JokeContact;
-import cat.ycatapp.xandone.ui.jokeadd.JokeAddActivity;
 import cat.ycatapp.xandone.uitils.ToastUtils;
 import cat.ycatapp.xandone.widget.BottomDialog;
 import cat.ycatapp.xandone.widget.LoadingLayout;
@@ -97,9 +95,9 @@ public class ImageFragment extends RxBaseFragment<ImagePresenter> implements Ima
             }
         });
 
-        mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+        mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 mPage++;
                 mPresenter.getImageList(mPage, mCount, ImageContact.MODE_MORE);
             }
@@ -120,39 +118,47 @@ public class ImageFragment extends RxBaseFragment<ImagePresenter> implements Ima
     }
 
     @Override
-    public void showContent(ImageBean jokeBean) {
+    public void showContent(ImageBean imageBean) {
         mRefreshLayout.finishRefresh();
-        if (jokeBean == null || jokeBean.getRows() == null || jokeBean.getRows().isEmpty()) {
+        if (imageBean == null || imageBean.getRows() == null || imageBean.getRows().isEmpty()) {
             showMsg("无数据", LoadingLayout.empty);
             return;
         }
         showMsg("加载完毕", LoadingLayout.finish);
         datas.clear();
-        datas.addAll(jokeBean.getRows());
+        datas.addAll(imageBean.getRows());
         mImageAdapter.notifyDataSetChanged();
+
+        if (imageBean.getTotal() <= mCount) {
+            mRefreshLayout.setNoMoreData(true);
+        }
     }
 
     @Override
     public void showContentMore(ImageBean imageBean) {
-        mRefreshLayout.finishLoadmore();
+        mRefreshLayout.finishLoadMore();
         if (imageBean == null || imageBean.getRows() == null || imageBean.getRows().isEmpty()) {
             return;
         }
         datas.addAll(imageBean.getRows());
         mImageAdapter.notifyDataSetChanged();
+
+        if (imageBean.getTotal() <= mCount * mPage) {
+            mRefreshLayout.setNoMoreData(true);
+        }
     }
 
     @Override
     public void showUpImageResult(ImageBean.RowsBean imageBean) {
         Log.d("yandone", "showUpImageResult");
-        datas.add(0,imageBean);
+        datas.add(0, imageBean);
         mImageAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showMsg(String msg, int loadStatus) {
         mRefreshLayout.finishRefresh();
-        mRefreshLayout.finishLoadmore();
+        mRefreshLayout.finishLoadMore();
         loadingLayout.setLoadingTips(loadStatus);
     }
 

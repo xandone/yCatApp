@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
@@ -102,9 +102,9 @@ public class JokeCommentActivity extends RxBaseActivity<JokeCommentPresenter> im
             }
         });
 
-        mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+        mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
+            public void onLoadMore(RefreshLayout refreshlayout) {
                 mPage++;
                 mPresenter.getContentList(mPage, mCount, jokeBean.getJoke_id(), JokeContact.MODE_MORE);
             }
@@ -136,7 +136,7 @@ public class JokeCommentActivity extends RxBaseActivity<JokeCommentPresenter> im
 
     @Override
     public void showContentMore(CommentBean commentBean) {
-        mRefreshLayout.finishLoadmore();
+        mRefreshLayout.finishLoadMore();
         if (commentBean == null || commentBean.getRows() == null || commentBean.getRows().isEmpty()) {
             return;
         }
@@ -147,7 +147,7 @@ public class JokeCommentActivity extends RxBaseActivity<JokeCommentPresenter> im
     @Override
     public void showMsg(String msg, int loadStatus) {
         mRefreshLayout.finishRefresh();
-        mRefreshLayout.finishLoadmore();
+        mRefreshLayout.finishLoadMore();
         loadingLayout.setLoadingTips(loadStatus);
     }
 

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.sackcentury.shinebuttonlib.ShineButton;
 
 import java.util.List;
 
@@ -58,6 +59,9 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
     TextView act_joke_details_comment_count;
     @BindView(R.id.act_joke_details_collection)
     ImageView act_joke_details_collection;
+
+    @BindView(R.id.shinebutton)
+    ShineButton shinebutton;
 
     private JokeBean jokeBean;
     private int mPosition;
@@ -120,9 +124,16 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
                 .unique();
         if (bean != null) {
             act_joke_details_collection.setImageResource(R.drawable.collected);
+            shinebutton.setChecked(true);
             return;
         }
         act_joke_details_collection.setImageResource(R.drawable.collect);
+        shinebutton.setChecked(false);
+
+        if (shinebutton.isChecked()) {
+            shinebutton.setClickable(false);
+        }
+
     }
 
     @Override
@@ -134,7 +145,7 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
     }
 
     @OnClick({R.id.act_joke_details_root, R.id.act_joke_details_like, R.id.act_joke_details_comment_count,
-            R.id.act_joke_details_collection})
+            R.id.act_joke_details_collection, R.id.shinebutton})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.act_joke_details_root:
@@ -159,6 +170,13 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
                     break;
                 }
                 mPresenter.addToCollection(jokeBean);
+                break;
+            case R.id.shinebutton:
+                if (!UserInfoCache.isLogin()) {
+                    ToastUtils.showShort("你还未登录");
+                    shinebutton.setChecked(false);
+                    break;
+                }
                 break;
         }
     }
@@ -232,6 +250,7 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
     public void showCollectionResult(boolean success, String msg) {
         if (success) {
             act_joke_details_collection.setImageResource(R.drawable.collected);
+            shinebutton.setChecked(true);
         }
         ToastUtils.showShort(msg);
     }
