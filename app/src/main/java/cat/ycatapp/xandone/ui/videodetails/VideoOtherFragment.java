@@ -20,6 +20,8 @@ import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseFragment;
 import cat.ycatapp.xandone.model.video.VideoInfo;
 
+import static cat.ycatapp.xandone.model.video.VideoInfo.ItemListBean.HEADER;
+
 /**
  * author: xandone
  * created on: 2018/7/19 13:56
@@ -91,7 +93,9 @@ public class VideoOtherFragment extends RxBaseFragment<VideoOtherPresenter> impl
             return;
         }
         datas.clear();
-        datas.add(new VideoInfo.ItemListBean(1));
+        if (videoInfo.getItemList().size() > 0) {
+            videoInfo.getItemList().get(0).setItemType(HEADER);
+        }
         datas.addAll(videoInfo.getItemList());
         mVideoRecyclerAdapter.notifyDataSetChanged();
     }

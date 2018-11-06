@@ -64,7 +64,7 @@ public class VideoDetailsActivity extends RxBaseActivity {
 
     private void playVideo() {
         try {
-            playVideo("google机器人", mVideoInfo.getData().getCover().getDetail(), mVideoInfo.getData().getPlayUrl());
+            playVideo(mVideoInfo.getData().getTitle(), mVideoInfo.getData().getCover().getDetail(), mVideoInfo.getData().getPlayUrl());
         } catch (Exception e) {
 
         }
