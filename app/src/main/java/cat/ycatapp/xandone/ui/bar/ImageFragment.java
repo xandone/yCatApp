@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.LayoutManager;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -80,7 +80,7 @@ public class ImageFragment extends RxBaseFragment<ImagePresenter> implements Ima
         setToolBar(toolbar, getString(R.string.x_img_title));
 
         mImageAdapter = new ImageAdapter(mActivity, datas);
-        LayoutManager layoutManager = new GridLayoutManager(mActivity, 2);
+        LayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         frag_img_recycler.setAdapter(mImageAdapter);
         frag_img_recycler.setLayoutManager(layoutManager);
 
@@ -150,7 +150,6 @@ public class ImageFragment extends RxBaseFragment<ImagePresenter> implements Ima
 
     @Override
     public void showUpImageResult(ImageBean.RowsBean imageBean) {
-        Log.d("yandone", "showUpImageResult");
         datas.add(0, imageBean);
         mImageAdapter.notifyDataSetChanged();
     }

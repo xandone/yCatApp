@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cat.ycatapp.xandone.App;
 import cat.ycatapp.xandone.R;
+import cat.ycatapp.xandone.config.ImageConifg;
 import cat.ycatapp.xandone.model.bean.ImageBean;
 import cat.ycatapp.xandone.ui.img.ImageDetailsActivity;
 import cat.ycatapp.xandone.uitils.imgload.XGlide;
@@ -57,9 +58,8 @@ public class ImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ImageHolder) {
             ImageHolder imageHolder = (ImageHolder) holder;
-            imageHolder.bindView(datas.get(position));
+            imageHolder.bindView(datas.get(position), position);
         }
-
     }
 
     @Override
@@ -72,15 +72,20 @@ public class ImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         @BindView(R.id.item_image_iv)
         ImageView item_image_iv;
 
-         ImageHolder(View itemView) {
+        ImageHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-         void bindView(ImageBean.RowsBean rowsBean) {
+        void bindView(ImageBean.RowsBean rowsBean, int position) {
             if (rowsBean == null) {
                 return;
             }
+
+            ViewGroup.LayoutParams params = item_image_iv.getLayoutParams();
+            params.height = ImageConifg.setImageHeight(rowsBean.getSizeType());
+            item_image_iv.setLayoutParams(params);
+
             XGlide.loadImage(requestManager, item_image_iv, rowsBean.getImgUrl(), R.drawable.img_place);
 
         }

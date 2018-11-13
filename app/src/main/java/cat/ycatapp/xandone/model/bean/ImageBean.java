@@ -34,7 +34,7 @@ public class ImageBean {
         this.rows = rows;
     }
 
-    public static class RowsBean implements Serializable{
+    public static class RowsBean implements Serializable {
         /**
          * userId : 152146249752110
          * imgId : 152534259138809
@@ -48,6 +48,7 @@ public class ImageBean {
         private long upTime;
         private String imgUrl;
         private String pageViews;
+        private int sizeType;
 
         public String getUserId() {
             return userId;
@@ -87,6 +88,14 @@ public class ImageBean {
 
         public void setPageViews(String pageViews) {
             this.pageViews = pageViews;
+        }
+
+        public int getSizeType() {
+            return sizeType;
+        }
+
+        public void setSizeType(int sizeType) {
+            this.sizeType = sizeType;
         }
     }
 }

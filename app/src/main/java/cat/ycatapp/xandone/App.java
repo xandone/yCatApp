@@ -18,6 +18,7 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.squareup.leakcanary.LeakCanary;
 
+import cat.ycatapp.xandone.config.ImageConifg;
 import cat.ycatapp.xandone.di.component.AppComponent;
 import cat.ycatapp.xandone.di.component.DaggerAppComponent;
 import cat.ycatapp.xandone.di.module.AppModule;
@@ -56,8 +57,12 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
         sContext = this;
+
         getScreenSize();
+        ImageConifg.init(this);
+
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.

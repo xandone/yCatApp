@@ -75,7 +75,7 @@ public class JokeAddActivity extends RxBaseActivity<JokeAddPresenter> implements
 
     @Override
     public void showSuccess() {
-        ToastUtils.showShort("请求成功");
+        ToastUtils.showShort("操作成功");
         finish();
     }
 
