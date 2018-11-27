@@ -22,6 +22,7 @@ import cat.ycatapp.xandone.App;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseActivity;
 import cat.ycatapp.xandone.cache.UserInfoCache;
+import cat.ycatapp.xandone.config.Constants;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.CommentBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
@@ -71,7 +72,7 @@ public class JokeCommentActivity extends RxBaseActivity<JokeCommentPresenter> im
         super.initData();
         setToolBar(toolBar, getString(R.string.x_joke_comment_title));
 
-        jokeBean = (JokeBean) getIntent().getSerializableExtra(JokeListAdapter.KEY_JOKEBEAN);
+        jokeBean = (JokeBean) getIntent().getSerializableExtra(Constants.KEY_JOKEBEAN);
         if (jokeBean == null) {
             return;
         }

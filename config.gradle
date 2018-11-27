@@ -41,6 +41,7 @@ ext {
             "BaseRecyclerViewAdapterHelper"   : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.38",
             "bottom-bar"                 : "com.roughike:bottom-bar:2.3.1",
             "shinebutton"                :"com.sackcentury:shinebutton:0.2.0",
+            "banner"                :"com.youth.banner:banner:1.4.10",
 
 
             //rx

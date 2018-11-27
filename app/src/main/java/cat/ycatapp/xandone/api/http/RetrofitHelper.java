@@ -10,6 +10,7 @@ import cat.ycatapp.xandone.api.Api;
 import cat.ycatapp.xandone.api.KyApi;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.CommentBean;
+import cat.ycatapp.xandone.model.bean.HeadArticleBean;
 import cat.ycatapp.xandone.model.bean.ImageBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.model.bean.JokeListBean;
@@ -91,6 +92,12 @@ public class RetrofitHelper implements HttpHelper {
     @Override
     public Flowable<VideoInfo> getVideoList(Map<String, String> map) {
         return mKyApi.getVideoList(map);
+    }
+
+
+    @Override
+    public Flowable<HeadArticleBean> getHeadAticleList(int page, int count) {
+        return mApi.getHeadAticleList(page, count);
     }
 
 }

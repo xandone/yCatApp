@@ -6,6 +6,7 @@ import java.util.Map;
 import cat.ycatapp.xandone.api.http.HttpHelper;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.CommentBean;
+import cat.ycatapp.xandone.model.bean.HeadArticleBean;
 import cat.ycatapp.xandone.model.bean.ImageBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.model.bean.JokeListBean;
@@ -84,6 +85,11 @@ public class DataManager implements HttpHelper {
     @Override
     public Flowable<VideoInfo> getVideoList(Map<String, String> map) {
         return mHttpHelper.getVideoList(map);
+    }
+
+    @Override
+    public Flowable<HeadArticleBean> getHeadAticleList(int page, int count) {
+        return mHttpHelper.getHeadAticleList(page, count);
     }
 
 }

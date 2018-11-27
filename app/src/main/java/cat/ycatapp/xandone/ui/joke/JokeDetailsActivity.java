@@ -23,6 +23,7 @@ import cat.ycatapp.xandone.App;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.RxBaseActivity;
 import cat.ycatapp.xandone.cache.UserInfoCache;
+import cat.ycatapp.xandone.config.Constants;
 import cat.ycatapp.xandone.greendao.gen.JokeBeanDao;
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.JokeBean;
@@ -89,8 +90,8 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
 
         setToolBar(toolBar, getTitle().toString(), R.drawable.back_icon);
         requestManager = Glide.with(this);
-        jokeBean = (JokeBean) getIntent().getSerializableExtra(JokeListAdapter.KEY_JOKEBEAN);
-        mPosition = getIntent().getIntExtra(JokeListAdapter.KEY_JOKEBEAN_POSITION, 0);
+        jokeBean = (JokeBean) getIntent().getSerializableExtra(Constants.KEY_JOKEBEAN);
+        mPosition = getIntent().getIntExtra(Constants.KEY_JOKEBEAN_POSITION, 0);
         if (jokeBean == null) {
             return;
         }
@@ -161,7 +162,7 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
                 break;
             case R.id.act_joke_details_comment_count:
                 Intent intent = new Intent(this, JokeCommentActivity.class);
-                intent.putExtra(JokeListAdapter.KEY_JOKEBEAN, jokeBean);
+                intent.putExtra(Constants.KEY_JOKEBEAN, jokeBean);
                 startActivity(intent);
                 break;
             case R.id.act_joke_details_collection:
@@ -265,7 +266,7 @@ public class JokeDetailsActivity extends RxBaseActivity<JokeDetailsPresenter> im
     public void onBackPressed() {
         Intent intent = new Intent();
         intent.putExtra(JokeFragment.KEY_RQS_IS_THUMB, isThumbNow);
-        intent.putExtra(JokeListAdapter.KEY_JOKEBEAN_POSITION, mPosition);
+        intent.putExtra(Constants.KEY_JOKEBEAN_POSITION, mPosition);
         setResult(RESULT_OK, intent);
         super.onBackPressed();
     }

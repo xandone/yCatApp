@@ -20,12 +20,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cat.ycatapp.xandone.App;
 import cat.ycatapp.xandone.R;
-import cat.ycatapp.xandone.greendao.DaoManager;
+import cat.ycatapp.xandone.config.Constants;
 import cat.ycatapp.xandone.greendao.gen.JokeBeanDao;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.ui.joke.JokeDetailsActivity;
 import cat.ycatapp.xandone.ui.joke.JokeFragment;
-import cat.ycatapp.xandone.ui.joke.JokeListAdapter;
 import cat.ycatapp.xandone.uitils.TimeUtil;
 import cat.ycatapp.xandone.uitils.imgload.XGlide;
 
@@ -94,8 +93,8 @@ public class CollectSimpleAdapter extends RecyclerView.Adapter<RecyclerView.View
             switch (view.getId()) {
                 case R.id.collect_root:
                     Intent intent = new Intent(context, JokeDetailsActivity.class);
-                    intent.putExtra(JokeListAdapter.KEY_JOKEBEAN, datas.get(getLayoutPosition()));
-                    intent.putExtra(JokeListAdapter.KEY_JOKEBEAN_POSITION, getLayoutPosition());
+                    intent.putExtra(Constants.KEY_JOKEBEAN, datas.get(getLayoutPosition()));
+                    intent.putExtra(Constants.KEY_JOKEBEAN_POSITION, getLayoutPosition());
                     context.startActivityForResult(intent, JokeFragment.RQS_CODE_JOKEBEAN);
                     break;
                 case R.id.v_delete_tv:

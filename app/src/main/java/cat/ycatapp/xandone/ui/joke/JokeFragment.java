@@ -21,8 +21,11 @@ import cat.ycatapp.xandone.App;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.BaseActivity;
 import cat.ycatapp.xandone.base.RxBaseFragment;
+import cat.ycatapp.xandone.config.Constants;
+import cat.ycatapp.xandone.model.bean.HeadArticleBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.model.bean.JokeListBean;
+import cat.ycatapp.xandone.model.bean.MainJokeBean;
 import cat.ycatapp.xandone.ui.jokeadd.JokeAddActivity;
 import cat.ycatapp.xandone.widget.LoadingLayout;
 
@@ -43,6 +46,7 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
 
     private JokeListAdapter jokeListAdapter;
     private List<JokeBean> jokes;
+    private List<HeadArticleBean.RowsBean> heads;
     private int mPage = 1;
     private int mCount = 10;
 
@@ -68,11 +72,13 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
         setToolBar(toolBar, getString(R.string.x_joke_title), R.drawable.icon_show_left);
 
         jokes = new ArrayList<>();
-        jokeListAdapter = new JokeListAdapter(mActivity, this, jokes);
+        heads = new ArrayList<>();
+        jokeListAdapter = new JokeListAdapter(mActivity, this, jokes, heads);
         frag_joke_list.setAdapter(jokeListAdapter);
         frag_joke_list.setLayoutManager(new LinearLayoutManager(App.sContext));
 
         mPresenter.getJokeList(mPage, mCount, JokeContact.MODE_ONE);
+        mPresenter.getHeadAticleList(0, 10);
         loadingLayout.setLoadingTips(LoadingLayout.loading);
 
         onReloadListener = new LoadingLayout.OnReloadListener() {
@@ -102,6 +108,13 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
 
         });
 
+    }
+
+    @Override
+    public void showHeadAticle(List<HeadArticleBean.RowsBean> articleList) {
+        heads.clear();
+        heads.addAll(articleList);
+        jokeListAdapter.notifyItemChanged(0);
     }
 
     @Override
@@ -175,7 +188,7 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
         }
         if (requestCode == 1) {
             boolean isThumb = data.getBooleanExtra(KEY_RQS_IS_THUMB, false);
-            int position = data.getIntExtra(JokeListAdapter.KEY_JOKEBEAN_POSITION, 0);
+            int position = data.getIntExtra(Constants.KEY_JOKEBEAN_POSITION, 0);
             updataDatas(isThumb, position);
         }
     }

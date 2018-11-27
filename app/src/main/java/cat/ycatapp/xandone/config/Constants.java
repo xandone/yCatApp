@@ -43,4 +43,10 @@ public class Constants {
     public static final String USER_INFO_NAME = "Constants_USER_INFO_NAME";
 
 
+    //------------------------INTENT_KEY------------------------------
+
+    public static final String KEY_JOKEBEAN = "key_jokebean";
+    public static final String KEY_JOKEBEAN_POSITION = "key_jokebean_position";
+
+
 }

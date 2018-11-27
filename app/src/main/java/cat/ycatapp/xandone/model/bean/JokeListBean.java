@@ -1,6 +1,5 @@
 package cat.ycatapp.xandone.model.bean;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**

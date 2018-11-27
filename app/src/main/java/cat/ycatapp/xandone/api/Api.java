@@ -5,6 +5,7 @@ import java.util.Map;
 
 import cat.ycatapp.xandone.model.base.BaseResponse;
 import cat.ycatapp.xandone.model.bean.CommentBean;
+import cat.ycatapp.xandone.model.bean.HeadArticleBean;
 import cat.ycatapp.xandone.model.bean.ImageBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.model.bean.JokeListBean;
@@ -89,5 +90,10 @@ public interface Api {
     @POST("ycat/user/upIcon")
     Flowable<BaseResponse<List<UserBean>>> changeUserIcon(@Part MultipartBody.Part part,
                                                           @QueryMap Map<String, String> maps);
+
+    @GET("ycat/headAticleList")
+    Flowable<HeadArticleBean> getHeadAticleList(
+            @Query("page") int page,
+            @Query("rows") int count);
 
 }

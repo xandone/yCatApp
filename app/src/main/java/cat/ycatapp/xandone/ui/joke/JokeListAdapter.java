@@ -1,18 +1,25 @@
 package cat.ycatapp.xandone.ui.joke;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.google.gson.Gson;
+import com.youth.banner.Banner;
+import com.youth.banner.loader.ImageLoader;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,8 +28,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cat.ycatapp.xandone.App;
 import cat.ycatapp.xandone.R;
+import cat.ycatapp.xandone.config.Constants;
+import cat.ycatapp.xandone.model.bean.HeadArticleBean;
 import cat.ycatapp.xandone.model.bean.JokeBean;
 import cat.ycatapp.xandone.model.bean.JokeListBean;
+import cat.ycatapp.xandone.model.bean.MainJokeBean;
 import cat.ycatapp.xandone.uitils.TimeUtil;
 import cat.ycatapp.xandone.uitils.imgload.XGlide;
 import cat.ycatapp.xandone.widget.UserCircleIcon;
@@ -34,15 +44,18 @@ import cat.ycatapp.xandone.widget.UserCircleIcon;
 
 public class JokeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<JokeBean> list;
+    private List<HeadArticleBean.RowsBean> articleList;
     private Activity mActivity;
     private Fragment mFragment;
     private RequestManager requestManager;
 
-    public static final String KEY_JOKEBEAN = "key_jokebean";
-    public static final String KEY_JOKEBEAN_POSITION = "key_jokebean_position";
+    private static final int TYPE_HEAD_ARTICLE = 1;
+    private static final int TYPE_NORMAL = 2;
 
-    public JokeListAdapter(Activity activity, Fragment fragment, List list) {
+
+    public JokeListAdapter(Activity activity, Fragment fragment, List list, List articleList) {
         this.list = list;
+        this.articleList = articleList;
         this.mActivity = activity;
         this.mFragment = fragment;
         requestManager = Glide.with(mActivity);
@@ -50,22 +63,37 @@ public class JokeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view;
+        switch (viewType) {
+            case TYPE_HEAD_ARTICLE:
+                view = LayoutInflater.from(App.sContext).inflate(R.layout.item_head_article_list, parent, false);
+                return new MyArticleHolder(view);
+            default:
+                view = LayoutInflater.from(App.sContext).inflate(R.layout.item_joke_list, parent, false);
+                return new MyHolder(view);
+        }
 
-        View view = LayoutInflater.from(App.sContext).inflate(R.layout.item_joke_list, parent, false);
-        return new MyHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof MyHolder) {
             MyHolder myHolder = (MyHolder) holder;
-            myHolder.bindView(list.get(position));
+            myHolder.bindView(list.get(position - 1));
+        } else if (holder instanceof MyArticleHolder) {
+            MyArticleHolder myHolder = (MyArticleHolder) holder;
+            myHolder.bindView(articleList);
         }
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return list.size() + 1;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position == 0 ? TYPE_HEAD_ARTICLE : TYPE_NORMAL;
     }
 
     class MyHolder extends RecyclerView.ViewHolder {
@@ -86,7 +114,7 @@ public class JokeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         @BindView(R.id.item_joke_user_icon)
         UserCircleIcon item_joke_user_icon;
 
-        public MyHolder(View itemView) {
+        MyHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -96,14 +124,14 @@ public class JokeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             switch (view.getId()) {
                 case R.id.item_joke_list_root:
                     Intent intent = new Intent(mActivity, JokeDetailsActivity.class);
-                    intent.putExtra(KEY_JOKEBEAN, list.get(getLayoutPosition()));
-                    intent.putExtra(KEY_JOKEBEAN_POSITION, getLayoutPosition());
+                    intent.putExtra(Constants.KEY_JOKEBEAN, list.get(getLayoutPosition()));
+                    intent.putExtra(Constants.KEY_JOKEBEAN_POSITION, getLayoutPosition());
                     mFragment.startActivityForResult(intent, JokeFragment.RQS_CODE_JOKEBEAN);
                     break;
             }
         }
 
-        public void bindView(JokeBean jokeBean) {
+        void bindView(JokeBean jokeBean) {
             if (jokeBean == null) {
                 return;
             }
@@ -115,6 +143,37 @@ public class JokeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             item_joke_list_date.setText(TimeUtil.getStringByFormat(jokeBean.getPost_time(), TimeUtil.dateFormat));
 
             XGlide.loadImage(requestManager, item_joke_user_icon, jokeBean.getJoke_user_icon(), R.drawable.df_icon);
+        }
+    }
+
+
+    class MyArticleHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.banner)
+        Banner banner;
+
+        MyArticleHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+
+        public void bindView(List<HeadArticleBean.RowsBean> articleList) {
+            if (articleList == null) {
+                return;
+            }
+            List<String> imgs = new ArrayList<>();
+            for (int i = 0; i < articleList.size(); i++) {
+                imgs.add(articleList.get(i).getImgUrl());
+            }
+            banner.setImages(imgs).setImageLoader(new GlideImageLoader()).start();
+        }
+    }
+
+
+    class GlideImageLoader extends ImageLoader {
+        @Override
+        public void displayImage(Context context, Object path, ImageView imageView) {
+            //Glide 加载图片简单用法
+            Glide.with(context).load(path).into(imageView);
         }
     }
 

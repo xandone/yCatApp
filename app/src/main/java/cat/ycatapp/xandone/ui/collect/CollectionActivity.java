@@ -1,28 +1,22 @@
 package cat.ycatapp.xandone.ui.collect;
 
 import android.content.Intent;
-import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindInt;
 import butterknife.BindView;
 import cat.ycatapp.xandone.R;
 import cat.ycatapp.xandone.base.BaseActivity;
 import cat.ycatapp.xandone.base.RxBaseActivity;
+import cat.ycatapp.xandone.config.Constants;
 import cat.ycatapp.xandone.model.bean.JokeBean;
-import cat.ycatapp.xandone.ui.joke.JokeDetailsActivity;
 import cat.ycatapp.xandone.ui.joke.JokeFragment;
-import cat.ycatapp.xandone.ui.joke.JokeListAdapter;
 
 /**
  * author: xandone
@@ -108,7 +102,7 @@ public class CollectionActivity extends RxBaseActivity<CollectPresenter> impleme
         }
         if (requestCode == 1) {
             boolean isThumb = data.getBooleanExtra(JokeFragment.KEY_RQS_IS_THUMB, false);
-            int position = data.getIntExtra(JokeListAdapter.KEY_JOKEBEAN_POSITION, 0);
+            int position = data.getIntExtra(Constants.KEY_JOKEBEAN_POSITION, 0);
             updataDatas(isThumb, position);
         }
     }

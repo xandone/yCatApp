@@ -1,7 +1,10 @@
 package cat.ycatapp.xandone.ui.joke;
 
+import java.util.List;
+
 import cat.ycatapp.xandone.base.BasePresenter;
 import cat.ycatapp.xandone.base.BaseView;
+import cat.ycatapp.xandone.model.bean.HeadArticleBean;
 import cat.ycatapp.xandone.model.bean.JokeListBean;
 
 /**
@@ -14,6 +17,8 @@ public interface JokeContact {
     int MODE_MORE = 1;
 
     interface View extends BaseView {
+        void showHeadAticle(List<HeadArticleBean.RowsBean> articleList);
+
         void showContent(JokeListBean jokeBean);
 
         void showContentMore(JokeListBean jokeBean);
