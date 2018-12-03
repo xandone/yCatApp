@@ -56,7 +56,7 @@ public class ImageFragment extends RxBaseFragment<ImagePresenter> implements Ima
     LoadingLayout loadingLayout;
 
     private ImageAdapter mImageAdapter;
-    private List<ImageBean.RowsBean> datas = new ArrayList<>();
+    private ArrayList<ImageBean.RowsBean> datas = new ArrayList<>();
     private int mPage = 1;
     private int mCount = 10;
     private LoadingLayout.OnReloadListener onReloadListener;

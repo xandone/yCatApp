@@ -96,6 +96,7 @@ public class JokeFragment extends RxBaseFragment<JokePresenter> implements JokeC
             public void onRefresh(RefreshLayout refreshlayout) {
                 mPage = 1;
                 mPresenter.getJokeList(mPage, mCount, JokeContact.MODE_ONE);
+                mPresenter.getHeadAticleList(0, 10);
             }
         });
 

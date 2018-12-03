@@ -8,7 +8,7 @@ import java.util.List;
  * Created on: 2018/5/3 22:10
  */
 
-public class ImageBean {
+public class ImageBean implements Serializable {
 
     /**
      * total : 2

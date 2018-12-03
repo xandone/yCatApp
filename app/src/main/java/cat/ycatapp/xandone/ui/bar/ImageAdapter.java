@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,13 +34,13 @@ import cat.ycatapp.xandone.uitils.imgload.XGlide;
 
 public class ImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<ImageBean.RowsBean> datas;
+    private ArrayList<ImageBean.RowsBean> datas;
     private Activity mContext;
     private RequestManager requestManager;
 
     public static final String IMAGEADAPTER_PIC = "IMAGEADAPTER_PIC";
 
-    public ImageAdapter(Context context, List datas) {
+    public ImageAdapter(Context context, ArrayList datas) {
         this.mContext = (Activity) context;
         this.datas = datas;
         requestManager = Glide.with(App.sContext);
@@ -102,9 +101,11 @@ public class ImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     } else {
                         mContext.startActivity(intent);
                     }
+
                     break;
             }
         }
+
     }
 
 }

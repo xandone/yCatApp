@@ -124,8 +124,8 @@ public class JokeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             switch (view.getId()) {
                 case R.id.item_joke_list_root:
                     Intent intent = new Intent(mActivity, JokeDetailsActivity.class);
-                    intent.putExtra(Constants.KEY_JOKEBEAN, list.get(getLayoutPosition()));
-                    intent.putExtra(Constants.KEY_JOKEBEAN_POSITION, getLayoutPosition());
+                    intent.putExtra(Constants.KEY_JOKEBEAN, list.get(getLayoutPosition() - 1));
+                    intent.putExtra(Constants.KEY_JOKEBEAN_POSITION, getLayoutPosition() - 1);
                     mFragment.startActivityForResult(intent, JokeFragment.RQS_CODE_JOKEBEAN);
                     break;
             }

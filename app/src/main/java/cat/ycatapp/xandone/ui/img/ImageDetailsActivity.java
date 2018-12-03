@@ -1,6 +1,5 @@
 package cat.ycatapp.xandone.ui.img;
 
-import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
